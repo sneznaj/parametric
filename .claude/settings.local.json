@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/o/Documents/parametric/GrasshopperSwift/GrasshopperSwift/Models)",
+      "Bash(mkdir -p /Users/o/Documents/parametric/GrasshopperSwift/GrasshopperSwift/Views)",
+      "Bash(mkdir -p /Users/o/Documents/parametric/GrasshopperSwift/GrasshopperSwift/Nodes)",
+      "Bash(brew list:*)",
+      "Bash(brew install:*)",
+      "Bash(xcodegen generate:*)",
+      "Bash(xcodebuild -project GrasshopperSwift.xcodeproj -scheme GrasshopperSwift -destination 'platform=macOS' build)",
+      "Bash(sudo xcode-select:*)",
+      "Bash(xcode-select -p)",
+      "Bash(DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -project /Users/o/Documents/parametric/GrasshopperSwift/GrasshopperSwift.xcodeproj -scheme GrasshopperSwift -destination 'platform=macOS' build)",
+      "Bash(open:*)",
+      "Bash(DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -project GrasshopperSwift.xcodeproj -scheme GrasshopperSwift -destination 'platform=macOS' build)",
+      "Bash(wc:*)",
+      "Bash(xcodebuild -version)",
+      "Bash(command -v xcodegen)",
+      "Bash(make build:*)",
+      "Bash(rm -rf GrasshopperSwift.app)",
+      "Bash(rm -rf .build)",
+      "Bash(make run:*)",
+      "Bash(find /Users/o/Documents/parametric -name *.swift)",
+      "Bash(make)",
+      "Bash(xargs ls:*)",
+      "Bash(xcodebuild -scheme GrasshopperSwift -destination 'platform=macOS' build)",
+      "Bash(python3:*)"
+    ]
+  }
+}

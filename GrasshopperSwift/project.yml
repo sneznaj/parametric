@@ -1,0 +1,85 @@
+name: GrasshopperSwift
+options:
+  bundleIdPrefix: com.parametric
+  deploymentTarget:
+    macOS: "14.0"
+  defaultConfig: Debug
+  xcodeVersion: "15"
+
+settings:
+  SWIFT_VERSION: "5.10"
+  MACOSX_DEPLOYMENT_TARGET: "14.0"
+
+configs:
+  Debug: debug
+  Release: release
+
+targets:
+  GrasshopperSwift:
+    type: application
+    platform: macOS
+    sources:
+      - GrasshopperSwift
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.parametric.GrasshopperSwift
+      PRODUCT_NAME: GrasshopperSwift
+      SWIFT_VERSION: "5.10"
+      INFOPLIST_FILE: GrasshopperSwift/Info.plist
+      CODE_SIGN_IDENTITY: ""
+      CODE_SIGNING_REQUIRED: "NO"
+      CODE_SIGNING_ALLOWED: "NO"
+
+      # Filament integration — bridging header for C++ bridge
+      SWIFT_OBJC_BRIDGING_HEADER: GrasshopperSwift/GrasshopperSwift-Bridging-Header.h
+
+      # Filament header search paths (framework is outside source tree)
+      HEADER_SEARCH_PATHS:
+        - $(SRCROOT)/filament-framework/include
+        - $(SRCROOT)/filament-framework/include/filament
+
+      # Filament static library search paths
+      LIBRARY_SEARCH_PATHS:
+        - $(SRCROOT)/filament-framework/lib/arm64
+
+      # C++ settings for Filament
+      CLANG_CXX_LANGUAGE_STANDARD: c++17
+      CLANG_CXX_LIBRARY: libc++
+
+      # Linker flags — all Filament static libs + system frameworks
+      # Using -Wl,-force_load for filament/backend to ensure symbols are pulled in.
+      OTHER_LDFLAGS:
+        - $(inherited)
+        - -lfilament
+        - -lbackend
+        - -lutils
+        - -lfilabridge
+        - -lfilaflat
+        - -lgeometry
+        - -lshaders
+        - -lsmol-v
+        - -libl
+        - -lfilament-iblprefilter
+        - -lzstd
+        - -lmikktspace
+        - -lbluegl
+        - -lbluevk
+        - -lcivetweb
+        - -lbasis_transcoder
+        - -ldracodec
+        - -lstb
+        - -lmeshoptimizer
+        - -labseil
+        - -lperfetto
+        - -luberarchive
+        - -luberzlib
+        - -limage
+        - -limageio-lite
+        - -libl-lite
+        - -framework OpenGL
+        - -lc++
+        - -framework Metal
+        - -framework MetalKit
+        - -framework QuartzCore
+        - -framework Cocoa
+    scheme:
+      testTargets: []

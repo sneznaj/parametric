@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="rendering, raytracing, radiosity, computer graphics, NURBS, CAD, CAM, CAE, computer aided design, design, modeling, 3DM, Rhino, AutoCAD, AccuRender, DWG, DXF" http-equiv="Keywords" />
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    <link href="../../../images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../../images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+   
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto+Mono' type='text/css' media="all" />
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github.min.css">
+    
+    
+    
+    <link rel="stylesheet" href="../../../scss/style.min.4515315bf66c3671b457c25338ed76b899746b6d65c438664f0f87f5ea2fbfbb.css">
+    
+    
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-brands-400.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-solid-900.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="https://developer.rhino3d.com/webfonts/fa-regular-400.woff2" crossorigin="anonymous"/>
+
+    
+<title>Rhino - Extending the GUI</title>
+
+
+<meta name="description" content="Rhinoceros 3D: This guide describes how to extend the default behaviour, functionality, and graphical user interface (GUI) of Grasshopper document objects."> 
+<meta name="author" content="Robert McNeel &amp; Associates">
+
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://developer.rhino3d.com/en/guides/grasshopper/extending-the-gui/" />
+<meta property="og:title" content="Extending the GUI" />
+<meta property="og:description" content="This guide describes how to extend the default behaviour, functionality, and graphical user interface (GUI) of Grasshopper document objects." />
+<meta property="og:site_name" content="www.rhino3d.com"/>
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+<meta name="twitter:domain" value="rhino3d.com" />
+<meta name="twitter:title" value="Extending the GUI" />
+<meta name="twitter:description" value="This guide describes how to extend the default behaviour, functionality, and graphical user interface (GUI) of Grasshopper document objects." />
+
+
+
+
+
+  
+
+
+
+
+<meta name="twitter:url" value="https://developer.rhino3d.com/en/guides/grasshopper/extending-the-gui/" />
+<meta name="application-name" content="Rhino Developer Docs">
+<meta name="apple-mobile-web-app-title" content="Rhino Developer Docs"></head>
+
+
+  
+
+  <body>
+  
+     
+      <div id="mask"></div><div class='heading header-area'><div id="navbar">
+  <div id="wrap">
+    
+    <div id="sitesearch">
+      
+      
+      
+      <form id="cref" action="https://developer.rhino3d.com/searchresults/">
+        <label for="search"><input id="searchtext" type="text" name="q" size="24" value="" placeholder="search" /></label>  
+        <input class="searchBox" type="submit" name="sa" size="2" aria-label="Search" value=" "/>
+      </form>
+    </div>
+
+    
+    <div id="logo-container">
+      <div id="logo-inner-container">
+        <div id="logo-title-text">
+          <a href="https://developer.rhino3d.com/"><span id="logo-title-text-primary">Rhino</span><span id="logo-title-text-secondary">Developer</span><sup id="protected-mark">®</sup></a>
+        </div>
+        <div id="logo-subtitle">
+          <a href="https://developer.rhino3d.com/"><span class="logo-text-secondary">design, model, present, analyze, realize...</span></a>
+        </div>
+        
+        <a href="https://developer.rhino3d.com/"><img id="site-nav-logo" src="../../../images/rhinodevlogo.png" alt="Rhino Logo"/></a>
+        <div class="clear"></div>
+      </div>
+      <div class="overlayMenuIcon" id="theoverlayMenuIcon">
+        <span onclick="toggleMenu()"><i class="fa fa-bars" id="menuToggleIcon" style="color: #c2c2c2; font-size: 2.5em"></i></span>
+      </div>
+    </div>
+
+    
+    <div class="menu-items" id="theMenuItems">
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/guides" target="_self">Guides</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/samples" target="_self">Samples</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/api" target="_self">API</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/videos" target="_self">Videos</a>
+        
+          
+        
+        <a class="menu-item" href="https://discourse.mcneel.com/c/rhino-developer" target="_blank">Community</a><span class="logged_in">
+        <a href="https://www.rhino3d.com/my-account/" title="Manage your account, licenses, and teams">my account
+        </a>
+      </span></div>
+
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../script/mcneel_accounts_login_status.53c592c69219db2067e789870d0449b68ca1dd6f2fd14733a5fcac75cfdb715e.js"></script>
+<script>
+  const logout = () => {
+        
+        const clientId = window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG";
+        var infoCookie = mca.utilities.getCookieForName("MCA_CLIENT_USER_SESSION_INFO-" + clientId);
+  
+        if (infoCookie)
+          {
+            
+            
+            infoCookie = JSON.parse(infoCookie);
+            const dropdownLogoutUrl = mca.utilities.buildURL("https://developer.rhino3d.com/user/logout", {
+              nonce: infoCookie.nonce,
+              redirect_uri: window.location.href
+            });
+            console.log("dropdownLogoutUrl:", dropdownLogoutUrl)
+            window.location.href = dropdownLogoutUrl;
+          }
+          else{
+          console.log("not logged in");
+          }
+  }
+
+  const toAccount = () => {
+    window.location.href = "https://developer.rhino3d.com/my-account";
+  }
+
+  
+  $('#nav-avatar').click(function(event){
+    event.stopPropagation();
+  });
+
+  $(window).click(function(event) {
+    if(event.target.id == "nav-avatar"){
+      event.stopPropagation();
+    }
+    else{
+      
+      $('#nav-avatar').prop('checked', false); 
+    }
+  });
+</script>
+</div>
+      <div class="outerbox">
+<div class="single-content-area toc-page">
+  
+    
+
+
+    
+
+
+
+
+<script langage="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        $('body').scrollspy({ target: '.toc', offset: 90 });
+        $(window).on('activate.bs.scrollspy', function (e, o) {
+            
+            
+            
+        });
+      });    
+
+</script>
+
+
+<div class="toc">
+    <aside>
+        <div id="toc-top-container" style="
+        text-align: center;
+    ">
+        </div>
+        <header>
+            
+            <a href="index.html">Extending the GUI</a>
+        </header>
+        <nav id="TableOfContents" class="scrollbar">
+                
+<ul class="nav">
+        
+
+        
+        <li class="nav-item" >
+        <a href="index.html#default-functionality-and-gui" class="nav-link">Default Functionality and GUI</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#menus" class="nav-link">Menus</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#interaction" class="nav-link">Interaction</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#display" class="nav-link">Display</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#related-topics" class="nav-link">Related Topics</a>
+    </li></ul>
+                <div id="toc-bottom-container" style="
+                text-align: center;
+            ">
+                </div>
+        </nav>
+    </aside>
+</div>
+
+  
+  
+  <div class="main-content ">
+    <div id="breadcrumbs">
+    
+    
+        
+    
+        <a href="https://developer.rhino3d.com/en/guides/">Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/">Grasshopper Guides</a> /
+    
+
+</div>
+
+ 
+
+      <div class="feature-title-container">
+        <div class="feature-title">Extending the GUI</div><div class="platform-callout">    
+    
+        
+        
+        
+        
+    
+</div></div>
+      <p>
+        
+    <span class="byline">
+        by
+        
+        
+        
+        
+            
+            
+            
+              
+            <a href="https://discourse.mcneel.com/u/davidrutten/">David Rutten</a>                              
+         (Last updated:&nbsp; Wednesday, December 5, 2018)
+  </span>
+  
+</p>
+      
+      
+      <p>We&rsquo;ll focus on components as you should be familiar with those from earlier topics, but the same logic also applies to Parameters and custom objects.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="default-functionality-and-gui">Default Functionality and GUI<a aria-label="Default Functionality and GUI" href="index.html#default-functionality-and-gui"></a></h2>
+<p>When you derive a class from <a href="https://developer.rhino3d.com/api/grasshopper/html/T_Grasshopper_Kernel_GH_Component.htm">GH_Component</a> or <a href="https://developer.rhino3d.com/api/grasshopper/html/T_Grasshopper_Kernel_GH_Param_1.htm">GH_Param(T)</a> you get a lot of functionality and GUI for free.  It is quite important that all the objects in Grasshopper behave in a consistent and predictable fashion so you typically don&rsquo;t need to override this default behaviour.  However there can be cases where changing the default Grasshopper GUI is the best solution.  Overriding the GUI is not exactly a trivial task, there are a lot of different facets to this and I&rsquo;ll discuss the most important ones in this topic.</p>
+<p>There are three common ways in which the default GUI can be altered:</p>
+<ul>
+<li><a href="index.html#menus">Menus</a></li>
+<li><a href="index.html#interaction">Interaction</a></li>
+<li><a href="index.html#display">Display</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="menus">Menus<a aria-label="Menus" href="index.html#menus"></a></h2>
+<p>It is possible to insert items into the default pop-up menus of objects, or even to completely alter the menu layout.  If your component for example can run in two different modes, you can choose to expose an additional GUI option instead of an input parameter.  These modes can then be toggled via the component pop-up menu.</p>
+<p>At the lowest level, pop-up menus are generated by the canvas when a right mouse button click is detected over a component or parameter.  The menu by default contains no items and it is the responsibility of said component or parameter to populate the menu.  The top-level method which is in charge of this is <a href="https://developer.rhino3d.com/api/grasshopper/html/M_Grasshopper_Kernel_IGH_DocumentObject_AppendMenuItems.htm">AppendMenuItems</a> which is defined inside <code>IGH_DocumentObject</code> and thus propagates to all objects on the canvas.</p>
+<p>The <code>GH_DocumentObject</code> abstract class does not create any menu items, so unless this function is overridden, there will be no popup menu for a certain object.  However, it is unlikely you derive directly from <code>GH_DocumentObject</code> so this should not be a problem.  <code>GH_ActiveObject</code>, which is the base class for all objects on the canvas that actually do something (Sketches and Scribbles don&rsquo;t &ldquo;do&rdquo; anything, hence they derive directly from <code>GH_DocumentObject</code>), does provide a default implementation of <code>AppendMenuItems()</code>.  The default layout of popup menus is:</p>
+<ul>
+<li>NickName</li>
+<li>Preview</li>
+<li>Enabled</li>
+<li>Bake</li>
+<li>Warnings</li>
+<li>Errors</li>
+<li>Help</li>
+</ul>
+<p>Although if the object in question does not support previews or baking then those items will be missing from the final menu.  When overridden, <code>AppendMenuItems()</code> allows you to completely replace the default menu:</p>
+<div class="codetab">
+  <button class="tablinks" onclick="openCodeTab(event, 'cs')" id="defaultOpen">C#</button>
+  <button class="tablinks" onclick="openCodeTab(event, 'vb')">VB.NET</button>
+</div>
+<div class="tab-content">
+<div class="codetab-content" id="cs">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#00f">public</span> <span style="color:#00f">override</span> <span style="color:#2b91af">bool</span> AppendMenuItems(ToolStripDropDown menu)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;First item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Second item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Third item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendSeparator(menu);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Fourth item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Fifth item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Sixth item&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">// Return true, otherwise the menu won&#39;t be shown.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">return</span> <span style="color:#00f">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></div>
+<div class="codetab-content" id="vb">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vbnet" data-lang="vbnet"><span style="display:flex;"><span><span style="color:#00f">Public</span> <span style="color:#00f">Overrides</span> <span style="color:#00f">Function</span> AppendMenuItems(<span style="color:#00f">ByVal</span> menu <span style="color:#00f">As</span> ToolStripDropDown) <span style="color:#00f">As</span> <span style="color:#2b91af">Boolean</span>
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;First item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Second item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Third item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendSeparator(menu)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Fourth item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Fifth item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Sixth item&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;Return True, otherwise the menu won&#39;t be shown.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#00f">Return</span> <span style="color:#00f">True</span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">End</span> <span style="color:#00f">Function</span>
+</span></span></code></pre></div></div>
+</div>
+<p><img src="../../../images/extending-the-gui-01.png" alt="AppendMenuItems"></p>
+<p>If you want to insert additional items into the menu it would be very annoying if you had to recreate this default menu layout from scratch every single time.  So even though you can override <code>AppendMenuItems()</code> it is recommended you instead override <code>AppendAdditionalMenuItems()</code> which allows you to insert custom menu items between Errors and Help without losing the standard functionality:</p>
+<div class="codetab">
+  <button class="tablinks1" onclick="openCodeTab(event, 'cs1')" id="defaultOpen1">C#</button>
+  <button class="tablinks1" onclick="openCodeTab(event, 'vb1')">VB.NET</button>
+</div>
+<div class="tab-content">
+<div class="codetab-content1" id="cs1">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#00f">public</span> <span style="color:#00f">override</span> <span style="color:#00f">void</span> AppendAdditionalMenuItems(ToolStripDropDown menu)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">base</span>.AppendAdditionalMenuItems(menu);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;First item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Second item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Third item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendSeparator(menu);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Fourth item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Fifth item&#34;</span>);
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Sixth item&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></div>
+<div class="codetab-content1" id="vb1">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vbnet" data-lang="vbnet"><span style="display:flex;"><span><span style="color:#00f">Public</span> <span style="color:#00f">Overrides</span> <span style="color:#00f">Sub</span> AppendAdditionalMenuItems(<span style="color:#00f">ByVal</span> menu <span style="color:#00f">As</span> ToolStripDropDown)
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">MyBase</span>.AppendAdditionalMenuItems(menu)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;First item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Second item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Third item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendSeparator(menu)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Fourth item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Fifth item&#34;</span>)
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;Sixth item&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#00f">End</span> <span style="color:#00f">Sub</span>
+</span></span></code></pre></div></div>
+</div>
+<p><img src="../../../images/extending-the-gui-02.png" alt="AppendAdditionalMenuItems"></p>
+<p><code>GH_Param&lt;T&gt;</code> for example derives from <code>GH_ActiveObject</code> and re-implements <code>AppendAdditionalMenuItems()</code> in order to supply the Wire Display, Disconnect, Reverse, Flatten and Graft menu items that are present in all parameters.  <code>GH_Component</code>, likewise, derives from <code>GH_ActiveObject</code> and it re-implements <code>AppendAdditionalMenuItems()</code> in order to insert the Shortest List, Longest List, Cross Reference and the parameter submenus.</p>
+<p>Long story short; if you wish to insert additional menu items then either re-implement <code>AppendAdditionalMenuItems()</code> if you derive from <code>GH_Param&lt;T&gt;</code> or re-implement <code>AppendAdditionalComponentMenuItems()</code> if you derive from <code>GH_Component</code>:</p>
+<div class="codetab">
+  <button class="tablinks2" onclick="openCodeTab(event, 'cs2')" id="defaultOpen2">C#</button>
+  <button class="tablinks2" onclick="openCodeTab(event, 'vb2')">VB.NET</button>
+</div>
+<div class="tab-content">
+<div class="codetab-content2" id="cs2">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#008000">// If you implement IGH_Param, then override this method. If you implement IGH_Component,</span>
+</span></span><span style="display:flex;"><span><span style="color:#008000">// then override AppendAdditionalComponentMenuItems instead.</span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">protected</span> <span style="color:#00f">override</span> <span style="color:#00f">void</span> AppendAdditionalMenuItems(ToolstripDropDown menu)
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">// Place a call to the base class to ensure the default parameter menu</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">// is still there and operational.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">base</span>.AppendAdditinalMenuItems(menu);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">// Now insert your own custom menu items.</span>
+</span></span><span style="display:flex;"><span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;My Custom Menu Item&#34;</span>, Menu_MyCustomItemClicked);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">private</span> <span style="color:#00f">void</span> Menu_MyCustomItemClicked(Object sender, EventArgs e)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  Rhino.RhinoApp.WriteLine(<span style="color:#a31515">&#34;Alcohol doesn&#39;t affect me...&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></div>
+<div class="codetab-content2" id="vb2">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vbnet" data-lang="vbnet"><span style="display:flex;"><span><span style="color:#008000">&#39;If you implement IGH_Param, then override this method. If you implement IGH_Component,
+</span></span></span><span style="display:flex;"><span><span style="color:#008000">&#39;then override AppendAdditionalComponentMenuItems instead.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span><span style="color:#00f">Protected</span> <span style="color:#00f">Overrides</span> <span style="color:#00f">Sub</span> AppendAdditionalMenuItems(<span style="color:#00f">ByVal</span> menu <span style="color:#00f">As</span> ToolstripDropDown)
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;Place a call to the base class to ensure the default parameter menu
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#008000">&#39;is still there and operational.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#00f">MyBase</span>.AppendAdditinalMenuItems(menu)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;Now insert your own custom menu items.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  Menu_AppendGenericMenuItem(menu, <span style="color:#a31515">&#34;My Custom Menu Item&#34;</span>, <span style="color:#00f">Addressof</span> Menu_MyCustomItemClicked)
+</span></span><span style="display:flex;"><span><span style="color:#00f">End</span> <span style="color:#00f">Sub</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">Private</span> <span style="color:#00f">Sub</span> Menu_MyCustomItemClicked(<span style="color:#00f">ByVal</span> sender <span style="color:#00f">As</span> <span style="color:#2b91af">Object</span>, <span style="color:#00f">ByVal</span> e <span style="color:#00f">As</span> EventArgs)
+</span></span><span style="display:flex;"><span>  Rhino.RhinoApp.WriteLine(<span style="color:#a31515">&#34;Alcohol doesn&#39;t affect me...&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#00f">End</span> <span style="color:#00f">Sub</span>
+</span></span></code></pre></div></div>
+</div>
+<p>There&rsquo;s a lot of menu utility functions provided by <code>GH_DocumentObject</code>.  They all start with &ldquo;Menu_&rdquo; and they&rsquo;ll make it much easier to insert formatted menu items.  But of course nothing is stopping you from using typical <code>System.Windows.Forms</code> plumbing to extend the pop-up menu.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="interaction">Interaction<a aria-label="Interaction" href="index.html#interaction"></a></h2>
+<p>You can also choose to handle specific mouse and keyboard events.  You could for example choose to respond to a mouse double-click event on your component.  Complicated objects such as Gradients and Graph Mappers handle all sorts of mouse events to provide grip-dragging functionality directly within the Grasshopper canvas.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="display">Display<a aria-label="Display" href="index.html#display"></a></h2>
+<p>Finally, it is possible to override the way an object displays itself on the canvas.  These alterations can be minor, mere additions to the default display, or they can be radically different (as with the Gradient and Graph Mapper objects).  For a detailed explanation regarding display overrides, see the <a href="../custom-attributes/index.html">Custom Attributes</a> guide.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="related-topics">Related Topics<a aria-label="Related Topics" href="index.html#related-topics"></a></h2>
+<ul>
+<li><a href="../custom-attributes/index.html">Custom Attributes</a></li>
+</ul>
+<span class="mcneel_only hidden">
+    <div style="text-align: center;">
+        <div class="editdropdown" style="text-align: left;">
+            <button class="editbutton"><div class="fas fa-pencil-alt"></div> Edit this page</button>
+            <div class="editdropdown-content">
+                
+                
+                <a href="https://github.com/mcneel/developer.rhino3d.com/edit/master/content/en/guides/grasshopper/extending-the-gui/index.md" target="_blank" rel="noopener noreferrer"><div class="fab fa-github"></div> Edit on GitHub</a>
+                <a href="https://github.com/mcneel/developer.rhino3d.com/commits/master/content/en/guides/grasshopper/extending-the-gui/index.md" target="_blank" rel="noopener noreferrer"><div class="fas fa-history"></div> History</a>
+                <a href="https://developer.rhino3d.com/admin" target="_blank"><div class="fas fa-cog"></div> Admin</a>
+            </div>
+        </div>
+    </div>
+</span>
+  </div>
+</div><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha384-a4pIV46KBffvdjRuStQik2G6mPrTxdtAiZFQCdpsP4fyplWNoQ7fXlLMiIGcAP+M" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/vbnet.min.js" integrity="sha384-EN9fHTs/Ki0RX5/vXR4Y2Qb0XnV2+j2GVj86nencgtJYbNlNanf3ogcbPVkgFKBf" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/yaml.min.js" integrity="sha384-vLBVpaJcrTRsLBHhkvU9neJTiLqRgYWBnEg3o4eLgTKw1+hWbSr/QaNuSB9XWftA" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/powershell.min.js" integrity="sha384-5dY/Kkeznu4IIDRQyT6jL9e1XwSy39f1/sqYLFifcz2CfKQe9AunCsb7lBEeMh+f" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../script/highlightjs-line-numbers.1b36d98c62cb9f88ab73b1b24041fe3ba7331949ff54dd3737d99f5e362a8abb.js"></script>
+
+<script>hljs.highlightAll();</script>
+<script>hljs.initLineNumbersOnLoad();</script>
+
+
+<script type="text/javascript" src="../../../script/copy-code.d299324970feb9b7a8b27c988252faacbbb6adb5658c8de5c3378ba9844c7845.js"></script>
+
+<script>
+    function openCodeTab(evt, tabName) {
+      
+      var i, tabcontent, tablinks;
+      
+      
+      var matches = tabName.match(/\d+$/); 
+      var tabCounter = "";
+      if (matches)
+        tabCounter = matches[0];
+      
+      
+      tabcontent = document.getElementsByClassName("codetab-content" + tabCounter);
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      
+      tablinks = document.getElementsByClassName("tablinks" + tabCounter);
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  
+    
+    var defaultTabs = document.querySelectorAll(`*[id^="defaultOpen"]`);
+    defaultTabs.forEach(element => {
+      element.click();
+    });
+
+</script>
+<div class="footer footer-area">
+    <div class="footer-columns">
+        <div class="footer-column footer-left default"><a href="https://www.rhino3d.com/sales">Find a Reseller</a></div>
+        <div class="footer-column footer-left skin-napa">
+            <a href="https://www.rhino3d.com/store">Shop online</a>
+            or find a
+            <a href="https://www.rhino3d.com/sales">Reseller</a>
+        </div>
+        <div class="footer-column footer-left skin-not-napa">
+            <a href="https://www.rhino3d.com/sales">Find a Reseller</a>
+        </div>
+        <div class="footer-column footer-right">           
+                <a href="https://www.rhino3d.com/privacy">Privacy Policy</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/about">About</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/contact">Contact Us</a> &bull;
+                <a href="https://www.rhino3d.com/language" title="Change to a different region or language">
+                    Language</a>            
+        </div>
+    </div>    
+    <div class="footer-middle">       
+        <a href="https://www.rhino3d.com/mcneel/about" alt="About McNeel">Copyright © 1993-2026 Robert McNeel &amp; Associates. All Rights Reserved.</a>
+    </div>
+    <div class="footer-middle">
+        <a href="https://www.facebook.com/McNeelRhinoceros/" aria-label="Facebook" class="fab fa-facebook" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        
+        <a href="https://www.linkedin.com/groups/75313/" aria-label="LinkedIn" class="fab fa-linkedin" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://www.youtube.com/user/RhinoGuide/videos" aria-label="YouTube" class="fab fa-youtube" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://vimeo.com/rhino" aria-label="Vimeo" class="fab fa-vimeo" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="http://blog.rhino3d.com/" aria-label="Blogger" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Blogger icon" src="../../../images/blogger.svg"></a>
+        <a href="https://www.food4rhino.com" aria-label="Food4Rhino" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Food4Rhino" src="../../../images/f4r_icon_01.svg" height="32" width="32"></a>
+    </div>
+</div>
+      </div><script type="text/javascript" src="../../../script/jquery-3.5.1.min.f7f6a5894f1d19ddad6fa392b2ece2c5e578cbf7da4ea805b6885eb6985b6e3d.js"></script>
+<script type="text/javascript" src="../../../script/jquery-ui.min.793cb14b4ae48e92c4a35eae5d34b4b95092e3cd7995ce342b6895a560ef7526.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="../../../script/rhino.05c268ec655ef5ff95646d1f4c93dd13f833bb83b30ad95a68bbd8a7f15f9d26.js"></script>
+
+<script type="text/javascript" src="../../../script/protocolcheck.e5a8f6d34595c946cfc9f84fce91cd8fb625ce62380441a75d5de802cc2819e4.js"></script>
+<script type="text/javascript" src="../../../script/theme.55f13be26c834445d530dbfb196c7a9ef2692979b20258caa03793331a316a0e.js"></script>
+<script>
+    mca.addLogoutListenerForClientId(window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG", function (url) {
+      console.log("Redirecting to logout URL: " + url);
+      window.location.href = url;
+    });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-512742-1" crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-512742-1');
+</script>
+<script type="text/javascript" async
+src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<script type="text/javascript" src="../../../script/anchor.min.1384657f1c322559a4924d2ccf0ecb609c6e3e5a7a7afb4f4810e5587b1860bf.js"></script>
+<script>
+	
+	(function () {
+		'use strict';
+		anchors.options.placement = 'right';
+		anchors.add();
+		}
+	)();
+</script>
+
+
+
+
+    
+  </body>
+</html>

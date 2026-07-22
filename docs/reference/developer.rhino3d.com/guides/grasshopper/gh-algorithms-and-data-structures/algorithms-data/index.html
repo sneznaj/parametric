@@ -1,0 +1,8565 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="rendering, raytracing, radiosity, computer graphics, NURBS, CAD, CAM, CAE, computer aided design, design, modeling, 3DM, Rhino, AutoCAD, AccuRender, DWG, DXF" http-equiv="Keywords" />
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    <link href="../../../../images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../../../images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+   
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto+Mono' type='text/css' media="all" />
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github.min.css">
+    
+    
+    
+    <link rel="stylesheet" href="../../../../scss/style.min.4515315bf66c3671b457c25338ed76b899746b6d65c438664f0f87f5ea2fbfbb.css">
+    
+    
+    <link rel="preload" as="font" type="font/woff2" href="../../../../webfonts/fa-brands-400.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="../../../../webfonts/fa-solid-900.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="https://developer.rhino3d.com/webfonts/fa-regular-400.woff2" crossorigin="anonymous"/>
+
+    
+<title>Rhino - Chapter 1: Algorithms and Data</title>
+
+
+ 
+<meta name="author" content="Robert McNeel &amp; Associates">
+
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://developer.rhino3d.com/en/guides/grasshopper/gh-algorithms-and-data-structures/algorithms-data/" />
+<meta property="og:title" content="Chapter 1: Algorithms and Data" />
+<meta property="og:description" content="" />
+<meta property="og:site_name" content="www.rhino3d.com"/>
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+<meta name="twitter:domain" value="rhino3d.com" />
+<meta name="twitter:title" value="Chapter 1: Algorithms and Data" />
+<meta name="twitter:description" value="" />
+
+
+
+
+
+  
+
+
+
+
+<meta name="twitter:url" value="https://developer.rhino3d.com/en/guides/grasshopper/gh-algorithms-and-data-structures/algorithms-data/" />
+<meta name="application-name" content="Rhino Developer Docs">
+<meta name="apple-mobile-web-app-title" content="Rhino Developer Docs"></head>
+
+
+  
+
+  <body>
+  
+     
+      <div id="mask"></div><div class='heading header-area'><div id="navbar">
+  <div id="wrap">
+    
+    <div id="sitesearch">
+      
+      
+      
+      <form id="cref" action="https://developer.rhino3d.com/searchresults/">
+        <label for="search"><input id="searchtext" type="text" name="q" size="24" value="" placeholder="search" /></label>  
+        <input class="searchBox" type="submit" name="sa" size="2" aria-label="Search" value=" "/>
+      </form>
+    </div>
+
+    
+    <div id="logo-container">
+      <div id="logo-inner-container">
+        <div id="logo-title-text">
+          <a href="https://developer.rhino3d.com/"><span id="logo-title-text-primary">Rhino</span><span id="logo-title-text-secondary">Developer</span><sup id="protected-mark">®</sup></a>
+        </div>
+        <div id="logo-subtitle">
+          <a href="https://developer.rhino3d.com/"><span class="logo-text-secondary">design, model, present, analyze, realize...</span></a>
+        </div>
+        
+        <a href="https://developer.rhino3d.com/"><img id="site-nav-logo" src="../../../../images/rhinodevlogo.png" alt="Rhino Logo"/></a>
+        <div class="clear"></div>
+      </div>
+      <div class="overlayMenuIcon" id="theoverlayMenuIcon">
+        <span onclick="toggleMenu()"><i class="fa fa-bars" id="menuToggleIcon" style="color: #c2c2c2; font-size: 2.5em"></i></span>
+      </div>
+    </div>
+
+    
+    <div class="menu-items" id="theMenuItems">
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/guides" target="_self">Guides</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/samples" target="_self">Samples</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/api" target="_self">API</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/videos" target="_self">Videos</a>
+        
+          
+        
+        <a class="menu-item" href="https://discourse.mcneel.com/c/rhino-developer" target="_blank">Community</a><span class="logged_in">
+        <a href="https://www.rhino3d.com/my-account/" title="Manage your account, licenses, and teams">my account
+        </a>
+      </span></div>
+
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../../script/mcneel_accounts_login_status.53c592c69219db2067e789870d0449b68ca1dd6f2fd14733a5fcac75cfdb715e.js"></script>
+<script>
+  const logout = () => {
+        
+        const clientId = window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG";
+        var infoCookie = mca.utilities.getCookieForName("MCA_CLIENT_USER_SESSION_INFO-" + clientId);
+  
+        if (infoCookie)
+          {
+            
+            
+            infoCookie = JSON.parse(infoCookie);
+            const dropdownLogoutUrl = mca.utilities.buildURL("https://developer.rhino3d.com/user/logout", {
+              nonce: infoCookie.nonce,
+              redirect_uri: window.location.href
+            });
+            console.log("dropdownLogoutUrl:", dropdownLogoutUrl)
+            window.location.href = dropdownLogoutUrl;
+          }
+          else{
+          console.log("not logged in");
+          }
+  }
+
+  const toAccount = () => {
+    window.location.href = "https://developer.rhino3d.com/my-account";
+  }
+
+  
+  $('#nav-avatar').click(function(event){
+    event.stopPropagation();
+  });
+
+  $(window).click(function(event) {
+    if(event.target.id == "nav-avatar"){
+      event.stopPropagation();
+    }
+    else{
+      
+      $('#nav-avatar').prop('checked', false); 
+    }
+  });
+</script>
+</div>
+      <div class="outerbox">
+<div class="single-content-area toc-page">
+  
+    
+
+
+    
+
+
+
+
+<script langage="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        $('body').scrollspy({ target: '.toc', offset: 90 });
+        $(window).on('activate.bs.scrollspy', function (e, o) {
+            
+            
+            
+        });
+      });    
+
+</script>
+
+
+<div class="toc">
+    <aside>
+        <div id="toc-top-container" style="
+        text-align: center;
+    ">
+        </div>
+        <header>
+            
+            <a href="index.html">Chapter 1: Algorithms and Data</a>
+        </header>
+        <nav id="TableOfContents" class="scrollbar">
+                
+<ul class="nav">
+        
+
+        
+        <li class="nav-item" >
+        <a href="index.html#11-algorithmic-design" class="nav-link">1.1 Algorithmic design</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#12-algorithms-parts" class="nav-link">1.2 Algorithms parts</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#13-designing-algorithms-the-4-step-process" class="nav-link">1.3 Designing algorithms: the 4-step process</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#14-data" class="nav-link">1.4 Data</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#15-data-sources" class="nav-link">1.5 Data sources</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#16-data-types" class="nav-link">1.6 Data types</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#17-processing-data" class="nav-link">1.7 Processing Data</a>
+        
+
+        
+        <ul class="nav">
+                <li class="nav-item">
+            <a href="index.html#171-numeric-operations" class="nav-link">1.7.1 Numeric operations</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#172-logical-operations" class="nav-link">1.7.2 Logical operations</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#173-data-analysis" class="nav-link">1.7.3 Data analysis</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#174-data-sorting" class="nav-link">1.7.4 Data Sorting</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#175-data-selection" class="nav-link">1.7.5 Data Selection</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#176-mapping" class="nav-link">1.7.6 Mapping</a>
+        
+
+        
+        </li></ul></li><li class="nav-item">
+            <a href="index.html#18-pitfalls-of-algorithmic-design" class="nav-link">1.8 Pitfalls of algorithmic design</a>
+        
+
+        
+        <ul class="nav">
+                <li class="nav-item">
+            <a href="index.html#181-invalid-or-wrong-input-type" class="nav-link">1.8.1 Invalid or wrong input type</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#182-unintended-input" class="nav-link">1.8.2 Unintended input</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#183-incorrect-order-of-operation" class="nav-link">1.8.3 Incorrect order of operation</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#184-mismatched-data-structures" class="nav-link">1.8.4 Mismatched data structures</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#185-long-processing-time" class="nav-link">1.8.5 Long processing time</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#186-poor-organization" class="nav-link">1.8.6 Poor organization</a>
+        
+
+        
+        </li></ul></li><li class="nav-item">
+            <a href="index.html#19-tutorials-algorithms-and-data" class="nav-link">1.9 Tutorials: algorithms and data</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#next-steps" class="nav-link">Next Steps</a>
+    </li></ul>
+                <div id="toc-bottom-container" style="
+                text-align: center;
+            ">
+                </div>
+        </nav>
+    </aside>
+</div>
+
+  
+  
+  <div class="main-content ">
+    <div id="breadcrumbs">
+    
+    
+        
+    
+        
+    
+        <a href="https://developer.rhino3d.com/en/guides/">Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/">Grasshopper Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/gh-algorithms-and-data-structures/">Essential Algorithms and Data Structures for Grasshopper</a> /
+    
+
+</div>
+
+ 
+
+      <div class="feature-title-container">
+        <div class="feature-title">Chapter 1: Algorithms and Data</div><div class="platform-callout">    
+    
+        
+        
+        
+        
+    
+</div></div>
+      <p>
+        
+    <span class="byline">
+        by
+        
+        
+        
+        
+            
+            
+            
+              
+            <a href="https://discourse.mcneel.com/u/rajaa/">Rajaa Issa</a>                              
+         (Last updated:&nbsp; Monday, July 15, 2024)
+  </span>
+  
+</p>
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="11-algorithmic-design">1.1 Algorithmic design<a aria-label="1.1 Algorithmic design" href="index.html#11-algorithmic-design"></a></h2>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030214506" target="_blank"> Algorithmic design</a></p>
+<p>We can define algorithmic design as a design method where the <strong>output</strong> is achieved through <strong>well-defined steps</strong>. In that sense, many human activities are algorithmic. Take, for example, baking a cake. You get the <strong>cake</strong> (output) by using a <strong>recipe</strong> (well-defined steps). Any change in the ingredients (input) or the baking process results in a different cake. We will analyze the parts of typical algorithms, and identify a strategy to build algorithmic solutions from scratch.</p>
+<p>Regardless of its complexity, all algorithmic solutions have 3 building blocks: <strong>input, key process,</strong> and <strong>output</strong>. Note that the key process may require additional input and processes.</p>
+<figure>
+   <img src="ads-002.png">
+   <figcaption>Figure(1): The building blocks of algorithmic solutions</figcaption>
+</figure>  
+<p>Throughout this text, we will organize and label the solutions to identify the three blocks clearly. We will also use consistent color coding to visually distinguish between the parts. This will help us become more comfortable with reading algorithms and quickly identify input, key processing steps, and properly collect and display output. Visual cues are important to develop fluency in algorithmic thinking.</p>
+<p>In general, reading existing algorithmic solutions is relatively easy, but building new ones from scratch is much harder and requires a new set of skills. While it is useful to know how to read and modify existing solutions, it is essential to develop algorithmic design skills to build new solutions from scratch.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="12-algorithms-parts">1.2 Algorithms parts<a aria-label="1.2 Algorithms parts" href="index.html#12-algorithms-parts"></a></h2>
+<p>In Grasshopper, a solution flows from left to right. At the far left are input values and parameters, and the far right has the output. In between are one or more key processes, and sometimes additional input and output. Let’s take a simple example to help identify the three parts of any algorithm (input, key process, output). The simple addition algorithm includes two numbers (input), the sum (output) and one key process that takes the numbers and gives the result. We will use purple for the input, maroon for the key processes and light blue for the output. We will also group and label the different parts and adhere to organizing the Grasshopper solutions from left to right.</p>
+<p><strong>Example 1-2-1:</strong>
+Algorithm to add 2 numbers</p>
+<figure>
+   <img src="ads-003.png">
+</figure>  
+<p>Algorithms may involve intermediate processes. For example, suppose we need to create a circle (output) using a center and a radius (input). Notice that the input is not sufficient because we do not know the plane on which the circle should be created. In this case, we need to generate additional information, namely the plane of the circle. We will call this an intermediate process and use brown color to label it.</p>
+<p><strong>Example 1-2-2:</strong>
+Algorithm to create a circle on the XY-Plane from a center and a radius</p>
+<figure>
+   <img src="ads-004.png">
+</figure>  
+<p>Some solutions are not written with styles and hence are hard to read and build on. It is very important that you take the time to organize and label your solutions to make them easier to understand, debug and use by others.</p>
+<table class="rounded">
+  <tr>
+    <th>Tutorial 1-2-3: Read existing algorithm</th>
+  </tr>
+  <tr>
+    <td>
+    Given the following definition, write a description of what the algorithm does, identify input, the main process(s) and output, then label and color-code all the parts. Re-write the solution to make it more readable.
+    <figure>
+    <img src="ads-005.png" class="image_center" width="75%">
+    </figure>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br>In order to figure out what the algorithm is meant to do, we need to group the input on the left side, and collect the output on the right side, then organize the processes in the order of execution. We then step through the solution from left to right to deduce what it does. We can examine and preview the output in each step.
+        <br><br>
+        The example of the tutorial is meant to create a circle that is twice as large as another circle that goes through three given points. One of the points is constructed out of its 3 coordinates.
+        <figure>
+        <img src="ads-006.png">
+        </figure>
+        </details>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="13-designing-algorithms-the-4-step-process">1.3 Designing algorithms: the 4-step process<a aria-label="1.3 Designing algorithms: the 4-step process" href="index.html#13-designing-algorithms-the-4-step-process"></a></h2>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030225149" target="_blank"> Modeling in Rhino vs Grasshopper</a></p>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030216024" target="_blank"> The 4-step process to designing algorithms</a></p>
+<p>Before we generalize a method to design algorithms, let’s examine an algorithm we commonly use in real life such as baking a cake. If you already have a recipe for a cake, you simply get the recommended ingredients, mix them, pour in a pan, put in a preheated oven for a certain amount of time, then serve. If the recipe is well documented, then it is relatively straightforward to use. As you become more proficient in baking cakes, you may start to modify the recipe. Perhaps add new ingredients (chocolate or nuts) or use different tools (cupcake container).</p>
+<figure>
+   <img src="ads-007.png">
+   <figcaption>Figure(2): Steps to follow existing recipe</figcaption>
+</figure>  
+<p>When designers write algorithms, they typically try to search for existing solutions and modify them to fit their purposes. While this is a good entry point, using existing solutions can be frustrating and time-consuming. Also, existing solutions have their own flavor and that may influence design decisions and limit creativity. If designers have unique problems, and they often do, they have no choice but to create new solutions from scratch; albeit a much harder endeavor.</p>
+<p>Back to our example, the task of baking a cake is much harder if you don’t have a recipe to follow and have not baked one before. You will have to guess the ingredients and the process. You will likely end up with bad results in the first few attempts, until you figure it out! In general, when you create a new recipe, you have to follow the process in reverse. You start with an image of the desired cake, you then guess the ingredients, tools and steps. Your thinking goes along the following lines:</p>
+<ul>
+<li>The cake needs to be baked, so I need an oven and time,</li>
+<li>What goes in the oven is a cake batter held by a container,</li>
+<li>The batter is a mix of ingredients</li>
+</ul>
+<figure>
+   <img src="ads-008.png">
+   <figcaption>Figure(3): Steps to invent a new recipe from scratch</figcaption>
+</figure>  
+<p>We can use a similar methodology to design parametric algorithms from scratch. Keep in mind that creating new algorithms is a “skill” and it requires patience, practice and time to develop.</p>
+<p><strong>Algorithmic thinking in 3D modeling vs parametric design</strong></p>
+<p>3D modeling involves a certain level of algorithmic thinking, but it has many implicit steps and data. For example designing a mass model using a 3D modeler may involve the following steps:</p>
+<ol>
+<li>Think about the output (e.g. a mass out of few intersecting boxes)</li>
+<li>Identify a command or series of commands to achieve the output ( e.g. run Box command a few times, Move, Scale or Rotate one or more boxes, then BooleanUnion the geometry).</li>
+</ol>
+<p>At that point, you are done!</p>
+<p>Data such as the base point for your initial box, width, height, scale factor, move direction, rotation angle, etc. are requested by the commands, and the designer does not need to prepare ahead of time. Also, the final output (the boolean mass) becomes directly available and visible as an object in your document.</p>
+<figure>
+   <img src="ads-009.png">
+   <figcaption>Figure(4): Interactive 3D modeling to create and manipulate geometry uses visual widgets and guides</figcaption>
+</figure>  
+<p>Algorithmic solutions are not interactive and require explicit articulation of data and processes. In the box example, you need to define the box orientation and dimensions. When copy, you need a vector and when rotate you need to define the plane and angle of rotation.</p>
+<figure>
+   <img src="ads-010.png">
+   <figcaption>Figure(5): Algorithmic solutions involve explicit definition of geometry, vectors and transformations</figcaption>
+</figure>  
+<p><strong>Designing algorithms</strong></p>
+<p>Designing algorithms requires knowledge in geometry, mathematics and programming. Knowledge in geometry and mathematics is covered in the <a href="https://developer.rhino3d.com/guides/general/essential-mathematics/">Essential Mathematics for Computational Design</a>. As for programming skills, it takes time and practice to build the ability to formulate design intentions into logical steps to process and manage geometric data. To help get started, it is useful to think of any <strong>algorithm as a 4-step process</strong> as in the following:</p>
+<table class="rounded">
+  <tr>
+    <td style="background-color:#cfe2f3"><b>1. Output</b></td>
+    <td>Clearly identify the desired outcome</td>
+  </tr>
+  <tr>
+    <td style="background-color:#f4cccc"><b>2. Key processes</b></td>
+    <td>Identify key steps to reach the outcome</td>
+  </tr>
+  <tr>
+    <td style="background-color:#d9d2e9"><b>3. Input</b></td>
+    <td>Examine initial data and parameters</td>
+  </tr>
+    <tr>
+    <td style="background-color:#eee4c5"><b>4. Intermediate steps</b></td>
+    <td>Define intermediate parameters and processes to generate additional data</td>
+  </tr>
+</table>
+<p>Thinking in terms of these 4 steps is key to developing the skill of algorithmic design. We will start with simple examples to illustrate the methodology, and gradually apply more complex examples.</p>
+<p><strong>Example 1-3-1: Add two numbers</strong>
+Use the 4-Step process to write an algorithm to add two numbers</p>
+<figure>
+   <img src="ads-011.png">
+</figure> 
+<table class="rounded">
+  <tr>
+    <td style="background-color:#cfe2f3"><b>1. Output:<br>The sum of the 2 numbers</b> <br>Use the Panel component to collect the sum</td>
+    <td>
+   <img src="ads-012.png" class="image_center" width="50%">
+    </td>
+  </tr>
+  <tr>
+    <td style="background-color:#f4cccc"><b>2. Key processes:<br>Addition</b><br>Use the Addition component that takes 2 numbers and gives the sum</td>
+    <td><img src="ads-013.png" class="image_center" width="75%"></td>
+  </tr>
+  <tr>
+    <td style="background-color:#d9d2e9"><b>3. Input:<br>2 numbers</b><br>Use the Panel component to hold and view the values of input numbers</td>
+    <td><img src="ads-014.png"></td>
+  </tr>
+</table>
+<p><strong>Example 1-3-2: Create a circle</strong>
+Use the 4-Step process to create a circle from a given center and radius</p>
+<figure>
+   <img src="ads-015.png">
+</figure> 
+<table class="rounded">
+  <tr>
+    <td style="background-color:#cfe2f3"><b>1. Output:<br>A Circle</b><br>Use the <b>Circle</b> parameter to collect the output</td>
+    <td><img src="ads-016.png" class="image_center" width="50%"></td>
+  </tr>
+  <tr>
+    <td style="background-color:#f4cccc"><b>2. Key processes:</b><br>Identify a key process that generates a circle from a radius<br>Use the <b>Circle</b> component in Grasshopper</td>
+    <td><img src="ads-017.png" class="image_center" width="75%"></td>
+  </tr>
+  <tr>
+    <td style="background-color:#d9d2e9"><b>3. Input:</b><br>Use the given input (center and radius). Feed the radius to the <b>Circle</b> component</td>
+    <td><img src="ads-018.png"></td>
+  </tr>
+  <tr>
+    <td style="background-color:#eee4c5"><b>4.  Intermediate process:</b><br>The circle needs a center, and also the plane on which the circle is located. Let's assume the circle is on a plane parallel to the XY-Plane and use the circle center as the origin of the plane</td>
+    <td><img src="ads-019.png"></td>
+  </tr>
+</table>
+<p><strong>Example 1-3-3: Create a line</strong>
+Use the 4-Step process to create an algorithm to generate a line from 2 points. One point is referenced from Rhino, and the other is created using three coordinates (x=1, y=0.5 and z=3)</p>
+<figure>
+   <img src="ads-020.png">
+</figure>
+<table class="rounded">
+  <tr>
+    <td style="background-color:#cfe2f3"><b>1. Output:</b><br>The line geometry. Use the <b>Geometry</b> parameter to collect the output</td>
+    <td><img src="ads-021.png" class="image_center" width="50%"></td>
+  </tr>
+  <tr>
+    <td style="background-color:#f4cccc"><b>2. Key processes:</b><br>Identify a key process that generates a line from 2 points. Use the <b>Line</b> component in Grasshopper</td>
+    <td><img src="ads-022.png" class="image_center" width="75%"></td>
+  </tr>
+  <tr>
+    <td style="background-color:#d9d2e9"><b>3. Input:</b><br>Use the given input (a referenced point and 3 coordinates). Feed one point to one of the ends of the line</td>
+    <td><img src="ads-023.png" class="image_center" width="100%"></td>
+  </tr>
+  <tr>
+    <td style="background-color:#eee4c5"><b>4.  Intermediate process:</b><br>Before we can use the coordinates as a point, we need to construct a point</td>
+    <td><img src="ads-024.png"></td>
+  </tr>
+</table>
+<p>In more complex algorithms, we will need to analyze the problems, investigate possible solutions and break them down to pieces whenever possible to make it more manageable and readable. We will continue to use the 4-step process and other techniques to solve more complex algorithms throughout the book.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="14-data">1.4 Data<a aria-label="1.4 Data" href="index.html#14-data"></a></h2>
+<p>Data is information stored in a computer and processed by a program. Data can be collected from different sources, it has many types and is stored in well defined structures so that it can be used efficiently. While there are commonalities when it comes to data across all scripting languages, there are also some differences. This book explores data and data structures specific to Grasshopper.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="15-data-sources">1.5 Data sources<a aria-label="1.5 Data sources" href="index.html#15-data-sources"></a></h2>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030590039" target="_blank"> Data and data sources</a></p>
+<p>In Grasshopper, there are three main ways to supply data to processes (or what is called components): internal, referenced and external.</p>
+<table class="rounded">
+  <tr>
+    <th>Data sources in Grasshopper</th>
+  </tr>
+    <tr>
+    <td>
+    <b>1. Internally set data</b><br> Data can be set inside any instance of a parameter. Once set, it remains constant, unless manually changed or overridden by external input. This is a good way when you do not
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <b>2. Referenced data</b><br> Data can be referenced from Rhino or some external document. For example, you can reference a point created in a Rhino document. When you move the point in Rhino, its reference in Grasshopper updates as well. Grasshopper files are saved separately from Rhino files, and hence if the GH file has referenced data, the Rhino file needs to be saved and passed along with the GH file to avoid any loss of data<br>
+    <figure>
+    <img src="ads-025.png" class="image_center" width="60%">
+    </figure><br>
+    generally need to change the data after it is set (constant). Data is stored inside the GH file<br>
+    <figure>
+    <img src="ads-026.png" class="image_center" width="75%">
+    </figure>
+    </td>
+  </tr>
+    <tr>
+    <td>
+    <b>3. Externally supplied data</b><br> Data can be supplied from previous processes. This method is best suited for dynamic data or data controlled parametrically. Externally supplied data to a parameter takes precedent over the internal or referenced values (when both exist)<br>
+    <figure>
+    <img src="ads-027.png" class="image_center" width="75%">
+    </figure>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="16-data-types">1.6 Data types<a aria-label="1.6 Data types" href="index.html#16-data-types"></a></h2>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030590459" target="_blank"> Data types</a></p>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030590809" target="_blank"> Data casting</a></p>
+<p>All programming languages identify the kind of data used in terms of the values that can be assigned to and the operations and processes it can participate in. There are common data types such as <b>Integer, Number, Text, Boolean</b> (Boolean type can be set to <b>True</b> or <b>False</b>), and others. Grasshopper lists those under the <b>Params &gt; Primitives</b> tab.</p>
+<figure>
+   <img src="ads-028.png" class="image_center" width="40%">
+   <figcaption>Figure(6): Examples of primitive data types common to all programming languages</figcaption>
+</figure>  
+<p>Grasshopper supports geometry types that are useful in the context of 3D modeling such as Point (3 numbers for coordinates), <b>Line</b> (2 points), <b>NURBS Curve, NURBS Surface, Brep</b>, and others. All geometry types are included under the <b>Params&gt; Geometry</b> tab in GH.</p>
+<figure>
+   <img src="ads-029.png" class="image_center" width="60%">
+   <figcaption>Figure(7): Examples of geometry data types</figcaption>
+</figure>  
+<p>There are other mathematics types that designers do not usually use in 3D modeling, but are very common in parametric design such as Domains, Vectors, Planes, and Transformation Matrices. GH provides a rich set of tools to help create, analyze and use these types. To fully understand the mathematical as well as geometry types such as NURBS curves and surfaces, you can refer to the <a href="https://developer.rhino3d.com/guides/general/essential-mathematics/">Essential Mathematics for Computational Design</a> book by the author</p>
+<figure>
+   <img src="ads-030.png" class="image_center" width="75%">
+   <figcaption>Figure(8): Examples of data types common in computer graphics</figcaption>
+</figure>  
+<p>The parameters in GH can be used to convert data from one type to another (cast). For example if you need to turn a text into a number, you can feed your text into a <b>Number</b> parameter. If the text cannot be converted, you’ll get an error.</p>
+<figure>
+   <img src="ads-031.png">
+   <figcaption>Figure(9): Data conversion (casting) inside parameters in Grasshopper</figcaption>
+</figure>  
+<p>Grasshopper components internally convert input to suitable types when possible. For example, if you feed a “text” to <b>Addition</b> component, GH tries to read the text as a number. If a component can process more than one type, it uses the input type without conversion. For example, equality in an expression can compare text as well as numbers. In such case, make sure you use the intended type to avoid confusion.</p>
+<figure>
+   <img src="ads-032.png">
+   <figcaption>Figure(10): Some operations can be performed on multiple types. Cast to the intended type especially if the component is capable of processing multiple types (such as Expression in GH)</figcaption>
+</figure>  
+<p>It is worth noting that sometimes GH components simply ignore invalid input (null or wrong type). In such cases, you are likely to end up with an unexpected result and it will be hard to find the bug. It is very important to verify the output from each component before using it.</p>
+<figure>
+   <img src="ads-033.png" class="image_center" width="75%">
+   <figcaption>Figure(11): Invalid input is ignored and a default value is used. For example a number inside a Panel component can be interpreted as a text and hence become invalid input to an Addition component</figcaption>
+</figure>  
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="17-processing-data">1.7 Processing Data<a aria-label="1.7 Processing Data" href="index.html#17-processing-data"></a></h2>
+<p>Algorithmic designs use many data operations and processes. In the context of this book, we will focus on five categories: numeric and logical operations, analysis, sorting and selection.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="171-numeric-operations">1.7.1 Numeric operations<a aria-label="1.7.1 Numeric operations" href="index.html#171-numeric-operations"></a></h3>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030591400" target="_blank"> Numeric operations in Grasshopper</a></p>
+<p>Numeric operations include operations such as arithmetic, trigonometry, polynomials and complex numbers. GH has a rich set of numeric operations, and they are mostly found under the <b>Math</b> tab. There are two main ways to perform operations in GH. First by using designated components for specific operations such as <b>Addition, Subtraction</b> and <b>Multiplication</b>.</p>
+<figure>
+   <img src="ads-034.png" class="image_center" width="75%">
+   <figcaption>Figure(12): Examples of  numeric operations components in GH</figcaption>
+</figure>  
+<p>Second, use an <b>Expression</b> component where you can combine multiple operations and perform a rich set of math and trigonometry operations, all in one expression.</p>
+<figure>
+   <img src="ads-035.png" class="image_center" width="70%">
+   <figcaption>Figure(13): Expression component in GH can be used to perform multiple operations</figcaption>
+</figure>  
+<p>The <b>Expression</b> component is more robust and readable when you have multiple operations.</p>
+<figure>
+   <img src="ads-036.png" class="image_center" width="90%">
+   <figcaption>Figure(14): When a chain of operations is involved, using the Expression component is easier to maintain</figcaption>
+</figure>  
+<p>Input to Expressions can be treated as text depending on the context.</p>
+<figure>
+   <img src="ads-037.png" class="image_center" width="75%">
+   <figcaption>Figure(15): Expression can process and format text</figcaption>
+</figure>  
+<p>It is worth mentioning that most numeric input to components allow writing an expression to modify the inputs inline. For example, the Range component has N (number of steps) input. If you right mouse click on “N”, you can set an expression. You always use “x” to represent the supplied input regardless of the name.</p>
+<figure>
+   <img src="ads-038.png">
+   <figcaption>Figure(16):  Expression can be set inside the input parameter. Variable “x” refers to the supplied input value</figcaption>
+</figure>  
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="172-logical-operations">1.7.2 Logical operations<a aria-label="1.7.2 Logical operations" href="index.html#172-logical-operations"></a></h3>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030591761" target="_blank"> Logical operations in Grasshopper</a></p>
+<p>Main logical operations in GH include equalities, sets and logic gates.</p>
+<figure>
+   <img src="ads-039.png" class="image_center" width="60%">
+   <figcaption>Figure(17):  Grasshopper has multiple components to perform Logical operations</figcaption>
+</figure>  
+<p>Logical operations are used to create conditional flow of data. For example, if you like to draw a sphere only when the radius is between two values, then you need to create a logic that blocks the radius when it is not within your limits.</p>
+<figure>
+   <img src="ads-040.png">
+   <figcaption>Figure(18):  Data flow control using logical operations</figcaption>
+</figure>  
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="173-data-analysis">1.7.3 Data analysis<a aria-label="1.7.3 Data analysis" href="index.html#173-data-analysis"></a></h3>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030592921" target="_blank"> Data analysis in Grasshopper</a></p>
+<p>There are many tools in GH to examine and preview data. <b>Panel</b> is used to show the full details of the data and its structure, while the <b>Parameter Viewer</b> shows the data structure only. Other analysis components include <b>Quick Graph</b> that plots data in a graph, and <b>Bounds</b> to find the limits in a given set of numbers (the min and max values in the set).</p>
+<figure>
+   <img src="ads-041.png">
+   <figcaption>Figure(19):  Some of the ways to analyze data in Grasshopper</figcaption>
+</figure>  
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="174-data-sorting">1.7.4 Data Sorting<a aria-label="1.7.4 Data Sorting" href="index.html#174-data-sorting"></a></h3>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030593355" target="_blank"> Data sorting in Grasshopper</a></p>
+<p>GH has designated components to sort numeric and geometry data. The Sort List component can sort a list of numeric keys. It can sort a list of numbers in ascending order or reverse the order. You can also use the Sort List component to sort geometry by some numeric keys, for example sort curves by length. GH has components designated to sort geometry sets such as Sort Points to sort points by their coordinates.</p>
+<figure>
+   <img src="ads-042.png">
+   <figcaption>Figure(20):  Sorting numbers in Grasshopper</figcaption>
+</figure>  
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="175-data-selection">1.7.5 Data Selection<a aria-label="1.7.5 Data Selection" href="index.html#175-data-selection"></a></h3>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030593936" target="_blank"> Data selection in Grasshopper</a></p>
+<p>3D modeling allows picking specific or a group of objects interactively, but this is not possible in algorithmic design. Data is selected in GH based on the location within the data structure, or by a selection pattern. For example <b>List</b> Item component allows selecting elements based on their indices.</p>
+<figure>
+   <img src="ads-043.png" class="image_center" width="75%">
+   <figcaption>Figure(21):  Select items from a list in Grasshopper</figcaption>
+</figure>  
+<p>The <b>Cull Pattern</b> component allows using some repeated patterns to select a subset of the data.</p>
+<figure>
+   <img src="ads-044.png" class="image_center" width="75%">
+   <figcaption>Figure(22):  An example to select every other item in a list</figcaption>
+</figure>  
+<p>As you can see from the examples, selecting specific items or using cull components yield a subset of the data, and the rest is thrown away. Many times you only need to isolate a subset to operate on, then recombine back with the original set. This is possible in GH, but involves more advanced operations. We will get into the details of these operations when we talk about advanced data structures in chapter 3.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="176-mapping">1.7.6 Mapping<a aria-label="1.7.6 Mapping" href="index.html#176-mapping"></a></h3>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030594157" target="_blank"> Data mapping in Grasshopper</a></p>
+<p>That refers to the linear mapping of a range of numbers where each number in a set is mapped to exactly one value in the new set. GH has a component to perform linear mapping called <b>ReMap</b>. You can use it to scale a set of numbers from its original range to a new one. This is useful to scale your range to a domain that suits your algorithm’s needs and limitations.</p>
+<figure>
+   <img src="ads-045.png">
+   <figcaption>Figure(23):  An example of linear remapping of numbers in Grasshopper</figcaption>
+</figure>  
+<p>Converting data involves mapping. For example, you may need to convert an angle unit from degrees to radians ( GH components accept angles in radians only).</p>
+<figure>
+   <img src="ads-046.png" class="image_center" width="75%">
+   <figcaption>Figure(24):  Convert angles from degrees to radians</figcaption>
+</figure>  
+<p>As you know, parametric curves have “domains” (the range of parameters that evaluate to points on the curve). For example, if the domain of a given curve is between 12.5 to 51.3, evaluating the curve at 12.5 gives the point at the start of the curve. Many times you need to evaluate multiple curves using consistent parameters. Reparameterizing the domain of curves to some unified range helps solve this problem. One common domain to use is “0 To 1”. At the input of each curve in any GH component, there is the option to <b>Reparameterize</b> which resets the domain of the curve to be “0 to 1”.</p>
+<figure>
+   <img src="ads-047.png" class="image_center" width="75%">
+   <figcaption>Figure(25):  Normalize the domain of curves (set to 0-1). Use Reparameterize input flag in Grasshopper</figcaption>
+</figure>  
+<table class="rounded">
+  <tr>
+    <th>Tutorial 1-7-A: Flow control</th>
+  </tr>
+  <tr>
+    <td>
+    What is the purpose of the following algorithm? Notate and color code to describe the purpose of each part.
+    <figure>
+    <img src="ads-048.png">
+    </figure>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><b>Analyze the algorithm</b><br>
+        The algorithm has an output that is a sphere, a radius input and some conditional logic to process the radius.
+        <figure>
+        <img src="ads-049.png"><br>
+        <br><b>Notate and color-code the solution</b><br>
+        From testing the output and following the steps of the solution it becomes apparent that the intention is to make sure that the radius of the sphere cannot be less than 1 unit.<br>
+        Test with radius greater than 1 (3.4 in the example)
+        <figure>
+        <img src="ads-050.png"><br>
+        </figure><br>
+        Test with radius less than 1 (-2.8 in the example)
+        <figure>
+        <img src="ads-051.png"><br>
+        </figure><br>
+        </details>
+    </td>
+  </tr>
+</table>
+<table class="rounded">
+  <tr>
+    <th>Tutorial 1-7-B: Data processing</th>
+  </tr>
+  <tr>
+    <td>
+    Given a list of numbers of some point coordinates, do the following:<br>
+    1. Analyze the list to understand the data.<br>
+    2. Write an algorithm to convert the list of <b>Numbers</b> to a list of <b>Points</b>.<br>
+    3. Change the domain of coordinate values to be between 3 and 9.<br>
+    <br>Note that the input number list is organized so that the first 3 numbers refer to the x,y,z of the first point, the second 3 numbers belong to the second point and so on.
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><b>Analyze the algorithm</b><br>
+        <table>
+          <tr>
+            <td>
+            There are 2 inputs: a list of 51 numbers (3 coordinates for each point) which means that the list has 17 points.<br>
+            Using a <b>QuickGraph</b>, we can see that the numbers are between 2.60 and 15.89. We can also see that the values are distributed randomly. The other input is the target domain to be from 3 to 9.
+            </td>
+            <td>
+            <img src="ads-052.png">
+            </td>
+          </tr>
+        </table>
+        <b>Use the 4-step process to solve the algorithms</b><br>
+        <table>
+          <tr>
+            <td style="background-color:#cfe2f3">
+            <b>Output: List of points</b><br>
+            Use the <b>Parameter Viewer</b> to view the resulting data structure. To start, it will be empty.
+            </td>
+            <td>
+            <img src="ads-054.png" class="image_center" width="50%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#f4cccc">
+            <b>Key Process #1: Remap Coordinates</b><br>
+            Map the coordinates list from its current domain (2.60 to 15.89) to a new domain (3.0 to 9.0)<br>
+            Use <b>ReMap</b> component to achieve that
+            </td>
+            <td>
+            <img src="ads-055.png" class="image_center" width="75%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #1</b><br>
+            The input domain is missing and can be extracted using <b>Bounds</b> component
+            </td>
+            <td>
+            <img src="ads-056.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#f4cccc">
+            <b>Key Process #2: Construct Points</b><br>
+            Construct points from coordinates<br>
+            Use <b>Construct Point (Pt)</b> component
+            </td>
+            <td>
+            <img src="ads-057.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #2</b><br>
+            Extract all X coordinates as one list, Y in another and Z in the third. Use <b>Cull Pattern</b> component with appropriate pattern to extract each coordinate as a separate list.<br><br>
+            The input to <b>Cull</b> is the remapped points from process #1
+            </td>
+            <td>
+            <img src="ads-058.png">
+            </td>
+          </tr>
+        </table>
+        <b>Putting it all together</b><br>
+        <img src="ads-059.png">
+        </details>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="18-pitfalls-of-algorithmic-design">1.8 Pitfalls of algorithmic design<a aria-label="1.8 Pitfalls of algorithmic design" href="index.html#18-pitfalls-of-algorithmic-design"></a></h2>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1032151256" target="_blank"> Pitfalls of algorithmic design</a></p>
+<p>Writing elegant algorithms that are efficient and easy to read and debug is hard. We explained in this chapter how to write algorithms with style using color-coding and labeling. We also articulated a 4-step process to help develop algorithms. Following these guides help minimize bugs and improve the readability of the scripts. We will list a few of the common issues that lead to incorrect or unintended result.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="181-invalid-or-wrong-input-type">1.8.1 Invalid or wrong input type<a aria-label="1.8.1 Invalid or wrong input type" href="index.html#181-invalid-or-wrong-input-type"></a></h3>
+<p>If the input is of the wrong type or is invalid, GH changes the color of components to red or orange to indicate an error warning, with feedback about what the issue might be. This is helpful, but sometimes faulty input goes unnoticed if the components assign a default value, or calculate an alternative value to replace the input, that is not what was intended. It is a good practice to always double check the input (hook to a panel or parameter viewer and label the input). To avoid using wrong types, it is advisable to convert to the intended type to ensure accuracy.</p>
+<figure>
+   <img src="ads-060.png" class="image_center" width="90%">
+   <figcaption>Figure(26): Error resulting from wrong input type</figcaption>
+</figure>  
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="182-unintended-input">1.8.2 Unintended input<a aria-label="1.8.2 Unintended input" href="index.html#182-unintended-input"></a></h3>
+<p>Input is prone to unintended change via intermediate processes or when multiple users have writing access to the script. It is very useful to preview and verify all key input and output. The Panel component is very versatile and can help check all types of values. Also you can set up guarding logic against out of range values or to trap undesired values.</p>
+<figure>
+   <img src="ads-061.png" class="image_center" width="90%">
+   <figcaption>Figure(27): Error resulting from unintended input. Cannot assume curve domain is 0-1 and use 0.5 to evaluate the midpoint</figcaption>
+</figure>  
+<figure>
+   <img src="ads-062.png">
+   <figcaption>Figure(28): Example of a robust solution to evaluate the midpoint of a curve</figcaption>
+</figure>  
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="183-incorrect-order-of-operation">1.8.3 Incorrect order of operation<a aria-label="1.8.3 Incorrect order of operation" href="index.html#183-incorrect-order-of-operation"></a></h3>
+<p>You should try to organize your solutions horizontally or vertically to clearly see the sequence of operations. You should also check the output from each step to make sure it is as expected before continuing on your code. There are also some techniques that help consolidate the script, for example use <b>Expression</b> when multiple numeric and math operations are involved. The following highlights some unfavorable organization.</p>
+<figure>
+   <img src="ads-063.png">
+   <figcaption>Figure(29): Easy to confuse input to operations with poor organization</figcaption>
+</figure>  
+<p>The following shows how to rewrite the same code to make it less error prone.</p>
+<figure>
+   <img src="ads-064.png">
+   <figcaption>Figure(30): Best practices to align input with processes, or use Expressions</figcaption>
+</figure>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="184-mismatched-data-structures">1.8.4 Mismatched data structures<a aria-label="1.8.4 Mismatched data structures" href="index.html#184-mismatched-data-structures"></a></h3>
+<p>The issue of mismatched data structures as input to the same process or component is particularly tricky to guard against in GH, and has the potential to spiral the solution out of memory. It is essential to test the data structure of all input (except trivial ones) before feeding into any component. It is also important to examine desired matching under different scenarios (data matching will be explained at length later).</p>
+<figure>
+   <img src="ads-065.png" class="image_center" width="75%">
+   <figcaption>Figure(31): Mismatched data structures of input can cause errors in the output</figcaption>
+</figure>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="185-long-processing-time">1.8.5 Long processing time<a aria-label="1.8.5 Long processing time" href="index.html#185-long-processing-time"></a></h3>
+<p>Some algorithms are time consuming, and you simply have to wait for it to process, but there are ways to minimize the wait when it is unnecessary. For example, at the early cycles of development, you should try to use a smaller set of data to test your solution with before committing the time to process the full set of data. It is also a good practice to break the solution into stages when possible, so you can isolate and disable the time consuming parts. Also, it is often possible to rewrite your solution to be more optimized and consume less time. Use the GH <b>Profiler</b> to test processing time. When a solution takes far too long to process or crashes, you should do the following: before you reopen the solution, disable it, and disconnect the input that caused the crash.</p>
+<figure>
+   <img src="ads-066.png" class="image_center" width="75%">
+   <figcaption>Figure(32): Grasshopper Profiler widget helps observe processing time</figcaption>
+</figure>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="186-poor-organization">1.8.6 Poor organization<a aria-label="1.8.6 Poor organization" href="index.html#186-poor-organization"></a></h3>
+<p>Poorly organized definitions are not easy to debug, understand, reuse or modify. We can’t stress enough the importance of writing your definitions with styles, even if it costs extra time to start with. You should always color code, label everything, give meaningful names to variables, break repeated operations into modules and preview your input and output.</p>
+<figure>
+   <img src="ads-067.png">
+   <figcaption>Figure(33): Poor organization in visual programming make the code hard to read and debug</figcaption>
+</figure>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="19-tutorials-algorithms-and-data">1.9 Tutorials: algorithms and data<a aria-label="1.9 Tutorials: algorithms and data" href="index.html#19-tutorials-algorithms-and-data"></a></h2>
+<table class="rounded">
+  <tr>
+    <th><a href="Tutorial-1-9-1-Unioned-circles.gh" class="fas fa-download"></a> Tutorial 1.9.1: Unioned circles</th>
+  </tr>
+  <tr>
+    <td>
+    Use the 4-step process to design an algorithm that combines 2 circles, given the following:<br>
+    Both circles are located on the XY-Plane. The first circle (Cir1) has a center (C1) = (2,2,2) and radius (R1) that is equal to a random number between 3 and 6. The second circle (Cir2) has a center (C2) that is shifted to the right of the first circle (Cir1) by an amount equal to the radius of the first circle (R1) along the positive X-Axis. The second circle radius (R2) is 20% bigger, or in other words (R2) = (R1) * 1.2.
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><a href="Tutorial-1-9-1-Unioned-circles.gh"> <i>download GH file...</i> </a><br>
+        <b>Analyze the question and the flow of the solution</b><br>
+        <table>
+          <tr>
+            <td>
+            There are 2 inputs: the coordinates of the center of the first circle (2,2,2) and the XY-Plane where both circles are located. Also, we know that the second circle is shifted the positive X-Axis direction, The following diagram shows an overview of the solution:<br>
+            <img src="ads-068.png">
+            </td>
+          </tr>
+        </table>
+        <b>Solution steps</b><br>
+        <table>
+          <tr>
+            <td style="background-color:#cfe2f3">
+            <b>Output: Curve for the region union</b>
+            </td>
+            <td>
+            <img src="ads-069.png" class="image_center" width="50%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#f4cccc">
+            <b>Key Process: Union of 2 circles</b><br>
+            Use the <b>Region Union</b> component that takes curves and a plane
+            </td>
+            <td>
+            <img src="ads-070.png" class="image_center" width="75%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#d9d2e9">
+            <b>Input: needed to calculate the region union</b><br>
+            Identify the input needed and use given input when relevant.<br><br>
+            The plane for region union has been given. The 2 circles need their own plane and radius. The center of the plane is the center of the circle.
+            </td>
+            <td>
+            <img src="ads-071.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #1:</b><br>
+            generate the center and plane of the 1st circle<br>
+            Construct a center from the given coordinates. Create a plane using <b>Plane Origin</b> component and use the constructed center and XY-Plane.<br><br>
+            The radius is from a random number between 3 and 6. Use <b>Random</b> component to create the radius
+            </td>
+            <td>
+            <img src="ads-072.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #2</b><br>
+            Generate the center and plane of the 2nd circle<br>
+            Calculate the 2nd circle plane by moving the first circle plane along the x-axis by an amount = first radius<br><br>
+            Calculate the 2nd circle radius by multiplying the first radius by 1.2 
+            </td>
+            <td>
+            <img src="ads-073.png">
+            </td>
+          </tr>
+        </table>
+        <b>Putting it all together</b><br>
+        <img src="ads-074.png">
+        </details>
+    </td>
+  </tr>
+</table>
+<table class="rounded">
+  <tr>
+    <th><a href="Tutorial-1-9-2-Sphere-with-bounds.gh" class="fas fa-download"></a> Tutorial 1.9.2: Sphere with bounds</th>
+  </tr>
+  <tr>
+    <td>
+    Use the 4-step process to draw a sphere with a radius between 2 and 6. If input is less than 2, then set the radius to 2, and if input radius is greater than 6, set the radius to 6. Use a number slider to input the radius and set between 0 and 10 to test. Make sure your solution is well organized, color-coded and labeled properly.
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><a href="Tutorial-1-9-2-Sphere-with-bounds.gh"> <i>download GH file...</i> </a><br>
+        <b>The 4-step process to solve the algorithm</b><br>
+        <table>
+          <tr>
+            <td style="background-color:#cfe2f3">
+            <b>Output: The sphere as geometry</b>
+            </td>
+            <td>
+            <img src="ads-075.png" class="image_center" width="50%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#f4cccc">
+            <b>Key Process: Create a sphere</b><br>
+            Use the <b>Sphere</b> component to create a sphere from a base plane and radius
+            </td>
+            <td>
+            <img src="ads-076.png" class="image_center" width="75%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#d9d2e9">
+            <b>Input:</b><br>
+            1. The radius parameter (0 - 10)<br>
+            2. The bounds of the radius are 2 & 6
+            </td>
+            <td>
+            <img src="ads-077.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #1:</b><br>
+            Construct a selection logic of radii and pattern. The radii is a list of the values from the slider, min and max. <br>
+            The list of pattern is generated to select the correct radius value
+            </td>
+            <td>
+            <img src="ads-078.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #2</b><br>
+            Generate the center and plane of the 2nd circle<br>
+            The selection logic ensures that the radius value falls within the intended range. If the radius input is less than the minimum value of the bounds, then the radius is set to the min value, and if it is greater than the maximum, then the max value is used instead.
+            </td>
+            <td>
+            <img src="ads-079.png">
+            </td>
+          </tr>
+        </table>
+        </details>
+    </td>
+  </tr>
+</table>
+<table class="rounded">
+  <tr>
+    <th><a href="Tutorial-1-9-3-Data-operations.gh" class="fas fa-download"></a> Tutorial 1.9.3: Data operations</th>
+  </tr>
+  <tr>
+    <td>
+    Given the numbers embedded in the <b>Number</b> parameter do the following:<br>
+    1. Analyze input in terms of bounds and distribution<br>
+    2. View the data and how it is structured<br>
+    3. Extract even numbers<br>
+    4. Sort numbers descending<br>
+    5. Remap sorted numbers to (100 to 200)
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><a href="Tutorial-1-9-3-Data-operations.gh"> <i>download GH file...</i> </a>
+        <table>
+          <tr>
+            <td>
+            <br><b>1- Analyze the input bounds and distribution</b><br><br>
+            Use the <b>QuickGraph</b> to show that the set of numbers are between 3 and 98 and are distributed randomly.
+            </td>
+            <td>
+            <img src="ads-081.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <b>2- Analyze the input data structure and values</b><br><br>
+            Use the <b>Panel</b> and <b>Parameter Viewer</b> to show that there are 16 elements organized in a list
+            </td>
+            <td>
+            <img src="ads-082.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <b>3- Extract Even numbers</b><br><br>
+            Create the logic to test if a number is even (divisible by 2 without a remainder) and use <b>Dispatch</b> to extract even numbers
+            </td>
+            <td>
+            <img src="ads-083.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <b>4- Sort numbers descending</b><br><br>
+            The Sort List component sorts numbers in ascending order. Use Reverse List component to further process the list to order descending
+            </td>
+            <td>
+            <img src="ads-084.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <b>5- Remap to 100-200</b><br><br>
+            Check the input range and use Remap component to scale data to be between 100-200
+            </td>
+            <td>
+            <img src="ads-085.png">
+            </td>
+          </tr>
+        </table>
+        </details>
+    </td>
+  </tr>
+</table>
+<table class="rounded">
+  <tr>
+    <th><a href="Tutorial-1-9-4-Algorithmic-pitfalls.gh" class="fas fa-download"></a> Tutorial 1.9.4: Algorithmic Pitfalls</th>
+  </tr>
+  <tr>
+    <td>
+    Analyze what the following algorithm is intended to do, identify the errors that are preventing it from working as intended, then rewrite to fix the errors. Organize to reflect the algorithm flow, label and color-code.
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><a href="Tutorial-1-9-4-Algorithmic-pitfalls.gh"> <i>download GH file...</i> </a>
+        <table>
+          <tr>
+            <td>
+            <br>The first step is to mark the errors:
+            <img src="ads-086.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            Next, fix the errors and rewrite the solution with labels and proper color codes:
+            <img src="ads-087.png">
+            </td>
+          </tr>
+        </table>
+        </details>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="next-steps">Next Steps<a aria-label="Next Steps" href="index.html#next-steps"></a></h2>
+<p>Those are the algorithms and data. Next, learn <a href="../data-structures/index.html">Introduction to Data Structures</a>.</p>
+<p>This is part 1-3 of the <a href="../index.html">Essential Algorithms and Data Structures for Grasshopper</a>.</p>
+<span class="mcneel_only hidden">
+    <div style="text-align: center;">
+        <div class="editdropdown" style="text-align: left;">
+            <button class="editbutton"><div class="fas fa-pencil-alt"></div> Edit this page</button>
+            <div class="editdropdown-content">
+                
+                
+                <a href="https://github.com/mcneel/developer.rhino3d.com/edit/master/content/en/guides/grasshopper/gh-algorithms-and-data-structures/algorithms-data/index.md" target="_blank" rel="noopener noreferrer"><div class="fab fa-github"></div> Edit on GitHub</a>
+                <a href="https://github.com/mcneel/developer.rhino3d.com/commits/master/content/en/guides/grasshopper/gh-algorithms-and-data-structures/algorithms-data/index.md" target="_blank" rel="noopener noreferrer"><div class="fas fa-history"></div> History</a>
+                <a href="https://developer.rhino3d.com/admin" target="_blank"><div class="fas fa-cog"></div> Admin</a>
+            </div>
+        </div>
+    </div>
+</span>
+  </div>
+</div><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha384-a4pIV46KBffvdjRuStQik2G6mPrTxdtAiZFQCdpsP4fyplWNoQ7fXlLMiIGcAP+M" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/vbnet.min.js" integrity="sha384-EN9fHTs/Ki0RX5/vXR4Y2Qb0XnV2+j2GVj86nencgtJYbNlNanf3ogcbPVkgFKBf" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/yaml.min.js" integrity="sha384-vLBVpaJcrTRsLBHhkvU9neJTiLqRgYWBnEg3o4eLgTKw1+hWbSr/QaNuSB9XWftA" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/powershell.min.js" integrity="sha384-5dY/Kkeznu4IIDRQyT6jL9e1XwSy39f1/sqYLFifcz2CfKQe9AunCsb7lBEeMh+f" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../../script/highlightjs-line-numbers.1b36d98c62cb9f88ab73b1b24041fe3ba7331949ff54dd3737d99f5e362a8abb.js"></script>
+
+<script>hljs.highlightAll();</script>
+<script>hljs.initLineNumbersOnLoad();</script>
+
+
+<script type="text/javascript" src="../../../../script/copy-code.d299324970feb9b7a8b27c988252faacbbb6adb5658c8de5c3378ba9844c7845.js"></script>
+
+<script>
+    function openCodeTab(evt, tabName) {
+      
+      var i, tabcontent, tablinks;
+      
+      
+      var matches = tabName.match(/\d+$/); 
+      var tabCounter = "";
+      if (matches)
+        tabCounter = matches[0];
+      
+      
+      tabcontent = document.getElementsByClassName("codetab-content" + tabCounter);
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      
+      tablinks = document.getElementsByClassName("tablinks" + tabCounter);
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  
+    
+    var defaultTabs = document.querySelectorAll(`*[id^="defaultOpen"]`);
+    defaultTabs.forEach(element => {
+      element.click();
+    });
+
+</script>
+<div class="footer footer-area">
+    <div class="footer-columns">
+        <div class="footer-column footer-left default"><a href="https://www.rhino3d.com/sales">Find a Reseller</a></div>
+        <div class="footer-column footer-left skin-napa">
+            <a href="https://www.rhino3d.com/store">Shop online</a>
+            or find a
+            <a href="https://www.rhino3d.com/sales">Reseller</a>
+        </div>
+        <div class="footer-column footer-left skin-not-napa">
+            <a href="https://www.rhino3d.com/sales">Find a Reseller</a>
+        </div>
+        <div class="footer-column footer-right">           
+                <a href="https://www.rhino3d.com/privacy">Privacy Policy</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/about">About</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/contact">Contact Us</a> &bull;
+                <a href="https://www.rhino3d.com/language" title="Change to a different region or language">
+                    Language</a>            
+        </div>
+    </div>    
+    <div class="footer-middle">       
+        <a href="https://www.rhino3d.com/mcneel/about" alt="About McNeel">Copyright © 1993-2026 Robert McNeel &amp; Associates. All Rights Reserved.</a>
+    </div>
+    <div class="footer-middle">
+        <a href="https://www.facebook.com/McNeelRhinoceros/" aria-label="Facebook" class="fab fa-facebook" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        
+        <a href="https://www.linkedin.com/groups/75313/" aria-label="LinkedIn" class="fab fa-linkedin" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://www.youtube.com/user/RhinoGuide/videos" aria-label="YouTube" class="fab fa-youtube" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://vimeo.com/rhino" aria-label="Vimeo" class="fab fa-vimeo" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="http://blog.rhino3d.com/" aria-label="Blogger" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Blogger icon" src="../../../../images/blogger.svg"></a>
+        <a href="https://www.food4rhino.com" aria-label="Food4Rhino" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Food4Rhino" src="../../../../images/f4r_icon_01.svg" height="32" width="32"></a>
+    </div>
+</div>
+      </div><script type="text/javascript" src="../../../../script/jquery-3.5.1.min.f7f6a5894f1d19ddad6fa392b2ece2c5e578cbf7da4ea805b6885eb6985b6e3d.js"></script>
+<script type="text/javascript" src="../../../../script/jquery-ui.min.793cb14b4ae48e92c4a35eae5d34b4b95092e3cd7995ce342b6895a560ef7526.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="../../../../script/rhino.05c268ec655ef5ff95646d1f4c93dd13f833bb83b30ad95a68bbd8a7f15f9d26.js"></script>
+
+<script type="text/javascript" src="../../../../script/protocolcheck.e5a8f6d34595c946cfc9f84fce91cd8fb625ce62380441a75d5de802cc2819e4.js"></script>
+<script type="text/javascript" src="../../../../script/theme.55f13be26c834445d530dbfb196c7a9ef2692979b20258caa03793331a316a0e.js"></script>
+<script>
+    mca.addLogoutListenerForClientId(window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG", function (url) {
+      console.log("Redirecting to logout URL: " + url);
+      window.location.href = url;
+    });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-512742-1" crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-512742-1');
+</script>
+<script type="text/javascript" async
+src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<script type="text/javascript" src="../../../../script/anchor.min.1384657f1c322559a4924d2ccf0ecb609c6e3e5a7a7afb4f4810e5587b1860bf.js"></script>
+<script>
+	
+	(function () {
+		'use strict';
+		anchors.options.placement = 'right';
+		anchors.add();
+		}
+	)();
+</script>
+
+
+
+
+    
+  </body>
+</html>

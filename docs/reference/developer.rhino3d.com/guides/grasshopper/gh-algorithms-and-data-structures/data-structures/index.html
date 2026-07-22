@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="rendering, raytracing, radiosity, computer graphics, NURBS, CAD, CAM, CAE, computer aided design, design, modeling, 3DM, Rhino, AutoCAD, AccuRender, DWG, DXF" http-equiv="Keywords" />
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    <link href="../../../../images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../../../images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+   
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto+Mono' type='text/css' media="all" />
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github.min.css">
+    
+    
+    
+    <link rel="stylesheet" href="../../../../scss/style.min.4515315bf66c3671b457c25338ed76b899746b6d65c438664f0f87f5ea2fbfbb.css">
+    
+    
+    <link rel="preload" as="font" type="font/woff2" href="../../../../webfonts/fa-brands-400.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="../../../../webfonts/fa-solid-900.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="https://developer.rhino3d.com/webfonts/fa-regular-400.woff2" crossorigin="anonymous"/>
+
+    
+<title>Rhino - Chapter 2: Introduction to Data Structures</title>
+
+
+ 
+<meta name="author" content="Robert McNeel &amp; Associates">
+
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://developer.rhino3d.com/en/guides/grasshopper/gh-algorithms-and-data-structures/data-structures/" />
+<meta property="og:title" content="Chapter 2: Introduction to Data Structures" />
+<meta property="og:description" content="" />
+<meta property="og:site_name" content="www.rhino3d.com"/>
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+<meta name="twitter:domain" value="rhino3d.com" />
+<meta name="twitter:title" value="Chapter 2: Introduction to Data Structures" />
+<meta name="twitter:description" value="" />
+
+
+
+
+
+  
+
+
+
+
+<meta name="twitter:url" value="https://developer.rhino3d.com/en/guides/grasshopper/gh-algorithms-and-data-structures/data-structures/" />
+<meta name="application-name" content="Rhino Developer Docs">
+<meta name="apple-mobile-web-app-title" content="Rhino Developer Docs"></head>
+
+
+  
+
+  <body>
+  
+     
+      <div id="mask"></div><div class='heading header-area'><div id="navbar">
+  <div id="wrap">
+    
+    <div id="sitesearch">
+      
+      
+      
+      <form id="cref" action="https://developer.rhino3d.com/searchresults/">
+        <label for="search"><input id="searchtext" type="text" name="q" size="24" value="" placeholder="search" /></label>  
+        <input class="searchBox" type="submit" name="sa" size="2" aria-label="Search" value=" "/>
+      </form>
+    </div>
+
+    
+    <div id="logo-container">
+      <div id="logo-inner-container">
+        <div id="logo-title-text">
+          <a href="https://developer.rhino3d.com/"><span id="logo-title-text-primary">Rhino</span><span id="logo-title-text-secondary">Developer</span><sup id="protected-mark">®</sup></a>
+        </div>
+        <div id="logo-subtitle">
+          <a href="https://developer.rhino3d.com/"><span class="logo-text-secondary">design, model, present, analyze, realize...</span></a>
+        </div>
+        
+        <a href="https://developer.rhino3d.com/"><img id="site-nav-logo" src="../../../../images/rhinodevlogo.png" alt="Rhino Logo"/></a>
+        <div class="clear"></div>
+      </div>
+      <div class="overlayMenuIcon" id="theoverlayMenuIcon">
+        <span onclick="toggleMenu()"><i class="fa fa-bars" id="menuToggleIcon" style="color: #c2c2c2; font-size: 2.5em"></i></span>
+      </div>
+    </div>
+
+    
+    <div class="menu-items" id="theMenuItems">
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/guides" target="_self">Guides</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/samples" target="_self">Samples</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/api" target="_self">API</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/videos" target="_self">Videos</a>
+        
+          
+        
+        <a class="menu-item" href="https://discourse.mcneel.com/c/rhino-developer" target="_blank">Community</a><span class="logged_in">
+        <a href="https://www.rhino3d.com/my-account/" title="Manage your account, licenses, and teams">my account
+        </a>
+      </span></div>
+
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../../script/mcneel_accounts_login_status.53c592c69219db2067e789870d0449b68ca1dd6f2fd14733a5fcac75cfdb715e.js"></script>
+<script>
+  const logout = () => {
+        
+        const clientId = window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG";
+        var infoCookie = mca.utilities.getCookieForName("MCA_CLIENT_USER_SESSION_INFO-" + clientId);
+  
+        if (infoCookie)
+          {
+            
+            
+            infoCookie = JSON.parse(infoCookie);
+            const dropdownLogoutUrl = mca.utilities.buildURL("https://developer.rhino3d.com/user/logout", {
+              nonce: infoCookie.nonce,
+              redirect_uri: window.location.href
+            });
+            console.log("dropdownLogoutUrl:", dropdownLogoutUrl)
+            window.location.href = dropdownLogoutUrl;
+          }
+          else{
+          console.log("not logged in");
+          }
+  }
+
+  const toAccount = () => {
+    window.location.href = "https://developer.rhino3d.com/my-account";
+  }
+
+  
+  $('#nav-avatar').click(function(event){
+    event.stopPropagation();
+  });
+
+  $(window).click(function(event) {
+    if(event.target.id == "nav-avatar"){
+      event.stopPropagation();
+    }
+    else{
+      
+      $('#nav-avatar').prop('checked', false); 
+    }
+  });
+</script>
+</div>
+      <div class="outerbox">
+<div class="single-content-area toc-page">
+  
+    
+
+
+    
+
+
+
+
+<script langage="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        $('body').scrollspy({ target: '.toc', offset: 90 });
+        $(window).on('activate.bs.scrollspy', function (e, o) {
+            
+            
+            
+        });
+      });    
+
+</script>
+
+
+<div class="toc">
+    <aside>
+        <div id="toc-top-container" style="
+        text-align: center;
+    ">
+        </div>
+        <header>
+            
+            <a href="index.html">Chapter 2: Introduction to Data Structures</a>
+        </header>
+        <nav id="TableOfContents" class="scrollbar">
+                
+<ul class="nav">
+        
+
+        
+        <li class="nav-item" >
+        <a href="index.html#21-overview" class="nav-link">2.1 Overview</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#22-generating-lists" class="nav-link">2.2 Generating lists</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#23-list-operations" class="nav-link">2.3 List operations</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#24-list-matching" class="nav-link">2.4 List matching</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#25-tutorials-data-structures" class="nav-link">2.5 Tutorials: data structures</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#next-steps" class="nav-link">Next Steps</a>
+    </li></ul>
+                <div id="toc-bottom-container" style="
+                text-align: center;
+            ">
+                </div>
+        </nav>
+    </aside>
+</div>
+
+  
+  
+  <div class="main-content ">
+    <div id="breadcrumbs">
+    
+    
+        
+    
+        
+    
+        <a href="https://developer.rhino3d.com/en/guides/">Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/">Grasshopper Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/gh-algorithms-and-data-structures/">Essential Algorithms and Data Structures for Grasshopper</a> /
+    
+
+</div>
+
+ 
+
+      <div class="feature-title-container">
+        <div class="feature-title">Chapter 2: Introduction to Data Structures</div><div class="platform-callout">    
+    
+        
+        
+        
+        
+    
+</div></div>
+      <p>
+        
+    <span class="byline">
+        by
+        
+        
+        
+        
+            
+            
+            
+              
+            <a href="https://discourse.mcneel.com/u/rajaa/">Rajaa Issa</a>                              
+         (Last updated:&nbsp; Monday, July 15, 2024)
+  </span>
+  
+</p>
+      
+      
+      <p>All algorithms involve processing input data to generate a new set of data as output. Data is stored in well-defined structures to help access and manipulate efficiently. Understanding these structures is the key for successful algorithmic designs. This chapter includes an in-depth review of the basic data structures in Grasshopper.<br></p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="21-overview">2.1 Overview<a aria-label="2.1 Overview" href="index.html#21-overview"></a></h2>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030596360" target="_blank"> Overview of data structures in Grasshopper</a></p>
+<p>Grasshopper has three distinct data structures: single item, list of items and tree of items. GH components execute differently based on input data structures, and hence it is essential to be fully aware of the data structure before using. There are tools in GH to help identify the data structure. Those are Panel and Param Viewer.</p>
+<figure>
+   <img src="ads-100.png">
+   <figcaption>Figure(34): Data structures in Grasshopper
+</figcaption>
+</figure>
+<p>Processes in GH execute differently based on the data structure. For example, the Mass Addition component adds all the numbers in a list and produces a single number, but when operating on a tree, it produces a list of numbers representing the sum of each branch.</p>
+<figure>
+   <img src="ads-101.png">
+   <figcaption>Figure(35): Components execute differently based on the data structures. Result of adding numbers from Figure(34)
+</figcaption>
+</figure>
+<p>The wires connecting the data with components in GH offer additional visual reference to the data structure. The wire from a single item is a simple line, while the wire connecting a list is drawn as a double line. A wire output from a tree data structure is a dashed double line. This is very useful to quickly identify the structure of your data.</p>
+<table class="rounded">
+  <tr>
+    <th>Display the data structure</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>
+    <b>Item</b>: single branch with single item<br>
+    Wire display: single line
+    </td>
+    <td>
+    <img src="ads-102.png">
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <b>List</b>: single branch with multiple items<br>
+    Wire display: double line
+    </td>
+    <td>
+    <img src="ads-103.png">
+    </td>
+  </tr>
+    <tr>
+    <td>
+    <b>Tree</b>: multiple branches with any number of items per branch<br>
+    Wire display: double dashed line
+    </td>
+    <td>
+    <img src="ads-104.png">
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="22-generating-lists">2.2 Generating lists<a aria-label="2.2 Generating lists" href="index.html#22-generating-lists"></a></h2>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030597432" target="_blank"> Generate lists in Grasshopper</a></p>
+<p>There are many ways to generate lists of data in GH. So far we have seen how to directly embed a list of values inside a parameter or a panel (with multiline data). There are also special components to generate lists. For example, to generate a list of numbers, there are three key components: <b>Range</b>, <b>Series</b> and <b>Random</b>. Lists can be the output of some components such as <b>Divide</b> curve (the output includes lists of points, tangents and parameters). Use the <b>Panel</b> component to preview the values in a list and <b>Parameter Viewer</b> to examine the data structures.</p>
+ <table>
+<tr>
+  <td>
+  The <b>Range</b> component creates equally spaced range of numbers between a min and max values (called domain) and a number of steps (the number of values in the resulting list is equal to the number of steps plus one).
+  <figure>
+   <img src="ads-105.png" class="image_center" width="90%">
+   <figcaption>Figure(36): Generate a list of 8 numbers using the Range component in Grasshopper</figcaption>
+  </figure>
+  </td>
+</tr>
+<tr>
+  <td>
+  The <b>Series</b> component also creates an equally spaced list of numbers, but here you set the starting number, step size and number of elements.
+  <figure>
+   <img src="ads-106.png" class="image_center" width="90%">
+   <figcaption>Figure(37): Generate a list of 7 numbers using the Series component in Grasshopper</figcaption>
+  </figure>
+  </td>
+</tr>
+<tr>
+  <td>
+  The <b>Random</b> component is used to create random numbers using a domain and a number of elements. If you use the same seed, then you always get the same set of random numbers.
+<figure>
+   <img src="ads-107.png" class="image_center" width="90%">
+   <figcaption>Figure(38): Generate a list of numbers using the Random component in Grasshopper</figcaption>
+</figure>
+  </td>
+</tr>
+<tr>
+  <td>
+  The <b>Divide</b> component outputs divide points, tangents and parameters on curve.
+<figure>
+   <img src="ads-108.png">
+   <figcaption>Figure(39):  Divide Curve takes a single input (curve) and generate lists of output</figcaption>
+</figure>
+  </td>
+</tr>
+</table>
+<table class="rounded">
+  <tr>
+    <th>Tutorial: 2_2_1 Generating lists</th>
+  </tr>
+  <tr>
+    <td>
+    Explore 4 different ways to create circles. Use different data sources and data structures.
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <table>
+          <tr>
+            <td>
+            <br>1. Directly set a circle in a parameter
+            <img src="ads-109.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            2. Set the plane input to the default XY-Plane  (internal). Supply a list of radiuses using <b>Range</b> component
+            <img src="ads-110.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            3. Supply one value for the center. Normal is set to default (internal) List of radiuses using <b>Random</b> component
+            <img src="ads-111.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            4. Create a circle from 3 points:<br>A: set internally to one value<br>B: Supply one value<br>C: Supply a list of values using the <b>Series</b> component to set a list of Z coordinates
+            <img src="ads-112.png">
+            </td>
+          </tr>
+        </table>
+        </details>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="23-list-operations">2.3 List operations<a aria-label="2.3 List operations" href="index.html#23-list-operations"></a></h2>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030599906" target="_blank"> Generate lists in Grasshopper</a></p>
+<p>Grasshopper offers an extensive list of components for list operations and list management. We will review the most commonly used ones.<br></p>
+ <table>
+<tr>
+  <td>
+  You can check the length of a list using the <b>List Length</b> component, and access items at specific indices using the <b>List Item</b> component.
+<figure>
+   <img src="ads-113.png">
+   <figcaption>Figure(40):  Examples of list operations in Grasshopper</figcaption>
+</figure>
+  </td>
+</tr>
+<tr>
+  <td>
+  Lists can be reversed using the <b>Reverse List</b> component, and sorted using the <b>Sort List</b> component.
+<figure>
+   <img src="ads-114.png">
+   <figcaption>Figure(41):  Lists can be reversed or sorted using designated components in Grasshopper</figcaption>
+</figure>
+  </td>
+</tr>
+<tr>
+<tr>
+  <td>
+  Components such as <b>Cull Patterns</b> and <b>Dispatch</b> allow selecting a subset of the list, or splitting the list based on a pattern.These components are very commonly used to control data flow and select a subset of the data.
+<figure>
+   <img src="ads-115.png">
+   <figcaption>Figure(42):  Cull part of a list using components such as Cull Pattern and Dispatch</figcaption>
+</figure>
+  </td>
+</tr>
+<tr>
+<tr>
+  <td>
+  The <b>Shift List</b> component allows shifting a list by any number of steps. That helps align multiple lists to match in a particular order.
+<figure>
+   <img src="ads-116.png">
+   <figcaption>Figure(43):  Shift operation in Grasshopper</figcaption>
+</figure>
+  </td>
+</tr>
+<tr>
+<tr>
+<tr>
+  <td>
+  The <b>Subset</b> component is another example to select part of a list based on a range of indices.
+<figure>
+   <img src="ads-117.png">
+   <figcaption>Figure(44):  Select a subset of the list using a range of indices</figcaption>
+</figure>
+  </td>
+</tr>
+<tr>
+</table>
+<table class="rounded">
+  <tr>
+    <th>Tutorial: 2_3_1 List operations</th>
+  </tr>
+  <tr>
+    <td>
+    Given two lists of points from dividing two concentric circles, generate the following patterns:
+    <img src="ads-118.png">
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <table style="width:100%">
+          <tr>
+            <td>
+            <i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030600858" target="_blank"> Solution video...</a>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:25%">
+            <img src="ads-119.png">
+            </td>
+            <td style="width:75%">
+            <img src="ads-120.png" width="30%">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <img src="ads-121.png">
+            </td>
+            <td>
+            <img src="ads-122.png" width="60%">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <img src="ads-123.png">
+            </td>
+            <td>
+            <img src="ads-124.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <img src="ads-125.png">
+            </td>
+            <td>
+            <img src="ads-126.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <img src="ads-127.png">
+            </td>
+            <td>
+            <img src="ads-128.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <img src="ads-129.png">
+            </td>
+            <td>
+            <img src="ads-130.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <img src="ads-131.png">
+            </td>
+            <td>
+            <img src="ads-132.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <img src="ads-133.png">
+            </td>
+            <td>
+            <img src="ads-134.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <img src="ads-135.png">
+            </td>
+            <td>
+            <img src="ads-136.png">
+            </td>
+          </tr>
+        </table>
+        </details>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="24-list-matching">2.4 List matching<a aria-label="2.4 List matching" href="index.html#24-list-matching"></a></h2>
+<p><i class="fas fa-solid fa-video "></i> <a href="https://vimeo.com/showcase/11456959/video/1030598866" target="_blank"> Generate lists in Grasshopper</a></p>
+<p>When the input is a single item or has an equal number of elements in a simple list, it is easy to imagine how the data is matched. The matching is based on corresponding indices. Let’s use the <b>Addition</b> component to examine list matching in GH. Note that the same principles apply to all other Grasshopper components.</p>
+<figure>
+   <img src="ads-137.png" class="image_center" width="90%">
+   <figcaption>Figure(45): Examples of primitive data types common to all programming languages</figcaption>
+</figure>
+<p>There are times when input has variable length lists. In this case, GH reuses the last item on the shorter list and matches it with the next items in the longer list.</p>
+<figure>
+   <img src="ads-138.png" class="image_center" width="90%">
+   <figcaption>Figure(46): The default list matching in Grasshopper reuses the last element of the shorter list</figcaption>
+</figure>
+<p>Grasshopper offers alternative ways of data matching: <b>Long</b>, <b>Short</b> and <b>Cross</b> reference that the user can force to use. The <b>Long</b> matching is the same as the default matching. That is, the last element of the shorter list is repeated to create a matching length.</p>
+<figure>
+   <img src="ads-139.png">
+   <figcaption>Figure(47): Long list matching is the default matching mode in Grasshopper</figcaption>
+</figure>
+<p>The <b>Short</b> list matching truncates the long list to match the length of the short list. All additional elements are ignored and the resulting list has a length that matches the shorter list.</p>
+<figure>
+   <img src="ads-140.png" class="image_center" width="90%">
+   <figcaption>Figure(48): Short matching of lists omits additional values in longer lists</figcaption>
+</figure>
+<p>The <b>Cross Reference</b> matches the first list with each of the elements in the second list. The resulting list has a length equal to the multiplication product of the length of input lists. Cross reference is useful when trying to produce all possible combinations of input data. The order of input affects the order of the result as shown in Figure (49).</p>
+<figure>
+   <img src="ads-141.png">
+   <figcaption>Figure(49): Cross reference matching creates longer lists to account for all possible permutations</figcaption>
+</figure>
+<p>If none of the matching methods produce the desired result, you can explicitly adjust the lists to match in length based on your requirements. For example, if you like to repeat the shorter list until it matches the length of the longer list, then you’ll need to create the logic to achieve that as in the following example.</p>
+<figure>
+   <img src="ads-142.png" class="image_center" width="90%">
+   <figcaption>Figure(50):  Need to create custom script to generate custom matching</figcaption>
+</figure>
+<table class="rounded">
+  <tr>
+    <th>Tutorial 2_4_1 List matching</th>
+  </tr>
+  <tr>
+    <td>
+    Use the 4-step method to generate an algorithm that takes 6 numbers (0 to 5) and turn them into a cube of points as in the image:<br>
+    <img src="ads-143.png" class="image_center" width="50%">
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <table>
+          <tr>
+            <td style="background-color:#cfe2f3">
+            <b>Output:</b><br>
+            A list of 6x6x6 = 216 points constructed from a list of X, Y, Z coordinates
+            </td>
+            <td>
+            <img src="ads-144.png" class="image_center" width="75%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#f4cccc">
+            <b>Key Process:</b><br>
+            Use the <b>Construct Point</b> component to generate the list of points
+            </td>
+            <td>
+            <img src="ads-144A.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#d9d2e9">
+            <b>Input:</b><br>
+            Examine input using the <b>Parameter Viewer</b> and <b>Panel</b> components.<br>
+            The given list has 6 points representing each coordinate along each axis
+            </td>
+            <td>
+            <img src="ads-145.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes:</b><br>
+            Need to find all possible permutations for the coordinates to create the cube of 216 points along all 3 axes. <br>
+            Use <b>Cross Reference</b> matching to generate lists of coordinates that have all possible permutations
+            </td>
+            <td>
+            <img src="ads-146.png">
+            </td>
+          </tr>
+        </table>
+        <b>Putting it all together</b><br>
+        <img src="ads-147.png">
+        </details>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="25-tutorials-data-structures">2.5 Tutorials: data structures<a aria-label="2.5 Tutorials: data structures" href="index.html#25-tutorials-data-structures"></a></h2>
+<table class="rounded">
+  <tr>
+    <th><a href="Tutorial-2-5-1-Variable-thickness-pipe.gh" class="fas fa-download"></a> Tutorial 2.5.1: Variable thickness pipe</th>
+  </tr>
+  <tr>
+    <td>
+    Use the 4-step method to create a surface similar to the one in the image:<br>
+    <img src="ads-148.png" class="image_center" width="50%">
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><a href="Tutorial-2-5-1-Variable-thickness-pipe.gh"> <i>download GH file...</i> </a>
+        <br><i class="fas fa-solid fa-video "></i><a href="https://vimeo.com/showcase/11456959/video/1030601815" target="_blank"> Solution video...</a>
+        <br><br><b> Algorithm Analysis:</b><br>
+        We can think of two different ways to generate this surface:<br>
+        1. <b>Loft</b> circles created along a line at random locations with random radii<br>
+        2. Create a profile curve at the circles start points, and <b>Revolve</b> around the line<br>
+        <img src="ads-149.png"> <br>
+        <table>
+          <tr>
+            <td style="background-color:#cfe2f3">
+            <b>Output:</b><br>
+            The surface
+            </td>
+            <td>
+            <img src="ads-150.png" class="image_center" width="50%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#f4cccc">
+            <b>Key Process:</b><br>
+            Use the <b>Loft</b> component to generate the surface
+            </td>
+            <td>
+            <img src="ads-151.png" class="image_center" width="75%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#d9d2e9">
+            <b>Input:</b><br>
+            Line (not given, so create one), <br>
+            Number of intervals (not given, assume it is equal 10)<br>
+            Thickness range (not given, assume it is equal to 1.0 to 3.0)
+            </td>
+            <td>
+            <img src="ads-152.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #1:</b><br>
+            The Loft is created from a list of circles. Use the Circle component that takes centers, normals and radii lists.<br>
+            Use the default Loft options<br>
+            </td>
+            <td>
+            <img src="ads-153.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #2:</b><br>
+            To create a list of random radii, use the <b>Random</b> component and the input thickness range<br>
+            </td>
+            <td>
+            <img src="ads-154.png">
+            </td>
+          </tr>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #3:</b><br>
+            Evaluate the line at random intervals. Use the <b>Evaluate Curve</b> component to extract center points and normals, and use the Random component to generate the parameters along the curve.<br><br>
+            <b>Problem:</b><br>
+            The loft follows the order of input curves. however, the parameters (generated from the <b>Random</b> component) are not ordered along the line and hence it produces unordered circles. Use the Sort List component to order the parameters before feeding them into the <b>Evaluate Curve</b>
+            </td>
+            <td>
+            <img src="ads-155.png">
+            </td>
+          </tr>
+        </table>
+        <b>Putting it all together</b><br>
+        <img src="ads-156.png">
+        </details>
+    </td>
+  </tr>
+</table>
+<table class="rounded">
+  <tr>
+    <th><a href="Tutorial-2-5-2-Custom-list-matching.gh" class="fas fa-download"></a> Tutorial 2.5.2: Custom list matching</th>
+  </tr>
+  <tr>
+    <td>
+    Given the following three lists of numbers: [1, 2], [10, 20, 30] and [0.2, 0.4, 0.6, 0.9, 1], explain the default GH list matching when they are used as input. Compare the default matching with the Grasshopper <b>Shortest List</b> matching. Finally, use the original lists to create custom matching that repeats the pattern in the shorter lists to create a periodic matching until it matches the length of the longest list. For example [1,2] becomes [1,2,1,2,1].
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><a href="Tutorial-2-5-2-Custom-list-matching.gh"> <i>download GH file...</i> </a>
+        <table>
+          <tr>
+            <td>
+            <b>Construct default GH matching:</b><br>
+            To test the matching, feed the lists into the coordinates of the Construct Point component and observe the result<br>
+            <img src="ads-157.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <b>Analysize GH default matching:</b><br>
+            The last element of shorter lists is repeated until all lists have the same length, then elements are matched by indices<br>
+            <img src="ads-158.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <b>Construct shortest List matching:</b><br>
+            Omit additional values in longer lists so that the length of all lists equals the length of the shortest list<br>
+            <img src="ads-159.png">
+            </td>
+          </tr>
+         <tr>
+            <td>
+            <b>Create repeated custom matching:</b><br>
+            We know that the longest list has 5 items, but it is a good practice to make the script generic so it works with any input. First, figure out the length of the longest list, then use the <b>Repeat</b> component to repeat the elements  in shorter lists until they match the length of the longest list<br>
+            <img src="ads-160.png">
+            </td>
+          </tr>
+        </table>
+        </details>
+    </td>
+  </tr>
+</table>
+<table class="rounded">
+  <tr>
+    <th><a href="Tutorial-2-5-3-Simple-truss.gh" class="fas fa-download"></a> Tutorial 2.5.3: Simple truss</th>
+  </tr>
+  <tr>
+    <td>
+    Use the 4-step method to generate a simple truss as in the image. Use the given input for the baseline (base of the truss), height, number of runs (or spans), and the radius of the joint.<br>
+    <img src="ads-161.png" class="image_center">
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><a href="Tutorial-2-5-3-Simple-truss.gh"> <i>download GH file...</i> </a>
+        <br><i class="fas fa-solid fa-video "></i><a href="https://vimeo.com/showcase/11456959/video/1030602374" target="_blank"> Solution video...</a>
+        <table>
+          <tr>
+            <td>
+            <br><b>Algorithm analysis:</b>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            Define values for the input:<br>
+            <b>L</b>= create a <b>Line</b> along X-Axis<br>
+            <b>H</b>= assume height=7<br>
+            <b>R</b>= assume number of runs=10<br>
+            <b>J</b>= assume joint radius=0.5<br>
+            </td>
+            <td>
+            <br><img src="ads-162.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            Divide the baseline into 20 spans (2*<b>R</b>)
+            </td>
+            <td>
+            <img src="ads-163.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            Move every other point by 7 units (or <b>H</b>) in the Z-Axis direction
+            </td>
+            <td>
+            <img src="ads-164.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            Create 3 sets of ordered points for the beams along the base, top and middle, then connect each of the 3 sets with a polyline. Create spheres to represent the joints.<br>
+            </td>
+            <td>
+            <img src="ads-165.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <br><b>Solution steps:</b>
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#cfe2f3">
+            <b>Output:</b><br>
+            There are 2 outputs, the beams as curves (polylines) and joints as spheres (surfaces)
+            </td>
+            <td>
+            <img src="ads-166.png" class="image_center" width="75%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#f4cccc">
+            <b>Key Process:</b><br>
+            Need to create the polylines for the top, middle, and bottom beams. Use the <b>Polyline</b> component with a relevant set of points for each.<br>
+            Use the <b>Sphere</b> component to create joints. Use middle points and joint radius as input.
+            </td>
+            <td>
+            <img src="ads-167.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#d9d2e9">
+            <b>Input:</b><br>
+            Specify the inputs  and assume values when they are not given:<br>
+            line, number of runs, height and joint radius
+            </td>
+            <td>
+            <img src="ads-168.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #1:</b><br>
+            Divide the curve with twice the number of runs. Use <b>Divide</b> Curve component and <b>Multiply</b> the number of runs
+            </td>
+            <td>
+            <img src="ads-169.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #2:</b><br>
+            To create top points, select every other point from the list of all divide points, then move vertically by the height amount. <br>
+            Use <b>Cull Pattern</b> component to select points and <b>Move</b> component to shift vertically
+            </td>
+            <td>
+            <img src="ads-169A.png">
+            </td>
+          </tr>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #3:</b><br>
+            To create bottom points, select every other point, in the invert pattern used to select top points.<br>
+            Use <b>Cull Pattern</b> component to select points (set the <b>invert</b> flag for the pattern input)
+            </td>
+            <td>
+            <img src="ads-170.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #4:</b><br>
+            To create middle points, <b>Weave</b> the top and bottom points.
+            </td>
+            <td>
+            <img src="ads-171.png">
+            </td>
+          </tr>
+        </table>
+        <b>Putting it all together</b><br>
+        <img src="ads-172.png">
+        </details>
+    </td>
+  </tr>
+</table>
+<table class="rounded">
+  <tr>
+    <th><a href="Tutorial-2-5-4-Pearl-necklace.gh" class="fas fa-download"></a> Tutorial 2.5.4: Pearl necklace</th>
+  </tr>
+  <tr>
+    <td>
+    Create a necklace with one big pearl in the middle, and gradually smaller size pearls towards the ends as in the image. The number of pearls is between 15-25.<br>
+    <img src="ads-173.png" class="image_center">
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <details>
+        <summary><b>Solution...</b></summary>
+        <br><a href="Tutorial-2-5-4-Pearl-necklace.gh"> <i>download GH file...</i> </a>
+        <table>
+          <tr>
+            <td>
+            <br><b>Algorithm analysis:</b>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            The workflow to create the necklace follows these general lines:<br>
+            1. Divide the curve into segments of variable distances (widest in the middle and narrow towards the ends)<br>
+            2. Find length and midpoints of each segment<br>
+            3. Create spheres at midpoints using half the length as radius<br>
+            </td>
+            <td>
+            <br><img src="ads-174.png">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <br><b>Solution steps:</b>
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#cfe2f3">
+            <b>Output:</b><br>
+            The surfaces
+            </td>
+            <td>
+            <img src="ads-175.png" class="image_center" width="50%">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#f4cccc">
+            <b>Key Process:</b><br>
+            Use the Sphere component to generate the pearl surfaces
+            </td>
+            <td>
+            <img src="ads-175A.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#d9d2e9">
+            <b>Input:</b><br>
+            Necklace curve,<br>
+            Number of pearls as a parameter (can be changed by the user)
+            </td>
+            <td>
+            <img src="ads-176.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #1:</b><br>
+            The <b>Range</b> component creates equal distances. We need to change to variable distances and for that we can use the <b>Graph Mapper</b> component to control the spacing.
+            </td>
+            <td>
+            <img src="ads-177.png">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #2:</b><br>
+            Since we have normalized distances from the start of the curve (parameters are between 0 to 1), we can use the <b>Evaluate</b> <b>Length</b> component to find the divide points.
+            </td>
+            <td>
+            <img src="ads-178.png">
+            </td>
+          </tr>
+          </tr>
+          <tr>
+            <td style="background-color:#eee4c5">
+            <b>Intermediate processes #3:</b><br>
+            Generate the segments. Use Polyline and Explode components to turn the points into segments<br>
+            Center points are calculated at the middle of the segments. Use Evaluate Length at mid length<br>
+            Radii are calculated as half of each segment length. Use Length and Division components<br>
+            </td>
+            <td>
+            <img src="ads-179.png">
+            </td>
+          </tr>
+        </table>
+        <b>Putting it all together</b><br>
+        <img src="ads-180.png">
+        </details>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="next-steps">Next Steps<a aria-label="Next Steps" href="index.html#next-steps"></a></h2>
+<p>Those are the introduction to data structures. Next, learn <a href="../advanced-data-structures/index.html">Advanced Data Structures</a>.</p>
+<p>This is part 2-3 of the <a href="../index.html">Essential Algorithms and Data Structures for Grasshopper</a>.</p>
+<span class="mcneel_only hidden">
+    <div style="text-align: center;">
+        <div class="editdropdown" style="text-align: left;">
+            <button class="editbutton"><div class="fas fa-pencil-alt"></div> Edit this page</button>
+            <div class="editdropdown-content">
+                
+                
+                <a href="https://github.com/mcneel/developer.rhino3d.com/edit/master/content/en/guides/grasshopper/gh-algorithms-and-data-structures/data-structures/index.md" target="_blank" rel="noopener noreferrer"><div class="fab fa-github"></div> Edit on GitHub</a>
+                <a href="https://github.com/mcneel/developer.rhino3d.com/commits/master/content/en/guides/grasshopper/gh-algorithms-and-data-structures/data-structures/index.md" target="_blank" rel="noopener noreferrer"><div class="fas fa-history"></div> History</a>
+                <a href="https://developer.rhino3d.com/admin" target="_blank"><div class="fas fa-cog"></div> Admin</a>
+            </div>
+        </div>
+    </div>
+</span>
+  </div>
+</div><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha384-a4pIV46KBffvdjRuStQik2G6mPrTxdtAiZFQCdpsP4fyplWNoQ7fXlLMiIGcAP+M" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/vbnet.min.js" integrity="sha384-EN9fHTs/Ki0RX5/vXR4Y2Qb0XnV2+j2GVj86nencgtJYbNlNanf3ogcbPVkgFKBf" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/yaml.min.js" integrity="sha384-vLBVpaJcrTRsLBHhkvU9neJTiLqRgYWBnEg3o4eLgTKw1+hWbSr/QaNuSB9XWftA" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/powershell.min.js" integrity="sha384-5dY/Kkeznu4IIDRQyT6jL9e1XwSy39f1/sqYLFifcz2CfKQe9AunCsb7lBEeMh+f" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../../script/highlightjs-line-numbers.1b36d98c62cb9f88ab73b1b24041fe3ba7331949ff54dd3737d99f5e362a8abb.js"></script>
+
+<script>hljs.highlightAll();</script>
+<script>hljs.initLineNumbersOnLoad();</script>
+
+
+<script type="text/javascript" src="../../../../script/copy-code.d299324970feb9b7a8b27c988252faacbbb6adb5658c8de5c3378ba9844c7845.js"></script>
+
+<script>
+    function openCodeTab(evt, tabName) {
+      
+      var i, tabcontent, tablinks;
+      
+      
+      var matches = tabName.match(/\d+$/); 
+      var tabCounter = "";
+      if (matches)
+        tabCounter = matches[0];
+      
+      
+      tabcontent = document.getElementsByClassName("codetab-content" + tabCounter);
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      
+      tablinks = document.getElementsByClassName("tablinks" + tabCounter);
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  
+    
+    var defaultTabs = document.querySelectorAll(`*[id^="defaultOpen"]`);
+    defaultTabs.forEach(element => {
+      element.click();
+    });
+
+</script>
+<div class="footer footer-area">
+    <div class="footer-columns">
+        <div class="footer-column footer-left default"><a href="https://www.rhino3d.com/sales">Find a Reseller</a></div>
+        <div class="footer-column footer-left skin-napa">
+            <a href="https://www.rhino3d.com/store">Shop online</a>
+            or find a
+            <a href="https://www.rhino3d.com/sales">Reseller</a>
+        </div>
+        <div class="footer-column footer-left skin-not-napa">
+            <a href="https://www.rhino3d.com/sales">Find a Reseller</a>
+        </div>
+        <div class="footer-column footer-right">           
+                <a href="https://www.rhino3d.com/privacy">Privacy Policy</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/about">About</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/contact">Contact Us</a> &bull;
+                <a href="https://www.rhino3d.com/language" title="Change to a different region or language">
+                    Language</a>            
+        </div>
+    </div>    
+    <div class="footer-middle">       
+        <a href="https://www.rhino3d.com/mcneel/about" alt="About McNeel">Copyright © 1993-2026 Robert McNeel &amp; Associates. All Rights Reserved.</a>
+    </div>
+    <div class="footer-middle">
+        <a href="https://www.facebook.com/McNeelRhinoceros/" aria-label="Facebook" class="fab fa-facebook" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        
+        <a href="https://www.linkedin.com/groups/75313/" aria-label="LinkedIn" class="fab fa-linkedin" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://www.youtube.com/user/RhinoGuide/videos" aria-label="YouTube" class="fab fa-youtube" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://vimeo.com/rhino" aria-label="Vimeo" class="fab fa-vimeo" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="http://blog.rhino3d.com/" aria-label="Blogger" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Blogger icon" src="../../../../images/blogger.svg"></a>
+        <a href="https://www.food4rhino.com" aria-label="Food4Rhino" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Food4Rhino" src="../../../../images/f4r_icon_01.svg" height="32" width="32"></a>
+    </div>
+</div>
+      </div><script type="text/javascript" src="../../../../script/jquery-3.5.1.min.f7f6a5894f1d19ddad6fa392b2ece2c5e578cbf7da4ea805b6885eb6985b6e3d.js"></script>
+<script type="text/javascript" src="../../../../script/jquery-ui.min.793cb14b4ae48e92c4a35eae5d34b4b95092e3cd7995ce342b6895a560ef7526.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="../../../../script/rhino.05c268ec655ef5ff95646d1f4c93dd13f833bb83b30ad95a68bbd8a7f15f9d26.js"></script>
+
+<script type="text/javascript" src="../../../../script/protocolcheck.e5a8f6d34595c946cfc9f84fce91cd8fb625ce62380441a75d5de802cc2819e4.js"></script>
+<script type="text/javascript" src="../../../../script/theme.55f13be26c834445d530dbfb196c7a9ef2692979b20258caa03793331a316a0e.js"></script>
+<script>
+    mca.addLogoutListenerForClientId(window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG", function (url) {
+      console.log("Redirecting to logout URL: " + url);
+      window.location.href = url;
+    });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-512742-1" crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-512742-1');
+</script>
+<script type="text/javascript" async
+src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<script type="text/javascript" src="../../../../script/anchor.min.1384657f1c322559a4924d2ccf0ecb609c6e3e5a7a7afb4f4810e5587b1860bf.js"></script>
+<script>
+	
+	(function () {
+		'use strict';
+		anchors.options.placement = 'right';
+		anchors.add();
+		}
+	)();
+</script>
+
+
+
+
+    
+  </body>
+</html>

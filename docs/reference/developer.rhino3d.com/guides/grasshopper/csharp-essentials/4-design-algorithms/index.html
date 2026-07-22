@@ -1,0 +1,3357 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="rendering, raytracing, radiosity, computer graphics, NURBS, CAD, CAM, CAE, computer aided design, design, modeling, 3DM, Rhino, AutoCAD, AccuRender, DWG, DXF" http-equiv="Keywords" />
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    <link href="../../../../images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../../../images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+   
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto+Mono' type='text/css' media="all" />
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github.min.css">
+    
+    
+    
+    <link rel="stylesheet" href="../../../../scss/style.min.4515315bf66c3671b457c25338ed76b899746b6d65c438664f0f87f5ea2fbfbb.css">
+    
+    
+    <link rel="preload" as="font" type="font/woff2" href="../../../../webfonts/fa-brands-400.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="../../../../webfonts/fa-solid-900.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="https://developer.rhino3d.com/webfonts/fa-regular-400.woff2" crossorigin="anonymous"/>
+
+    
+<title>Rhino - Chapter 4: Design Algorithms</title>
+
+
+ 
+<meta name="author" content="Robert McNeel &amp; Associates">
+
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://developer.rhino3d.com/en/guides/grasshopper/csharp-essentials/4-design-algorithms/" />
+<meta property="og:title" content="Chapter 4: Design Algorithms" />
+<meta property="og:description" content="" />
+<meta property="og:site_name" content="www.rhino3d.com"/>
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+<meta name="twitter:domain" value="rhino3d.com" />
+<meta name="twitter:title" value="Chapter 4: Design Algorithms" />
+<meta name="twitter:description" value="" />
+
+
+
+
+
+  
+
+
+
+
+<meta name="twitter:url" value="https://developer.rhino3d.com/en/guides/grasshopper/csharp-essentials/4-design-algorithms/" />
+<meta name="application-name" content="Rhino Developer Docs">
+<meta name="apple-mobile-web-app-title" content="Rhino Developer Docs"></head>
+
+
+  
+
+  <body>
+  
+     
+      <div id="mask"></div><div class='heading header-area'><div id="navbar">
+  <div id="wrap">
+    
+    <div id="sitesearch">
+      
+      
+      
+      <form id="cref" action="https://developer.rhino3d.com/searchresults/">
+        <label for="search"><input id="searchtext" type="text" name="q" size="24" value="" placeholder="search" /></label>  
+        <input class="searchBox" type="submit" name="sa" size="2" aria-label="Search" value=" "/>
+      </form>
+    </div>
+
+    
+    <div id="logo-container">
+      <div id="logo-inner-container">
+        <div id="logo-title-text">
+          <a href="https://developer.rhino3d.com/"><span id="logo-title-text-primary">Rhino</span><span id="logo-title-text-secondary">Developer</span><sup id="protected-mark">®</sup></a>
+        </div>
+        <div id="logo-subtitle">
+          <a href="https://developer.rhino3d.com/"><span class="logo-text-secondary">design, model, present, analyze, realize...</span></a>
+        </div>
+        
+        <a href="https://developer.rhino3d.com/"><img id="site-nav-logo" src="../../../../images/rhinodevlogo.png" alt="Rhino Logo"/></a>
+        <div class="clear"></div>
+      </div>
+      <div class="overlayMenuIcon" id="theoverlayMenuIcon">
+        <span onclick="toggleMenu()"><i class="fa fa-bars" id="menuToggleIcon" style="color: #c2c2c2; font-size: 2.5em"></i></span>
+      </div>
+    </div>
+
+    
+    <div class="menu-items" id="theMenuItems">
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/guides" target="_self">Guides</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/samples" target="_self">Samples</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/api" target="_self">API</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/videos" target="_self">Videos</a>
+        
+          
+        
+        <a class="menu-item" href="https://discourse.mcneel.com/c/rhino-developer" target="_blank">Community</a><span class="logged_in">
+        <a href="https://www.rhino3d.com/my-account/" title="Manage your account, licenses, and teams">my account
+        </a>
+      </span></div>
+
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../../script/mcneel_accounts_login_status.53c592c69219db2067e789870d0449b68ca1dd6f2fd14733a5fcac75cfdb715e.js"></script>
+<script>
+  const logout = () => {
+        
+        const clientId = window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG";
+        var infoCookie = mca.utilities.getCookieForName("MCA_CLIENT_USER_SESSION_INFO-" + clientId);
+  
+        if (infoCookie)
+          {
+            
+            
+            infoCookie = JSON.parse(infoCookie);
+            const dropdownLogoutUrl = mca.utilities.buildURL("https://developer.rhino3d.com/user/logout", {
+              nonce: infoCookie.nonce,
+              redirect_uri: window.location.href
+            });
+            console.log("dropdownLogoutUrl:", dropdownLogoutUrl)
+            window.location.href = dropdownLogoutUrl;
+          }
+          else{
+          console.log("not logged in");
+          }
+  }
+
+  const toAccount = () => {
+    window.location.href = "https://developer.rhino3d.com/my-account";
+  }
+
+  
+  $('#nav-avatar').click(function(event){
+    event.stopPropagation();
+  });
+
+  $(window).click(function(event) {
+    if(event.target.id == "nav-avatar"){
+      event.stopPropagation();
+    }
+    else{
+      
+      $('#nav-avatar').prop('checked', false); 
+    }
+  });
+</script>
+</div>
+      <div class="outerbox">
+<div class="single-content-area toc-page">
+  
+    
+
+
+    
+
+
+
+
+<script langage="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        $('body').scrollspy({ target: '.toc', offset: 90 });
+        $(window).on('activate.bs.scrollspy', function (e, o) {
+            
+            
+            
+        });
+      });    
+
+</script>
+
+
+<div class="toc">
+    <aside>
+        <div id="toc-top-container" style="
+        text-align: center;
+    ">
+        </div>
+        <header>
+            
+            <a href="index.html">Chapter 4: Design Algorithms</a>
+        </header>
+        <nav id="TableOfContents" class="scrollbar">
+                
+<ul class="nav">
+        
+
+        
+        <li class="nav-item" >
+        <a href="index.html#41-introduction" class="nav-link">4.1 Introduction</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#42-geometry-algorithms" class="nav-link">4.2 Geometry Algorithms</a>
+        
+
+        
+        <ul class="nav">
+                <li class="nav-item">
+            <a href="index.html#421-sine-curves--surface" class="nav-link">4.2.1 Sine Curves &amp; Surface</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#422-de-casteljau-algorithm-to-interpolate-a-bezier-curve" class="nav-link">4.2.2 De Casteljau Algorithm to Interpolate a Bezier Curve</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#423-simple-subdivision-mesh" class="nav-link">4.2.3 Simple Subdivision Mesh</a>
+        
+
+        
+        </li></ul></li><li class="nav-item">
+            <a href="index.html#43-generative-algorithms" class="nav-link">4.3 Generative Algorithms</a>
+        
+
+        
+        <ul class="nav">
+                <li class="nav-item">
+            <a href="index.html#431-dragon-curve" class="nav-link">4.3.1 Dragon Curve</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#432-fractal-tree" class="nav-link">4.3.2 Fractal Tree</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#433-penrose-tiling" class="nav-link">4.3.3 Penrose Tiling</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#434-conway-game-of-life" class="nav-link">4.3.4 Conway Game of Life</a>
+        
+
+        
+        </li></ul></li><li class="nav-item">
+            <a href="index.html#end-of-guide" class="nav-link">End of Guide</a>
+    </li></ul>
+                <div id="toc-bottom-container" style="
+                text-align: center;
+            ">
+                </div>
+        </nav>
+    </aside>
+</div>
+
+  
+  
+  <div class="main-content ">
+    <div id="breadcrumbs">
+    
+    
+        
+    
+        
+    
+        <a href="https://developer.rhino3d.com/en/guides/">Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/">Grasshopper Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/csharp-essentials/">Essential C# Scripting for Grasshopper</a> /
+    
+
+</div>
+
+ 
+
+      <div class="feature-title-container">
+        <div class="feature-title">Chapter 4: Design Algorithms</div><div class="platform-callout">    
+    
+        
+        
+        
+        
+    
+</div></div>
+      <p>
+        
+    <span class="byline">
+        by
+        
+        
+        
+        
+            
+            
+            
+              
+            <a href="https://discourse.mcneel.com/u/rajaa/">Rajaa Issa</a>                              
+         (Last updated:&nbsp; Wednesday, December 5, 2018)
+  </span>
+  
+</p>
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="41-introduction">4.1 Introduction<a aria-label="4.1 Introduction" href="index.html#41-introduction"></a></h2>
+<p>In this chapter we will implement a few examples to create mathematical curves &amp; surfaces and solve a few generative algorithms using C# in Grasshopper. Many of the examples involve using loops &amp; recursions, which are not supported in regular Grasshopper components.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="42-geometry-algorithms">4.2 Geometry Algorithms<a aria-label="4.2 Geometry Algorithms" href="index.html#42-geometry-algorithms"></a></h2>
+<p>It is relatively easy to create curves &amp; surfaces that follow certain mathematical equations when you use scripting. You can generate control points to create smooth NURBS or interpolate points to create the geometry.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="421-sine-curves--surface">4.2.1 Sine Curves &amp; Surface<a aria-label="4.2.1 Sine Curves &amp; Surface" href="index.html#421-sine-curves--surface"></a></h3>
+<p>The following example shows how to create NurbsCurves, NurbsSurfaces, and a lofted Brep using the sine of an angle:</p>
+<p>Create curves &amp; surface using the sine equation</p>
+<img src="curves_sin_curve.png">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#00f">private</span> <span style="color:#00f">void</span> RunScript(<span style="color:#2b91af">int</span> num, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> OutCurves, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> OutSurface, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> OutLoft)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">// List of all points</span>
+</span></span><span style="display:flex;"><span>  List&lt;Point3d&gt; allPoints = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">// List of curves</span>
+</span></span><span style="display:flex;"><span>  List&lt;Curve&gt; curves = <span style="color:#00f">new</span> List&lt;Curve&gt;();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> y = 0; y &lt; num; y++)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Curve points</span>
+</span></span><span style="display:flex;"><span>      List&lt;Point3d&gt; crvPoints= <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> x = 0; x &lt; num; x++)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#2b91af">double</span> z = Math.Sin(Math.PI / 180 + (x + y));
+</span></span><span style="display:flex;"><span>        Point3d pt = <span style="color:#00f">new</span> Point3d(x, y, z);
+</span></span><span style="display:flex;"><span>        crvPoints.Add(pt);
+</span></span><span style="display:flex;"><span>        allPoints.Add(pt);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Create a degree 3 nurbs curve from control points</span>
+</span></span><span style="display:flex;"><span>      NurbsCurve crv = Curve.CreateControlPointCurve(crvPoints, 3);
+</span></span><span style="display:flex;"><span>      curves.Add(crv);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">// Create a nurbs surface from control points</span>
+</span></span><span style="display:flex;"><span>  NurbsSurface srf = NurbsSurface.CreateFromPoints(allPoints, num, num, 3, 3);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">// Create a lofted brep from curves</span>
+</span></span><span style="display:flex;"><span>  Brep[ ] breps = Brep.CreateFromLoft(curves, Point3d.Unset, Point3d.Unset, LoftType.Tight, <span style="color:#00f">false</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">// Assign output</span>
+</span></span><span style="display:flex;"><span>  OutCurves = curves;
+</span></span><span style="display:flex;"><span>  OutSurface = srf;
+</span></span><span style="display:flex;"><span>  OutLoft = breps;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="422-de-casteljau-algorithm-to-interpolate-a-bezier-curve">4.2.2 De Casteljau Algorithm to Interpolate a Bezier Curve<a aria-label="4.2.2 De Casteljau Algorithm to Interpolate a Bezier Curve" href="index.html#422-de-casteljau-algorithm-to-interpolate-a-bezier-curve"></a></h3>
+<p>You can create a cubic Bezier curve from four input points. The De Casteljau algorithm is used in computer graphics to evaluate the Bezier curve at any parameter. If evaluated at multiple parameters, then the points can be connected to draw the curve. The following example shows a recursive function implementation to interpolate through a Bezier curve:</p>
+<p>The De Casteljau algorithm to draw a Bezier curve with 2, 4, 8, and 16 segments</p>
+<img src="de_casteljau.png">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#00f">private</span> <span style="color:#00f">void</span> RunScript(Point3d pt0, Point3d pt1, Point3d pt2, Point3d pt3, <span style="color:#2b91af">int</span> segments, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> BezierCrv)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span>(segments &lt; 2)
+</span></span><span style="display:flex;"><span>      segments = 2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    List&lt;Point3d&gt; bezierPts = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>    bezierPts.Add(pt0);
+</span></span><span style="display:flex;"><span>    bezierPts.Add(pt1);
+</span></span><span style="display:flex;"><span>    bezierPts.Add(pt2);
+</span></span><span style="display:flex;"><span>    bezierPts.Add(pt3);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    List&lt;Point3d&gt; evalPts = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">double</span> step = 1 / (<span style="color:#2b91af">double</span>) segments;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 0; i &lt;= segments; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#2b91af">double</span> t = i * step;
+</span></span><span style="display:flex;"><span>      Point3d pt = Point3d.Unset;
+</span></span><span style="display:flex;"><span>      EvalPoint(bezierPts, t, <span style="color:#00f">ref</span> pt);
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>(pt.IsValid)
+</span></span><span style="display:flex;"><span>        evalPts.Add(pt);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Polyline pline = <span style="color:#00f">new</span> Polyline(evalPts);
+</span></span><span style="display:flex;"><span>    BezierCrv = pline;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#00f">void</span> EvalPoint(List&lt;Point3d&gt; points, <span style="color:#2b91af">double</span> t, <span style="color:#00f">ref</span> Point3d evalPt)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Stopping condition - point at parameter t is found</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span>(points.Count &lt; 2)
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">return</span>;
+</span></span><span style="display:flex;"><span>    List&lt;Point3d&gt; tPoints = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 1; i &lt; points.Count; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      Line line = <span style="color:#00f">new</span> Line(points[i - 1], points[i]);
+</span></span><span style="display:flex;"><span>      Point3d pt = line.PointAt(t);
+</span></span><span style="display:flex;"><span>      tPoints.Add(pt);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span>(tPoints.Count == 1)
+</span></span><span style="display:flex;"><span>      evalPt = tPoints[0];
+</span></span><span style="display:flex;"><span>    EvalPoint(tPoints, t, <span style="color:#00f">ref</span> evalPt);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="423-simple-subdivision-mesh">4.2.3 Simple Subdivision Mesh<a aria-label="4.2.3 Simple Subdivision Mesh" href="index.html#423-simple-subdivision-mesh"></a></h3>
+<p>The following example takes a surface &amp; closed polyline, then creates a subdivision mesh. It pulls the midpoints of the polyline edges to the surface to then subdivide &amp; pull again:</p>
+<img src="subdivision.png">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#00f">private</span> <span style="color:#00f">void</span> RunScript(Surface srf, List&lt;Polyline&gt; inPolylines, <span style="color:#2b91af">int</span> degree, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> OutPolylines, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> OutMesh)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Instantiate the collection of all panels</span>
+</span></span><span style="display:flex;"><span>    List&lt;Polyline&gt; outPanels = <span style="color:#00f">new</span> List&lt;Polyline&gt;();
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Limit to 6 subdivisions</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span>( degree &gt; 6)
+</span></span><span style="display:flex;"><span>      degree = 6;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 0; i &lt; degree; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Outer polylines</span>
+</span></span><span style="display:flex;"><span>      List&lt;Polyline&gt; plines = <span style="color:#00f">new</span> List&lt;Polyline&gt;();
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Mid polylines</span>
+</span></span><span style="display:flex;"><span>      List&lt;Polyline&gt; midPlines = <span style="color:#00f">new</span> List&lt;Polyline&gt;();
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Generate subdivided panels</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#2b91af">bool</span> result = SubPanelOnSurface(srf, inPolylines, <span style="color:#00f">ref</span> plines, <span style="color:#00f">ref</span> midPlines);
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( result == <span style="color:#00f">false</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Add outer panels</span>
+</span></span><span style="display:flex;"><span>      outPanels.AddRange(plines);
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Add mid panels only in the last iteration</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>(i == degree - 1)
+</span></span><span style="display:flex;"><span>        outPanels.AddRange(midPlines);
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">else</span> <span style="color:#008000">// Subdivide mid panels only</span>
+</span></span><span style="display:flex;"><span>        inPolylines = midPlines;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Create a mesh from all polylines</span>
+</span></span><span style="display:flex;"><span>    Mesh joinedMesh = <span style="color:#00f">new</span> Mesh();
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 0; i &lt; outPanels.Count; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      Mesh mesh = Mesh.CreateFromClosedPolyline(outPanels[i]);
+</span></span><span style="display:flex;"><span>      joinedMesh.Append(mesh);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Make sure all mesh faces normals are in the same general direction</span>
+</span></span><span style="display:flex;"><span>    joinedMesh.UnifyNormals();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Assign output</span>
+</span></span><span style="display:flex;"><span>    OutPolylines = outPanels;
+</span></span><span style="display:flex;"><span>    OutMesh = joinedMesh;
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">bool</span> SubPanelOnSurface( Surface srf, List&lt;Polyline&gt;
+</span></span><span style="display:flex;"><span> inputPanels, <span style="color:#00f">ref</span> List&lt;Polyline&gt; outPanels, <span style="color:#00f">ref</span> List&lt;Polyline&gt; midPanels)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Check for a valid input</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span> (inputPanels.Count == 0 || <span style="color:#00f">null</span> == srf)
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">return</span> <span style="color:#00f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> i = 0; i &lt; inputPanels.Count; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      Polyline ipline = inputPanels[i];
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (!ipline.IsValid || !ipline.IsClosed)
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">continue</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Stack of points</span>
+</span></span><span style="display:flex;"><span>      List&lt;Point3d&gt; stack = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>      Polyline newPline = <span style="color:#00f">new</span> Polyline();
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> j = 1; j &lt; ipline.Count; j++)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        Line line = <span style="color:#00f">new</span> Line(ipline[j - 1], ipline[j]);
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">if</span> (line.IsValid)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Point3d mid = line.PointAt(0.5);
+</span></span><span style="display:flex;"><span>          <span style="color:#2b91af">double</span> s, t;
+</span></span><span style="display:flex;"><span>          srf.ClosestPoint(mid, <span style="color:#00f">out</span> s, <span style="color:#00f">out</span> t);
+</span></span><span style="display:flex;"><span>          mid = srf.PointAt(s, t);
+</span></span><span style="display:flex;"><span>          newPline.Add(mid);
+</span></span><span style="display:flex;"><span>          stack.Add(ipline[j - 1]);
+</span></span><span style="display:flex;"><span>          stack.Add(mid);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Add the first 2 point to close last triangle</span>
+</span></span><span style="display:flex;"><span>      stack.Add(stack[0]);
+</span></span><span style="display:flex;"><span>      stack.Add(stack[1]);
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Close</span>
+</span></span><span style="display:flex;"><span>      newPline.Add(newPline[0]);
+</span></span><span style="display:flex;"><span>      midPanels.Add(newPline);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> j = 2; j &lt; stack.Count; j = j + 1)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        Polyline pl = <span style="color:#00f">new</span> Polyline { stack[j - 2], stack[j - 1], stack[j], stack[j - 2] };
+</span></span><span style="display:flex;"><span>        outPanels.Add(pl);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">return</span> <span style="color:#00f">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="43-generative-algorithms">4.3 Generative Algorithms<a aria-label="4.3 Generative Algorithms" href="index.html#43-generative-algorithms"></a></h2>
+<p>Most of the generative algorithms require recursive functions that are only possible through scripting in Grasshopper. The following are four examples of generative solutions to generate the dragon curve, fractals, penrose tiling, and game of life:</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="431-dragon-curve">4.3.1 Dragon Curve<a aria-label="4.3.1 Dragon Curve" href="index.html#431-dragon-curve"></a></h3>
+<table>
+<tr>
+<td>
+<img src="dragon_var.png" class="float_left" width="325">
+</td>
+<td>
+<img src="dragon_curve.png">
+</td>
+</tr>
+</table>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#00f">private</span> <span style="color:#00f">void</span> RunScript(<span style="color:#2b91af">string</span> startString, <span style="color:#2b91af">string</span> ruleX, <span style="color:#2b91af">string</span> ruleY, <span style="color:#2b91af">int</span> Num, <span style="color:#2b91af">double</span> Length, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> DragonCurve)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Declare string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">string</span> dragonString = startString;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Generate the string</span>
+</span></span><span style="display:flex;"><span>    GrowString(<span style="color:#00f">ref</span> Num, <span style="color:#00f">ref</span> dragonString , ruleX, ruleY);
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Generate the points</span>
+</span></span><span style="display:flex;"><span>    List&lt;Point3d&gt; dragonPoints = <span style="color:#00f">new</span> List&lt;Point3d&gt;();;
+</span></span><span style="display:flex;"><span>    ParseDeagonString(dragonString, Length, <span style="color:#00f">ref</span> dragonPoints);
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Create the curve</span>
+</span></span><span style="display:flex;"><span>    PolylineCurve dragonCrv= <span style="color:#00f">new</span> PolylineCurve(dragonPoints); 
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Assign output</span>
+</span></span><span style="display:flex;"><span>    DragonCurve = dragonCrv;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#00f">void</span> GrowString(<span style="color:#00f">ref</span> <span style="color:#2b91af">int</span> Num, <span style="color:#00f">ref</span> <span style="color:#2b91af">string</span> finalString, <span style="color:#2b91af">string</span> ruleX, <span style="color:#2b91af">string</span> ruleY)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Decrement the count with each new execution of the grow function</span>
+</span></span><span style="display:flex;"><span>    Num = Num - 1;
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">char</span> rule;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Create new string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">string</span> newString = <span style="color:#a31515">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> i = 0; i &lt; finalString.Length ; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      rule = finalString[i];
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;X&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + ruleX;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;Y&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + ruleY;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;F&#39;</span> | rule == <span style="color:#a31515">&#39;+&#39;</span> | rule == <span style="color:#a31515">&#39;-&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + rule;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    finalString = newString;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Stopper condition</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span> (Num == 0)
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">return</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Grow again</span>
+</span></span><span style="display:flex;"><span>    GrowString(<span style="color:#00f">ref</span> Num, <span style="color:#00f">ref</span> finalString, ruleX, ruleY);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#00f">void</span> ParseDeagonString(<span style="color:#2b91af">string</span> dragonString, <span style="color:#2b91af">double</span> Length, <span style="color:#00f">ref</span> List&lt;Point3d&gt; dragonPoints)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Parse instruction string to generate points</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Let base point be world origin</span>
+</span></span><span style="display:flex;"><span>    Point3d pt = Point3d.Origin;
+</span></span><span style="display:flex;"><span>    dragonPoints .Add(pt);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Drawing direction vector - strat along the x-axis</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Vector direction will be rotated depending on (+,-) instructions</span>
+</span></span><span style="display:flex;"><span>    Vector3d V = <span style="color:#00f">new</span> Vector3d(1.0, 0.0, 0.0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">char</span> rule;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 0 ; i &lt; dragonString.Length;i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Always start for 1 &amp; length 1 to get one char at a time</span>
+</span></span><span style="display:flex;"><span>      rule = DragonString[i];
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Move forward using direction vector</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;F&#39;</span>)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        pt = pt + (V * Length);
+</span></span><span style="display:flex;"><span>        dragonPoints.Add(pt);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Rotate Left</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;+&#39;</span>)
+</span></span><span style="display:flex;"><span>        V.Rotate(Math.PI / 2, Vector3d.ZAxis);
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Rotate Right</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;-&#39;</span>)
+</span></span><span style="display:flex;"><span>        V.Rotate(-Math.PI / 2, Vector3d.ZAxis);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="432-fractal-tree">4.3.2 Fractal Tree<a aria-label="4.3.2 Fractal Tree" href="index.html#432-fractal-tree"></a></h3>
+<table>
+<tr>
+<td>
+<img src="tree_var.png" class="float_left" width="325">
+</td>
+<td>
+<img src="tree_fractal.png">
+</td>
+</tr>
+</table>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#00f">private</span> <span style="color:#00f">void</span> RunScript(<span style="color:#2b91af">string</span> startString, <span style="color:#2b91af">string</span> ruleX, <span style="color:#2b91af">string</span> ruleY, <span style="color:#2b91af">int</span> num, <span style="color:#2b91af">double</span> length, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> FractalLines)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Declare string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">string</span> fractalString = startString;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Denerate the string</span>
+</span></span><span style="display:flex;"><span>    GrowString(<span style="color:#00f">ref</span> num, <span style="color:#00f">ref</span> dragonString , ruleX, ruleY);
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Generate the points</span>
+</span></span><span style="display:flex;"><span>    List&lt;Line&gt; fractalLines = <span style="color:#00f">new</span> List&lt;Line&gt;();;
+</span></span><span style="display:flex;"><span>    ParsefractalString(fractalString, length, <span style="color:#00f">ref</span> fractalLines );
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Assign output</span>
+</span></span><span style="display:flex;"><span>    FractalLines = fractalLines ;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#00f">void</span> GrowString(<span style="color:#00f">ref</span> <span style="color:#2b91af">int</span> num, <span style="color:#00f">ref</span> <span style="color:#2b91af">string</span> finalString, <span style="color:#2b91af">string</span> ruleX, <span style="color:#2b91af">string</span> ruleF)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Decrement the count with each new execution of the grow function</span>
+</span></span><span style="display:flex;"><span>    num = num - 1;
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">char</span> rule;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Create new string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">string</span> newString = <span style="color:#a31515">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> i = 0; i &lt; finalString.Length ; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      rule = finalString[i];
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;X&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + ruleX;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;F&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + ruleF;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;[&#39;</span> || rule == <span style="color:#a31515">&#39;]&#39;</span> || rule == <span style="color:#a31515">&#39;+&#39;</span> || rule == <span style="color:#a31515">&#39;-&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + rule;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    finalString = newString;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Stopper condition</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span> (num == 0)
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">return</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Grow again</span>
+</span></span><span style="display:flex;"><span>    GrowString(<span style="color:#00f">ref</span> num, <span style="color:#00f">ref</span> finalString, ruleX, ruleF);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#00f">void</span> ParsefractalString(<span style="color:#2b91af">string</span> fractalString, <span style="color:#2b91af">double</span> length, <span style="color:#00f">ref</span> List&lt;Line&gt; fractalLines)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Parse instruction string to generate points</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Let base point be world origin</span>
+</span></span><span style="display:flex;"><span>    Point3d pt = Point3d.Origin;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Declare points array</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Vector rotates with (+,-) instructions by 30 degrees</span>
+</span></span><span style="display:flex;"><span>    List&lt;Point3d&gt; arrPoints = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Draw forward direction</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Vector direction will be rotated depending on (+,-) instructions</span>
+</span></span><span style="display:flex;"><span>    Vector3d vec = <span style="color:#00f">new</span> Vector3d(0.0, 1.0, 0.0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Stacks of points and vectors</span>
+</span></span><span style="display:flex;"><span>    List&lt;Point3d&gt; ptStack = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>    List&lt;Vector3d&gt; vStack = <span style="color:#00f">new</span> List&lt;Vector3d&gt;();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Declare loop variables</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">char</span> rule;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 0 ; i &lt; fractalString.Length; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Always start for 1 &amp; length 1 to get one char at a time</span>
+</span></span><span style="display:flex;"><span>      rule = fractalString[i];
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Rotate Left</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;+&#39;</span>)
+</span></span><span style="display:flex;"><span>        vec.Rotate(Math.PI / 6, Vector3d.ZAxis);
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Rotate Right</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;-&#39;</span>)
+</span></span><span style="display:flex;"><span>        vec.Rotate(-Math.PI / 6, Vector3d.ZAxis);
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Draw Forward by direction</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;F&#39;</span>)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Add current points</span>
+</span></span><span style="display:flex;"><span>        Point3d newPt1 = <span style="color:#00f">new</span> Point3d(pt);
+</span></span><span style="display:flex;"><span>        arrPoints.Add(newPt1);
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Calculate next point</span>
+</span></span><span style="display:flex;"><span>        Point3d newPt2 = <span style="color:#00f">new</span> Point3d(pt);
+</span></span><span style="display:flex;"><span>        newPt2 = newPt2 + (vec * length);
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Add next point</span>
+</span></span><span style="display:flex;"><span>        arrPoints.Add(newPt2);
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Save new location</span>
+</span></span><span style="display:flex;"><span>        pt = newPt2;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Save point location</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;[&#39;</span>)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Save current point &amp; direction</span>
+</span></span><span style="display:flex;"><span>        Point3d newPt = <span style="color:#00f">new</span> Point3d(pt);
+</span></span><span style="display:flex;"><span>        ptStack.Add(newPt);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Vector3d newV = <span style="color:#00f">new</span> Vector3d(vec);
+</span></span><span style="display:flex;"><span>        vStack.Add(newV);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Retrieve point &amp; direction</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;]&#39;</span>)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        pt = ptStack[ptStack.Count - 1];
+</span></span><span style="display:flex;"><span>        vec = vStack[vStack.Count - 1];
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Remove from stack</span>
+</span></span><span style="display:flex;"><span>        ptStack.RemoveAt(ptStack.Count - 1);
+</span></span><span style="display:flex;"><span>        vStack.RemoveAt(vStack.Count - 1);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Generate lines</span>
+</span></span><span style="display:flex;"><span>    List&lt;Line&gt; allLines = <span style="color:#00f">new</span> List&lt;Line&gt;();
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 1; i &lt; arrPoints.Count; i = i + 2)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      Line line = <span style="color:#00f">new</span> Line(arrPoints[i - 1], arrPoints[i]);
+</span></span><span style="display:flex;"><span>      allLines.Add(line);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="433-penrose-tiling">4.3.3 Penrose Tiling<a aria-label="4.3.3 Penrose Tiling" href="index.html#433-penrose-tiling"></a></h3>
+<table>
+<tr>
+<td>
+<img src="penrose_var.png" class="float_left" width="325">
+</td>
+<td>
+<img src="penrose_tile.png">
+</td>
+</tr>
+</table>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#00f">private</span> <span style="color:#00f">void</span> RunScript(<span style="color:#2b91af">string</span> startString, <span style="color:#2b91af">string</span> rule6, <span style="color:#2b91af">string</span> rule7, <span style="color:#2b91af">string</span> rule8, <span style="color:#2b91af">string</span> rule9, <span style="color:#2b91af">int</span> num, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> PenroseString)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Declare string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">string</span> finalString;
+</span></span><span style="display:flex;"><span>    finalString = startString;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Generate the string</span>
+</span></span><span style="display:flex;"><span>    GrowString(<span style="color:#00f">ref</span> num, <span style="color:#00f">ref</span> finalString, rule6, rule7, rule8, rule9);
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Return the string</span>
+</span></span><span style="display:flex;"><span>    PenroseString = finalString;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">void</span> GrowString(<span style="color:#00f">ref</span> <span style="color:#2b91af">int</span> num, <span style="color:#00f">ref</span> <span style="color:#2b91af">string</span> finalString, <span style="color:#2b91af">string</span> rule6, <span style="color:#2b91af">string</span> rule7, <span style="color:#2b91af">string</span> rule8, <span style="color:#2b91af">string</span> rule9)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Decrement the count with each new execution of the grow function</span>
+</span></span><span style="display:flex;"><span>    num = num - 1;
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">char</span> rule;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Create new string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">string</span> newString = <span style="color:#a31515">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> i = 0; i &lt; finalString.Length; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      rule = finalString[i];
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;6&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + rule6;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;7&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + rule7;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;8&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + rule8;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;9&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + rule9;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> (rule == <span style="color:#a31515">&#39;[&#39;</span> || rule == <span style="color:#a31515">&#39;]&#39;</span> || rule == <span style="color:#a31515">&#39;+&#39;</span> || rule == <span style="color:#a31515">&#39;-&#39;</span>)
+</span></span><span style="display:flex;"><span>        newString = newString + rule;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    finalString = newString;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Stopper condition</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span> (num == 0)
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Grow again</span>
+</span></span><span style="display:flex;"><span>    GrowString(<span style="color:#00f">ref</span> num, <span style="color:#00f">ref</span> finalString, rule6, rule7, rule8, rule9);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span><span style="color:#00f">private</span> <span style="color:#00f">void</span> RunScript(<span style="color:#2b91af">string</span> penroseString, <span style="color:#2b91af">double</span> length, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> PenroseLines)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Parse instruction string to generate points</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Let base point be world origin</span>
+</span></span><span style="display:flex;"><span>    Point3d pt = Point3d.Origin;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Declare points array</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Vector rotates with (+,-) instructions by 36 degrees</span>
+</span></span><span style="display:flex;"><span>    List&lt;Point3d&gt; arrPoints = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Draw forward direction</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Vector direction will be rotated depending on (+,-) instructions</span>
+</span></span><span style="display:flex;"><span>    Vector3d vec = <span style="color:#00f">new</span> Vector3d(1.0, 0.0, 0.0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Stacks of points &amp; vectors</span>
+</span></span><span style="display:flex;"><span>    List&lt;Point3d&gt; ptStack = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>    List&lt;Vector3d&gt; vStack = <span style="color:#00f">new</span> List&lt;Vector3d&gt;();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Declare loop variables</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">char</span> rule;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 0 ; i &lt; penroseString.Length; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Always start for 1 &amp; length 1 to get one char at a time</span>
+</span></span><span style="display:flex;"><span>      rule = penroseString[i];
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Rotate Left</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;+&#39;</span>)
+</span></span><span style="display:flex;"><span>        vec.Rotate(36 * (Math.PI / 180), Vector3d.ZAxis);
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Rotate Right</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;-&#39;</span>)
+</span></span><span style="display:flex;"><span>        vec.Rotate(-36 * (Math.PI / 180), Vector3d.ZAxis);
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Draw Forward by direction</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;1&#39;</span>)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Add current points</span>
+</span></span><span style="display:flex;"><span>        Point3d newPt1 = <span style="color:#00f">new</span> Point3d(pt);
+</span></span><span style="display:flex;"><span>        arrPoints.Add(newPt1);
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Calculate next point</span>
+</span></span><span style="display:flex;"><span>        Point3d newPt2 = pt + (vec * length);
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Add next point</span>
+</span></span><span style="display:flex;"><span>        arrPoints.Add(newPt2);
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Save new location</span>
+</span></span><span style="display:flex;"><span>        pt = newPt2;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Save point location</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;[&#39;</span>)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Save current point &amp; direction</span>
+</span></span><span style="display:flex;"><span>        Point3d newPt = <span style="color:#00f">new</span> Point3d(pt);
+</span></span><span style="display:flex;"><span>        ptStack.Add(newPt);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Vector3d newVec = <span style="color:#00f">new</span> Vector3d(vec);
+</span></span><span style="display:flex;"><span>        vStack.Add(newVec);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#008000">// Retrieve point &amp; direction</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span>( rule == <span style="color:#a31515">&#39;]&#39;</span>)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        pt = ptStack[ptStack.Count - 1];
+</span></span><span style="display:flex;"><span>        vec = vStack[vStack.Count - 1];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Remove from stack</span>
+</span></span><span style="display:flex;"><span>        ptStack.RemoveAt(ptStack.Count - 1);
+</span></span><span style="display:flex;"><span>        vStack.RemoveAt(vStack.Count - 1);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Generate lines</span>
+</span></span><span style="display:flex;"><span>    List&lt;Line&gt; allLines = <span style="color:#00f">new</span> List&lt;Line&gt;();
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 1; i &lt; arrPoints.Count; i = i + 2)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      Line line = <span style="color:#00f">new</span> Line(arrPoints[i - 1], arrPoints[i]);
+</span></span><span style="display:flex;"><span>      allLines.Add(line);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    PenroseLines = allLines;
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="434-conway-game-of-life">4.3.4 Conway Game of Life<a aria-label="4.3.4 Conway Game of Life" href="index.html#434-conway-game-of-life"></a></h3>
+<p>A cellular automaton consists of a regular grid of cells, each in one of a finite number of states, &ldquo;On&rdquo; &amp; &ldquo;Off&rdquo; for example. The grid can be in any finite number of dimensions. For each cell, a set of cells called its neighborhood (usually including the cell itself) is defined relative to the specified cell. For example, the neighborhood of a cell might be defined as the set of cells a distance of 2 or less from the cell. An initial state (time t=0) is selected by assigning a state for each cell. A new generation is created (advancing t by 1), according to some fixed rule (generally, a mathematical function) that determines the new state of each cell in terms of the current state of the cell and the states of the cells in its neighborhood. <em>Check wikipedia for full details and examples.</em></p>
+<img src="game_of_life.png">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>  <span style="color:#00f">private</span> <span style="color:#00f">void</span> RunScript(Surface srf, <span style="color:#2b91af">int</span> uNum, <span style="color:#2b91af">int</span> vNum, <span style="color:#2b91af">int</span> seed, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> PointGrid, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> StateGrid)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span>(uNum &lt; 2)
+</span></span><span style="display:flex;"><span>      uNum = 2;
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span>(vNum &lt; 2)
+</span></span><span style="display:flex;"><span>      vNum = 2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">double</span> uStep = srf.Domain(0).Length / uNum;
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">double</span> vStep = srf.Domain(1).Length / vNum;
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">double</span> uMin = srf.Domain(0).Min;
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">double</span> vMin = srf.Domain(1).Min;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Create a grid of points &amp; a grid of states</span>
+</span></span><span style="display:flex;"><span>    DataTree&lt;Point3d&gt; pointsTree = <span style="color:#00f">new</span> DataTree&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>    DataTree&lt;<span style="color:#2b91af">int</span>&gt; statesTree = <span style="color:#00f">new</span> DataTree&lt;<span style="color:#2b91af">int</span>&gt;();
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">int</span> pathIndex = 0;
+</span></span><span style="display:flex;"><span>    Random rand = <span style="color:#00f">new</span> Random(seed);
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> i = 0; i &lt;= uNum; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      List&lt;Point3d&gt; ptList = <span style="color:#00f">new</span> List&lt;Point3d&gt;();
+</span></span><span style="display:flex;"><span>      List&lt;<span style="color:#2b91af">int</span>&gt; stateList = <span style="color:#00f">new</span> List&lt;<span style="color:#2b91af">int</span>&gt;();
+</span></span><span style="display:flex;"><span>      GH_Path path = <span style="color:#00f">new</span> GH_Path(pathIndex);
+</span></span><span style="display:flex;"><span>      pathIndex = pathIndex + 1;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> j = 0; j &lt;= vNum; j++)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        Point3d srfPt = srf.PointAt(uMin + i * uStep, vMin + j * vStep);
+</span></span><span style="display:flex;"><span>        ptList.Add(srfPt);
+</span></span><span style="display:flex;"><span>        <span style="color:#2b91af">int</span> randState = rand.Next(0, 2);
+</span></span><span style="display:flex;"><span>        stateList.Add(randState);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      pointsTree.AddRange(ptList, path);
+</span></span><span style="display:flex;"><span>      statesTree.AddRange(stateList, path);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    PointGrid = pointsTree;
+</span></span><span style="display:flex;"><span>    StateGrid = statesTree;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">private</span> <span style="color:#00f">void</span> RunScript(DataTree&lt;<span style="color:#2b91af">int</span>&gt; grid, <span style="color:#2b91af">int</span> gen, <span style="color:#00f">ref</span> <span style="color:#2b91af">object</span> OutGrid)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">// Get state at the defined generation</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span>(<span style="color:#2b91af">int</span> i = 0; i &lt; gen; i++)
+</span></span><span style="display:flex;"><span>      grid = NewGeneration(grid);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    OutGrid = grid;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">public</span> DataTree&lt;<span style="color:#2b91af">int</span>&gt; NewGeneration(DataTree&lt;<span style="color:#2b91af">int</span>&gt; inStates)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">int</span> i, j, c, nc;
+</span></span><span style="display:flex;"><span>    List&lt;<span style="color:#2b91af">int</span>&gt; prvBranch;
+</span></span><span style="display:flex;"><span>    List&lt;<span style="color:#2b91af">int</span>&gt; nxtBranch;
+</span></span><span style="display:flex;"><span>    List&lt;<span style="color:#2b91af">int</span>&gt; branch;
+</span></span><span style="display:flex;"><span>    DataTree&lt;<span style="color:#2b91af">int</span>&gt; states = <span style="color:#00f">new</span> DataTree&lt;<span style="color:#2b91af">int</span>&gt;();
+</span></span><span style="display:flex;"><span>    states = inStates;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span> (i = 0; i &lt;= states.Branches.Count - 1; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      branch = states.Branches[i];
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">for</span> (j = 0; j &lt;= branch.Count - 1; j++)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        c = branch[j];
+</span></span><span style="display:flex;"><span>        nc = 0;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Check neighbouring states</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Next</span>
+</span></span><span style="display:flex;"><span>        nc = nc + branch[(j + 1 + branch.Count) % branch.Count];
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Prev</span>
+</span></span><span style="display:flex;"><span>        nc = nc + branch[(j - 1 + branch.Count) % branch.Count];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Top</span>
+</span></span><span style="display:flex;"><span>        nxtBranch = states.Branches[(i + 1 + states.Branches.Count) % states.Branches.Count];
+</span></span><span style="display:flex;"><span>        nc = nc + nxtBranch[(j + 1 + nxtBranch.Count) % nxtBranch.Count];
+</span></span><span style="display:flex;"><span>        nc = nc + nxtBranch[(j + nxtBranch.Count) % nxtBranch.Count];
+</span></span><span style="display:flex;"><span>        nc = nc + nxtBranch[(j - 1 + nxtBranch.Count) % nxtBranch.Count];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Bottom</span>
+</span></span><span style="display:flex;"><span>        prvBranch = states.Branches[(i - 1 + states.Branches.Count) % states.Branches.Count];
+</span></span><span style="display:flex;"><span>        nc = nc + prvBranch[(j + 1 + prvBranch.Count) % prvBranch.Count];
+</span></span><span style="display:flex;"><span>        nc = nc + prvBranch[(j + prvBranch.Count) % prvBranch.Count];
+</span></span><span style="display:flex;"><span>        nc = nc + prvBranch[(j - 1 + prvBranch.Count) % prvBranch.Count];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000">// Set the new state</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">if</span> (c == 1)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#00f">if</span> (nc &lt; 2 | nc &gt; 3)
+</span></span><span style="display:flex;"><span>            c = 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">else</span> <span style="color:#00f">if</span> (c == 0)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#00f">if</span> (nc == 3)
+</span></span><span style="display:flex;"><span>            c = 1;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        branch[j] = c;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">return</span> states;
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="end-of-guide">End of Guide<a aria-label="End of Guide" href="index.html#end-of-guide"></a></h2>
+<p>This is part 4 of the <a href="../index.html">Essential C# Scripting for Grasshopper guide</a>.</p>
+<span class="mcneel_only hidden">
+    <div style="text-align: center;">
+        <div class="editdropdown" style="text-align: left;">
+            <button class="editbutton"><div class="fas fa-pencil-alt"></div> Edit this page</button>
+            <div class="editdropdown-content">
+                
+                
+                <a href="https://github.com/mcneel/developer.rhino3d.com/edit/master/content/en/guides/grasshopper/csharp-essentials/4-design-algorithms/index.md" target="_blank" rel="noopener noreferrer"><div class="fab fa-github"></div> Edit on GitHub</a>
+                <a href="https://github.com/mcneel/developer.rhino3d.com/commits/master/content/en/guides/grasshopper/csharp-essentials/4-design-algorithms/index.md" target="_blank" rel="noopener noreferrer"><div class="fas fa-history"></div> History</a>
+                <a href="https://developer.rhino3d.com/admin" target="_blank"><div class="fas fa-cog"></div> Admin</a>
+            </div>
+        </div>
+    </div>
+</span>
+  </div>
+</div><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha384-a4pIV46KBffvdjRuStQik2G6mPrTxdtAiZFQCdpsP4fyplWNoQ7fXlLMiIGcAP+M" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/vbnet.min.js" integrity="sha384-EN9fHTs/Ki0RX5/vXR4Y2Qb0XnV2+j2GVj86nencgtJYbNlNanf3ogcbPVkgFKBf" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/yaml.min.js" integrity="sha384-vLBVpaJcrTRsLBHhkvU9neJTiLqRgYWBnEg3o4eLgTKw1+hWbSr/QaNuSB9XWftA" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/powershell.min.js" integrity="sha384-5dY/Kkeznu4IIDRQyT6jL9e1XwSy39f1/sqYLFifcz2CfKQe9AunCsb7lBEeMh+f" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../../script/highlightjs-line-numbers.1b36d98c62cb9f88ab73b1b24041fe3ba7331949ff54dd3737d99f5e362a8abb.js"></script>
+
+<script>hljs.highlightAll();</script>
+<script>hljs.initLineNumbersOnLoad();</script>
+
+
+<script type="text/javascript" src="../../../../script/copy-code.d299324970feb9b7a8b27c988252faacbbb6adb5658c8de5c3378ba9844c7845.js"></script>
+
+<script>
+    function openCodeTab(evt, tabName) {
+      
+      var i, tabcontent, tablinks;
+      
+      
+      var matches = tabName.match(/\d+$/); 
+      var tabCounter = "";
+      if (matches)
+        tabCounter = matches[0];
+      
+      
+      tabcontent = document.getElementsByClassName("codetab-content" + tabCounter);
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      
+      tablinks = document.getElementsByClassName("tablinks" + tabCounter);
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  
+    
+    var defaultTabs = document.querySelectorAll(`*[id^="defaultOpen"]`);
+    defaultTabs.forEach(element => {
+      element.click();
+    });
+
+</script>
+<div class="footer footer-area">
+    <div class="footer-columns">
+        <div class="footer-column footer-left default"><a href="https://www.rhino3d.com/sales">Find a Reseller</a></div>
+        <div class="footer-column footer-left skin-napa">
+            <a href="https://www.rhino3d.com/store">Shop online</a>
+            or find a
+            <a href="https://www.rhino3d.com/sales">Reseller</a>
+        </div>
+        <div class="footer-column footer-left skin-not-napa">
+            <a href="https://www.rhino3d.com/sales">Find a Reseller</a>
+        </div>
+        <div class="footer-column footer-right">           
+                <a href="https://www.rhino3d.com/privacy">Privacy Policy</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/about">About</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/contact">Contact Us</a> &bull;
+                <a href="https://www.rhino3d.com/language" title="Change to a different region or language">
+                    Language</a>            
+        </div>
+    </div>    
+    <div class="footer-middle">       
+        <a href="https://www.rhino3d.com/mcneel/about" alt="About McNeel">Copyright © 1993-2026 Robert McNeel &amp; Associates. All Rights Reserved.</a>
+    </div>
+    <div class="footer-middle">
+        <a href="https://www.facebook.com/McNeelRhinoceros/" aria-label="Facebook" class="fab fa-facebook" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        
+        <a href="https://www.linkedin.com/groups/75313/" aria-label="LinkedIn" class="fab fa-linkedin" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://www.youtube.com/user/RhinoGuide/videos" aria-label="YouTube" class="fab fa-youtube" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://vimeo.com/rhino" aria-label="Vimeo" class="fab fa-vimeo" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="http://blog.rhino3d.com/" aria-label="Blogger" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Blogger icon" src="../../../../images/blogger.svg"></a>
+        <a href="https://www.food4rhino.com" aria-label="Food4Rhino" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Food4Rhino" src="../../../../images/f4r_icon_01.svg" height="32" width="32"></a>
+    </div>
+</div>
+      </div><script type="text/javascript" src="../../../../script/jquery-3.5.1.min.f7f6a5894f1d19ddad6fa392b2ece2c5e578cbf7da4ea805b6885eb6985b6e3d.js"></script>
+<script type="text/javascript" src="../../../../script/jquery-ui.min.793cb14b4ae48e92c4a35eae5d34b4b95092e3cd7995ce342b6895a560ef7526.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="../../../../script/rhino.05c268ec655ef5ff95646d1f4c93dd13f833bb83b30ad95a68bbd8a7f15f9d26.js"></script>
+
+<script type="text/javascript" src="../../../../script/protocolcheck.e5a8f6d34595c946cfc9f84fce91cd8fb625ce62380441a75d5de802cc2819e4.js"></script>
+<script type="text/javascript" src="../../../../script/theme.55f13be26c834445d530dbfb196c7a9ef2692979b20258caa03793331a316a0e.js"></script>
+<script>
+    mca.addLogoutListenerForClientId(window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG", function (url) {
+      console.log("Redirecting to logout URL: " + url);
+      window.location.href = url;
+    });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-512742-1" crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-512742-1');
+</script>
+<script type="text/javascript" async
+src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<script type="text/javascript" src="../../../../script/anchor.min.1384657f1c322559a4924d2ccf0ecb609c6e3e5a7a7afb4f4810e5587b1860bf.js"></script>
+<script>
+	
+	(function () {
+		'use strict';
+		anchors.options.placement = 'right';
+		anchors.add();
+		}
+	)();
+</script>
+
+
+
+
+    
+  </body>
+</html>

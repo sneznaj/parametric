@@ -1,0 +1,13 @@
+.DS_Store
+
+# Xcode user state and local build output
+xcuserdata/
+*.xcuserstate
+DerivedData/
+.build/
+*.app/
+GrasshopperSwift/.deriveddata/
+
+# SwiftPM/Xcode generated noise
+.swiftpm/
+*.playground/xcuserdata/

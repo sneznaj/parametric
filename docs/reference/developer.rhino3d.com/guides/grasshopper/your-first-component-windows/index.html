@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="rendering, raytracing, radiosity, computer graphics, NURBS, CAD, CAM, CAE, computer aided design, design, modeling, 3DM, Rhino, AutoCAD, AccuRender, DWG, DXF" http-equiv="Keywords" />
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    <link href="../../../images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../../images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+   
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto+Mono' type='text/css' media="all" />
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github.min.css">
+    
+    
+    
+    <link rel="stylesheet" href="../../../scss/style.min.4515315bf66c3671b457c25338ed76b899746b6d65c438664f0f87f5ea2fbfbb.css">
+    
+    
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-brands-400.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-solid-900.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="https://developer.rhino3d.com/webfonts/fa-regular-400.woff2" crossorigin="anonymous"/>
+
+    
+<title>Rhino - Your First Component (Windows)</title>
+
+
+<meta name="description" content="Rhinoceros 3D: This guide walks you through your first custom Grasshopper component library using Visual Studio."> 
+<meta name="author" content="Robert McNeel &amp; Associates">
+
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://developer.rhino3d.com/en/guides/grasshopper/your-first-component-windows/" />
+<meta property="og:title" content="Your First Component (Windows)" />
+<meta property="og:description" content="This guide walks you through your first custom Grasshopper component library using Visual Studio." />
+<meta property="og:site_name" content="www.rhino3d.com"/>
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+<meta name="twitter:domain" value="rhino3d.com" />
+<meta name="twitter:title" value="Your First Component (Windows)" />
+<meta name="twitter:description" value="This guide walks you through your first custom Grasshopper component library using Visual Studio." />
+
+
+
+
+
+  
+    
+      
+        
+        
+          <meta property="og:image" content="https://www.rhino3d.com/new-source/images/dev-logo-grasshopper-small_hu14351544912089601083.png" />
+          <meta name="twitter:image" content="https://www.rhino3d.com/new-source/images/dev-logo-grasshopper-small_hu14351544912089601083.png" />
+        
+      
+    
+  
+
+
+
+
+<meta name="twitter:url" value="https://developer.rhino3d.com/en/guides/grasshopper/your-first-component-windows/" />
+<meta name="application-name" content="Rhino Developer Docs">
+<meta name="apple-mobile-web-app-title" content="Rhino Developer Docs"></head>
+
+
+  
+
+  <body>
+  
+     
+      <div id="mask"></div><div class='heading header-area'><div id="navbar">
+  <div id="wrap">
+    
+    <div id="sitesearch">
+      
+      
+      
+      <form id="cref" action="https://developer.rhino3d.com/searchresults/">
+        <label for="search"><input id="searchtext" type="text" name="q" size="24" value="" placeholder="search" /></label>  
+        <input class="searchBox" type="submit" name="sa" size="2" aria-label="Search" value=" "/>
+      </form>
+    </div>
+
+    
+    <div id="logo-container">
+      <div id="logo-inner-container">
+        <div id="logo-title-text">
+          <a href="https://developer.rhino3d.com/"><span id="logo-title-text-primary">Rhino</span><span id="logo-title-text-secondary">Developer</span><sup id="protected-mark">®</sup></a>
+        </div>
+        <div id="logo-subtitle">
+          <a href="https://developer.rhino3d.com/"><span class="logo-text-secondary">design, model, present, analyze, realize...</span></a>
+        </div>
+        
+        <a href="https://developer.rhino3d.com/"><img id="site-nav-logo" src="../../../images/rhinodevlogo.png" alt="Rhino Logo"/></a>
+        <div class="clear"></div>
+      </div>
+      <div class="overlayMenuIcon" id="theoverlayMenuIcon">
+        <span onclick="toggleMenu()"><i class="fa fa-bars" id="menuToggleIcon" style="color: #c2c2c2; font-size: 2.5em"></i></span>
+      </div>
+    </div>
+
+    
+    <div class="menu-items" id="theMenuItems">
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/guides" target="_self">Guides</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/samples" target="_self">Samples</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/api" target="_self">API</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/videos" target="_self">Videos</a>
+        
+          
+        
+        <a class="menu-item" href="https://discourse.mcneel.com/c/rhino-developer" target="_blank">Community</a><span class="logged_in">
+        <a href="https://www.rhino3d.com/my-account/" title="Manage your account, licenses, and teams">my account
+        </a>
+      </span></div>
+
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../script/mcneel_accounts_login_status.53c592c69219db2067e789870d0449b68ca1dd6f2fd14733a5fcac75cfdb715e.js"></script>
+<script>
+  const logout = () => {
+        
+        const clientId = window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG";
+        var infoCookie = mca.utilities.getCookieForName("MCA_CLIENT_USER_SESSION_INFO-" + clientId);
+  
+        if (infoCookie)
+          {
+            
+            
+            infoCookie = JSON.parse(infoCookie);
+            const dropdownLogoutUrl = mca.utilities.buildURL("https://developer.rhino3d.com/user/logout", {
+              nonce: infoCookie.nonce,
+              redirect_uri: window.location.href
+            });
+            console.log("dropdownLogoutUrl:", dropdownLogoutUrl)
+            window.location.href = dropdownLogoutUrl;
+          }
+          else{
+          console.log("not logged in");
+          }
+  }
+
+  const toAccount = () => {
+    window.location.href = "https://developer.rhino3d.com/my-account";
+  }
+
+  
+  $('#nav-avatar').click(function(event){
+    event.stopPropagation();
+  });
+
+  $(window).click(function(event) {
+    if(event.target.id == "nav-avatar"){
+      event.stopPropagation();
+    }
+    else{
+      
+      $('#nav-avatar').prop('checked', false); 
+    }
+  });
+</script>
+</div>
+      <div class="outerbox">
+<div class="single-content-area toc-page">
+  
+    
+
+
+    
+
+
+
+
+<script langage="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        $('body').scrollspy({ target: '.toc', offset: 90 });
+        $(window).on('activate.bs.scrollspy', function (e, o) {
+            
+            
+            
+        });
+      });    
+
+</script>
+
+
+<div class="toc">
+    <aside>
+        <div id="toc-top-container" style="
+        text-align: center;
+    ">
+        </div>
+        <header>
+            
+            <a href="index.html">Your First Component (Windows)</a>
+        </header>
+        <nav id="TableOfContents" class="scrollbar">
+                
+<ul class="nav">
+        
+
+        
+        <li class="nav-item" >
+        <a href="index.html#hellograsshopper" class="nav-link">HelloGrasshopper</a>
+        
+
+        
+        <ul class="nav">
+                <li class="nav-item">
+            <a href="index.html#file-new" class="nav-link">File New</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#boilerplate-build" class="nav-link">Boilerplate Build</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#component-anatomy" class="nav-link">Component Anatomy</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#make-changes" class="nav-link">Make Changes</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#debugging" class="nav-link">Debugging</a>
+        
+
+        
+        </li></ul></li><li class="nav-item">
+            <a href="index.html#next-steps" class="nav-link">Next Steps</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#related-topics" class="nav-link">Related topics</a>
+    </li></ul>
+                <div id="toc-bottom-container" style="
+                text-align: center;
+            ">
+                </div>
+        </nav>
+    </aside>
+</div>
+
+  
+  
+  <div class="main-content ">
+    <div id="breadcrumbs">
+    
+    
+        
+    
+        <a href="https://developer.rhino3d.com/en/guides/">Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/">Grasshopper Guides</a> /
+    
+
+</div>
+
+ 
+
+      <div class="feature-title-container">
+        <div class="feature-title">Your First Component (Windows)</div><div class="platform-callout">    
+    
+        
+            <i class="fab fa-windows"></i>  <div class="platform-callout-text">Windows only</div>
+        
+        
+        
+        
+    
+</div></div>
+      <p>
+        
+    <span class="byline">
+        by
+        
+        
+        
+        
+            
+            
+            
+            
+            <a href="https://discourse.mcneel.com/u/dan/">Dan Rigdon-Bel</a> and                              
+        
+            
+            
+            
+            
+            <a href="https://discourse.mcneel.com/u/Callumsykes/">Callum Sykes</a>                              
+         (Last updated:&nbsp;Monday, October 7, 2024)
+  </span>
+  
+</p>
+      
+      
+      <p>It is presumed you already have the necessary tools installed and are ready to go. If you are not there yet, see <a href="../installing-tools-windows/index.html">Installing Tools (Windows)</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="hellograsshopper">HelloGrasshopper<a aria-label="HelloGrasshopper" href="index.html#hellograsshopper"></a></h2>
+<p>We will use the Grasshopper Assembly templates to create a new, basic, component library called HelloGrasshopper.</p>
+<p>If you are familiar with Visual Studio, these step-by-step instructions may be overly detailed for you. The executive summary: create a new project using the Grasshopper Assembly template, build and run, and then make a change.</p>
+<p>We are presuming you have never used Visual Studio before, so we&rsquo;ll go through this one step at a time.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="file-new">File New<a aria-label="File New" href="index.html#file-new"></a></h3>
+<ol>
+<li>If you have not done so already, <strong>launch Visual Studio</strong> (for the purposes of this guide, we are using Visual Studio Community Edition and C#).</li>
+<li>Navigate to <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Project</strong>&hellip;
+<img src="../../../images/your-first-plugin-windows-01.png" alt="File New Project"></li>
+<li>A <strong>Create a new project</strong> wizard should appear. In the <strong>Search for templates</strong> area, search for <code>Grasshopper</code> to filter the results. Find and select the <strong>Grasshopper Assembly for Rhino (C#)</strong> entry and click <strong>Next</strong>.</li>
+<li>For the purposes of this Guide, we will name our demo plugin <em>HelloGrasshopper</em>. In the <strong>Configure your new project</strong> dialog, fill in the <strong>Project name</strong> field. <strong>Browse</strong> and select a location for this project on your disk, then click <strong>Next</strong></li>
+<li>The <em>New Grasshopper Add-On dialog</em> appears. Check the <em>Provide sample code</em> checkbox.
+<img src="../../../images/your-first-component-windows-03.png" alt="New Grasshopper Assembly"></li>
+<li>This is where you fill out information about your first component:
+<ol>
+<li>Add-on display name: the name of component library itself.</li>
+<li>Name: the name of the component as displayed in the ribbon bar and search menus.</li>
+<li>Nickname: the default name of the component when inserted into the canvas.</li>
+<li>Category: name of tab where component icon will be shown.</li>
+<li>Subcategory: name of group inside tab where icon will be shown.</li>
+<li>Description: description shown in tooltip when mouse is over the component icon in the menu.</li>
+</ol>
+</li>
+<li>For the purposes of this guide, let&rsquo;s chek the &ldquo;Provide Sample Code&rdquo;, and then click <strong>Finish</strong>&hellip;</li>
+<li>A <strong>new solution</strong> called <strong>HelloGrasshopper</strong> should open&hellip;
+<img src="../../../images/your-first-component-windows-04.png" alt="HelloGrasshopper Solution"></li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="boilerplate-build">Boilerplate Build<a aria-label="Boilerplate Build" href="index.html#boilerplate-build"></a></h3>
+<ol>
+<li>Before we do anything, let&rsquo;s <strong>build</strong> and <strong>run</strong> HelloGrasshopper to make sure everything is working as expected. We&rsquo;ll just build the boilerplate Plugin template. Click <strong>Start</strong> (play) button in toolbar corner of Visual Studio (or press <strong>F5</strong>) to <strong>Start Debugging</strong>&hellip;
+<img src="https://developer.rhino3d.com/images/your-first-compo-windows-06.png" alt="Start Button"></li>
+<li><strong>Rhinoceros</strong> launches and a moment later, so will <strong>Grasshopper</strong>.</li>
+</ol>
+<div class="details call-out hint open">
+        <div class="details-summary call-out-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>First Debug<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="call-out-content"><em>The first debug may take a while depending on your settings, as Visual Studio downloads debugging files, this is normal.</em></div>
+        </div>
+    </div>
+<ol>
+<li>Navigate to <strong>Curve</strong> &gt; <strong>Primitive</strong> in the components menus. You should see HelloGrasshopper in the list with a blank icon. Drag this onto the canvas. The component will run and some interesting Geometry will appear in the Rhino Viewport.</li>
+<li><strong>Exit</strong> Rhinoceros. This stops the session. Go back to <strong>Visual Studio</strong>. Let&rsquo;s take a look at the&hellip;</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="component-anatomy">Component Anatomy<a aria-label="Component Anatomy" href="index.html#component-anatomy"></a></h3>
+<ol>
+<li>
+<p>Use the <strong>Solution Explorer</strong> to expand the <strong>Solution</strong> (<em>.sln</em>) so that it looks like this&hellip;
+<img src="../../../images/your-first-component-windows-06.png" alt="Grasshopper Component Anatomy"></p>
+<p><em>NOTE</em>: Depending on your edition of Visual Studio, it may look slightly different.</p>
+</li>
+<li>
+<p>The <strong>HelloGrasshopper</strong> project (<em>.csproj</em>) has the same name as its parent solution&hellip;this is the project that was created for us by the <strong>Grasshopper Assembly</strong> template wizard earlier.</p>
+</li>
+<li>
+<p><strong>Dependencies</strong>: Just as with most projects, you will be referencing other libraries. The <strong>Grasshopper Assembly</strong> template added the necessary dependencies to create a custom Grasshopper component.</p>
+</li>
+<li>
+<p><strong>Framework Targets</strong> - The <strong>Grasshopper Assembly</strong> template is multi-targeted so that the correct assemblies are loaded for the correct platforms.</p>
+</li>
+<li>
+<p><strong>Grasshopper</strong> - The referenced Grasshopper Nuget.</p>
+</li>
+<li>
+<p><strong>Properties</strong> contains the <strong>launchSettings.json</strong> file. This file contains all of the debug.</p>
+</li>
+<li>
+<p><strong>HelloGrasshopperInfo.cs</strong> contains the component library information, such as the name, icon, etc.</p>
+</li>
+<li>
+<p><strong>HelloGrasshopperComponent.cs</strong> is where the action is. Let&rsquo;s take a look at this file&hellip;</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="make-changes">Make Changes<a aria-label="Make Changes" href="index.html#make-changes"></a></h3>
+<ol>
+<li>
+<p>Open <strong>HelloGrasshopperComponent.cs</strong> in Visual Studio&rsquo;s Source Editor (if it isn&rsquo;t already).</p>
+</li>
+<li>
+<p>Notice that <code>HelloGrasshopperComponent</code> inherits from <code>GH_Component</code> &hellip;</p>
+<pre><code>public class HelloGrasshopperComponent : GH_Component
+</code></pre>
+</li>
+<li>
+<p>If you hover over <code>GH_Component</code> you will notice this is actually <code>Grasshopper.Kernel.GH_Component</code>.</p>
+</li>
+<li>
+<p><code>HelloGrasshopperComponent</code> also overrides two methods for determining the input and output parameters &hellip;</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#00f">protected</span> <span style="color:#00f">override</span> <span style="color:#00f">void</span> RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#00f">protected</span> <span style="color:#00f">override</span> <span style="color:#00f">void</span> RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+</span></span></code></pre></div><ol start="5">
+<li>The actual work done by the component is to be found in the <code>SolveInstance</code> method&hellip;</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#00f">protected</span> <span style="color:#00f">override</span> <span style="color:#00f">void</span> SolveInstance(IGH_DataAccess DA)
+</span></span></code></pre></div><ol start="6">
+<li>As you can see, this is where the action happens. This boilerplate component creates a spiral on a plane. Just to make sure everything is working, let&rsquo;s change the default plane on which the spiral is constructed. On line<sup id="fnref:1"><a href="index.html#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 67, in <code>SolveInstance</code>, notice that an XY plane is constructed&hellip;</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span>Plane plane = Plane.WorldXY;
+</span></span></code></pre></div><ol start="7">
+<li>Further down in the <code>SolveInstance</code> method, you will notice that the input data is being fed into this plane&hellip;</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#00f">if</span> (!DA.GetData(0, <span style="color:#00f">ref</span> plane)) <span style="color:#00f">return</span>;
+</span></span></code></pre></div><ol start="8">
+<li>Go back to the <code>RegisterInputParams</code>, and find the line where the <em>Plane</em> input is registered. The last argument being fed to the method - <code>Plane.WorldXY</code> - is the default value of the input&hellip;</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span>pManager.AddPlaneParameter(<span style="color:#a31515">&#34;Plane&#34;</span>, <span style="color:#a31515">&#34;P&#34;</span>, <span style="color:#a31515">&#34;Base plane for spiral&#34;</span>, GH_ParamAccess.item, Plane.WorldXY);
+</span></span></code></pre></div><ol start="9">
+<li>Change the default value of the <em>Plane</em> input to be <code>Plane.WorldYZ</code> &hellip;</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span>pManager.AddPlaneParameter(<span style="color:#a31515">&#34;Plane&#34;</span>, <span style="color:#a31515">&#34;P&#34;</span>, <span style="color:#a31515">&#34;Base plane for spiral&#34;</span>, GH_ParamAccess.item, Plane.WorldYZ);
+</span></span></code></pre></div><ol start="10">
+<li>Now let&rsquo;s examine what happens when inputs are given to this component&hellip;</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="debugging">Debugging<a aria-label="Debugging" href="index.html#debugging"></a></h3>
+<ol>
+<li>Set a breakpoint on line<sup id="fnref1:1"><a href="index.html#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 99 of <em>HelloGrasshopperComponent.cs</em>. You set breakpoints in Visual Studio by clicking in the gutter&hellip;
+<img src="../../../images/your-first-component-windows-07.png" alt="Set a breakpoint"></li>
+<li><strong>Build</strong> and <strong>Run</strong>.</li>
+<li>In Grasshopper, place a <em>HelloGrasshopper</em> component on the canvas&hellip;as soon as you do, you should hit your breakpoint and pause&hellip;
+<img src="../../../images/your-first-component-windows-08.png" alt="Hit a breakpoint"></li>
+<li>The reason you hit the breakpoint is because the <code>SolveInstance</code> method was called once initially when the component was placed on the canvas. With Rhino and Grasshopper paused, in <strong>Visual Studio</strong> switch to the <strong>Autos</strong> tab (if it not already there). In the list, find the <code>plane</code> object. Our <code>plane</code> is a <code>Rhino.Geometry.Plane</code> with a value of <code>{Origin=0,0,0 XAxis=0,1,0, YAxis=0,0,1, ZAxis=1,0,0}</code> &hellip;an YZ plane, the default, as expected.</li>
+<li><strong>Continue</strong> in Grasshopper by pressing the <strong>Continue</strong> button in the upper menu of <strong>Visual Studio</strong> (or press <strong>F5</strong>)&hellip;
+<img src="../../../images/your-first-plugin-windows-11.png" alt="Continue Executing"></li>
+<li>Control is passed back to <strong>Grasshopper</strong> and the spiral draws in the Rhino viewport. Now, place an <em>XY Plane</em> component on the canvas and feed it as an input into <em>HelloGrasshopper</em>&rsquo;s <em>Plane</em> input. Notice you hit your breakpoint again, because the <code>SolveInstance</code> is being called now that the input values have changed.</li>
+<li><strong>Exit</strong> Grasshopper and Rhino or <strong>Stop</strong> the debugging session.</li>
+<li><strong>Remove</strong> the breakpoint you created above by clicking on it in the gutter.</li>
+</ol>
+<p><strong>DONE!</strong></p>
+<p><strong>Congratulations!</strong> You have just built your first Grasshopper component for Rhino for Windows. <strong>Now what?</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="next-steps">Next Steps<a aria-label="Next Steps" href="index.html#next-steps"></a></h2>
+<p>You&rsquo;ve built a component library from boilerplate code, but what about putting together a new simple component &ldquo;from scratch&rdquo; and adding it to your project? (Component libraries are made up of multiple components after all). Next, check out the <a href="../simple-component/index.html">Simple Component</a> guide.</p>
+<p>Try debugging your new grasshopper plugin on <a href="../your-first-component-mac/index.html">Mac</a>, all plugins using the new templates are now cross-platform by default.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="related-topics">Related topics<a aria-label="Related topics" href="index.html#related-topics"></a></h2>
+<ul>
+<li><a href="../installing-tools-windows/index.html">Installing Tools (Windows)</a></li>
+<li><a href="../simple-component/index.html">Simple Component</a></li>
+</ul>
+<p><strong>Footnotes</strong></p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><strong>Line numbers</strong> in Visual Studio can be enabled and disabled in <strong>Tools</strong> &gt; <strong>Options&hellip;</strong> &gt; <strong>Text Editor</strong> section &gt; <strong>All Languages</strong> entry &gt; <strong>General</strong> sub-entry &gt; <strong>Settings</strong> subsection &gt; check <strong>Line numbers</strong>. Click <strong>OK</strong> to close the <strong>Options</strong> dialog.&#160;<a href="index.html#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="index.html#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<span class="mcneel_only hidden">
+    <div style="text-align: center;">
+        <div class="editdropdown" style="text-align: left;">
+            <button class="editbutton"><div class="fas fa-pencil-alt"></div> Edit this page</button>
+            <div class="editdropdown-content">
+                
+                
+                <a href="https://github.com/mcneel/developer.rhino3d.com/edit/master/content/en/guides/grasshopper/your-first-component-windows/index.md" target="_blank" rel="noopener noreferrer"><div class="fab fa-github"></div> Edit on GitHub</a>
+                <a href="https://github.com/mcneel/developer.rhino3d.com/commits/master/content/en/guides/grasshopper/your-first-component-windows/index.md" target="_blank" rel="noopener noreferrer"><div class="fas fa-history"></div> History</a>
+                <a href="https://developer.rhino3d.com/admin" target="_blank"><div class="fas fa-cog"></div> Admin</a>
+            </div>
+        </div>
+    </div>
+</span>
+  </div>
+</div><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha384-a4pIV46KBffvdjRuStQik2G6mPrTxdtAiZFQCdpsP4fyplWNoQ7fXlLMiIGcAP+M" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/vbnet.min.js" integrity="sha384-EN9fHTs/Ki0RX5/vXR4Y2Qb0XnV2+j2GVj86nencgtJYbNlNanf3ogcbPVkgFKBf" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/yaml.min.js" integrity="sha384-vLBVpaJcrTRsLBHhkvU9neJTiLqRgYWBnEg3o4eLgTKw1+hWbSr/QaNuSB9XWftA" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/powershell.min.js" integrity="sha384-5dY/Kkeznu4IIDRQyT6jL9e1XwSy39f1/sqYLFifcz2CfKQe9AunCsb7lBEeMh+f" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../script/highlightjs-line-numbers.1b36d98c62cb9f88ab73b1b24041fe3ba7331949ff54dd3737d99f5e362a8abb.js"></script>
+
+<script>hljs.highlightAll();</script>
+<script>hljs.initLineNumbersOnLoad();</script>
+
+
+<script type="text/javascript" src="../../../script/copy-code.d299324970feb9b7a8b27c988252faacbbb6adb5658c8de5c3378ba9844c7845.js"></script>
+
+<script>
+    function openCodeTab(evt, tabName) {
+      
+      var i, tabcontent, tablinks;
+      
+      
+      var matches = tabName.match(/\d+$/); 
+      var tabCounter = "";
+      if (matches)
+        tabCounter = matches[0];
+      
+      
+      tabcontent = document.getElementsByClassName("codetab-content" + tabCounter);
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      
+      tablinks = document.getElementsByClassName("tablinks" + tabCounter);
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  
+    
+    var defaultTabs = document.querySelectorAll(`*[id^="defaultOpen"]`);
+    defaultTabs.forEach(element => {
+      element.click();
+    });
+
+</script>
+<div class="footer footer-area">
+    <div class="footer-columns">
+        <div class="footer-column footer-left default"><a href="https://www.rhino3d.com/sales">Find a Reseller</a></div>
+        <div class="footer-column footer-left skin-napa">
+            <a href="https://www.rhino3d.com/store">Shop online</a>
+            or find a
+            <a href="https://www.rhino3d.com/sales">Reseller</a>
+        </div>
+        <div class="footer-column footer-left skin-not-napa">
+            <a href="https://www.rhino3d.com/sales">Find a Reseller</a>
+        </div>
+        <div class="footer-column footer-right">           
+                <a href="https://www.rhino3d.com/privacy">Privacy Policy</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/about">About</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/contact">Contact Us</a> &bull;
+                <a href="https://www.rhino3d.com/language" title="Change to a different region or language">
+                    Language</a>            
+        </div>
+    </div>    
+    <div class="footer-middle">       
+        <a href="https://www.rhino3d.com/mcneel/about" alt="About McNeel">Copyright © 1993-2026 Robert McNeel &amp; Associates. All Rights Reserved.</a>
+    </div>
+    <div class="footer-middle">
+        <a href="https://www.facebook.com/McNeelRhinoceros/" aria-label="Facebook" class="fab fa-facebook" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        
+        <a href="https://www.linkedin.com/groups/75313/" aria-label="LinkedIn" class="fab fa-linkedin" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://www.youtube.com/user/RhinoGuide/videos" aria-label="YouTube" class="fab fa-youtube" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://vimeo.com/rhino" aria-label="Vimeo" class="fab fa-vimeo" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="http://blog.rhino3d.com/" aria-label="Blogger" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Blogger icon" src="../../../images/blogger.svg"></a>
+        <a href="https://www.food4rhino.com" aria-label="Food4Rhino" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Food4Rhino" src="../../../images/f4r_icon_01.svg" height="32" width="32"></a>
+    </div>
+</div>
+      </div><script type="text/javascript" src="../../../script/jquery-3.5.1.min.f7f6a5894f1d19ddad6fa392b2ece2c5e578cbf7da4ea805b6885eb6985b6e3d.js"></script>
+<script type="text/javascript" src="../../../script/jquery-ui.min.793cb14b4ae48e92c4a35eae5d34b4b95092e3cd7995ce342b6895a560ef7526.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="../../../script/rhino.05c268ec655ef5ff95646d1f4c93dd13f833bb83b30ad95a68bbd8a7f15f9d26.js"></script>
+
+<script type="text/javascript" src="../../../script/protocolcheck.e5a8f6d34595c946cfc9f84fce91cd8fb625ce62380441a75d5de802cc2819e4.js"></script>
+<script type="text/javascript" src="../../../script/theme.55f13be26c834445d530dbfb196c7a9ef2692979b20258caa03793331a316a0e.js"></script>
+<script>
+    mca.addLogoutListenerForClientId(window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG", function (url) {
+      console.log("Redirecting to logout URL: " + url);
+      window.location.href = url;
+    });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-512742-1" crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-512742-1');
+</script>
+<script type="text/javascript" async
+src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<script type="text/javascript" src="../../../script/anchor.min.1384657f1c322559a4924d2ccf0ecb609c6e3e5a7a7afb4f4810e5587b1860bf.js"></script>
+<script>
+	
+	(function () {
+		'use strict';
+		anchors.options.placement = 'right';
+		anchors.add();
+		}
+	)();
+</script>
+
+
+
+
+    
+  </body>
+</html>

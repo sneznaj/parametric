@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="rendering, raytracing, radiosity, computer graphics, NURBS, CAD, CAM, CAE, computer aided design, design, modeling, 3DM, Rhino, AutoCAD, AccuRender, DWG, DXF" http-equiv="Keywords" />
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    <link href="../../../images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../../images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+   
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto+Mono' type='text/css' media="all" />
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github.min.css">
+    
+    
+    
+    <link rel="stylesheet" href="../../../scss/style.min.4515315bf66c3671b457c25338ed76b899746b6d65c438664f0f87f5ea2fbfbb.css">
+    
+    
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-brands-400.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-solid-900.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="https://developer.rhino3d.com/webfonts/fa-regular-400.woff2" crossorigin="anonymous"/>
+
+    
+<title>Rhino - List Components</title>
+
+
+<meta name="description" content="Rhinoceros 3D: This guide demonstrates how to operate on more than one item at a time."> 
+<meta name="author" content="Robert McNeel &amp; Associates">
+
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://developer.rhino3d.com/en/guides/grasshopper/list-components/" />
+<meta property="og:title" content="List Components" />
+<meta property="og:description" content="This guide demonstrates how to operate on more than one item at a time." />
+<meta property="og:site_name" content="www.rhino3d.com"/>
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+<meta name="twitter:domain" value="rhino3d.com" />
+<meta name="twitter:title" value="List Components" />
+<meta name="twitter:description" value="This guide demonstrates how to operate on more than one item at a time." />
+
+
+
+
+
+  
+
+
+
+
+<meta name="twitter:url" value="https://developer.rhino3d.com/en/guides/grasshopper/list-components/" />
+<meta name="application-name" content="Rhino Developer Docs">
+<meta name="apple-mobile-web-app-title" content="Rhino Developer Docs"></head>
+
+
+  
+
+  <body>
+  
+     
+      <div id="mask"></div><div class='heading header-area'><div id="navbar">
+  <div id="wrap">
+    
+    <div id="sitesearch">
+      
+      
+      
+      <form id="cref" action="https://developer.rhino3d.com/searchresults/">
+        <label for="search"><input id="searchtext" type="text" name="q" size="24" value="" placeholder="search" /></label>  
+        <input class="searchBox" type="submit" name="sa" size="2" aria-label="Search" value=" "/>
+      </form>
+    </div>
+
+    
+    <div id="logo-container">
+      <div id="logo-inner-container">
+        <div id="logo-title-text">
+          <a href="https://developer.rhino3d.com/"><span id="logo-title-text-primary">Rhino</span><span id="logo-title-text-secondary">Developer</span><sup id="protected-mark">®</sup></a>
+        </div>
+        <div id="logo-subtitle">
+          <a href="https://developer.rhino3d.com/"><span class="logo-text-secondary">design, model, present, analyze, realize...</span></a>
+        </div>
+        
+        <a href="https://developer.rhino3d.com/"><img id="site-nav-logo" src="../../../images/rhinodevlogo.png" alt="Rhino Logo"/></a>
+        <div class="clear"></div>
+      </div>
+      <div class="overlayMenuIcon" id="theoverlayMenuIcon">
+        <span onclick="toggleMenu()"><i class="fa fa-bars" id="menuToggleIcon" style="color: #c2c2c2; font-size: 2.5em"></i></span>
+      </div>
+    </div>
+
+    
+    <div class="menu-items" id="theMenuItems">
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/guides" target="_self">Guides</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/samples" target="_self">Samples</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/api" target="_self">API</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/videos" target="_self">Videos</a>
+        
+          
+        
+        <a class="menu-item" href="https://discourse.mcneel.com/c/rhino-developer" target="_blank">Community</a><span class="logged_in">
+        <a href="https://www.rhino3d.com/my-account/" title="Manage your account, licenses, and teams">my account
+        </a>
+      </span></div>
+
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../script/mcneel_accounts_login_status.53c592c69219db2067e789870d0449b68ca1dd6f2fd14733a5fcac75cfdb715e.js"></script>
+<script>
+  const logout = () => {
+        
+        const clientId = window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG";
+        var infoCookie = mca.utilities.getCookieForName("MCA_CLIENT_USER_SESSION_INFO-" + clientId);
+  
+        if (infoCookie)
+          {
+            
+            
+            infoCookie = JSON.parse(infoCookie);
+            const dropdownLogoutUrl = mca.utilities.buildURL("https://developer.rhino3d.com/user/logout", {
+              nonce: infoCookie.nonce,
+              redirect_uri: window.location.href
+            });
+            console.log("dropdownLogoutUrl:", dropdownLogoutUrl)
+            window.location.href = dropdownLogoutUrl;
+          }
+          else{
+          console.log("not logged in");
+          }
+  }
+
+  const toAccount = () => {
+    window.location.href = "https://developer.rhino3d.com/my-account";
+  }
+
+  
+  $('#nav-avatar').click(function(event){
+    event.stopPropagation();
+  });
+
+  $(window).click(function(event) {
+    if(event.target.id == "nav-avatar"){
+      event.stopPropagation();
+    }
+    else{
+      
+      $('#nav-avatar').prop('checked', false); 
+    }
+  });
+</script>
+</div>
+      <div class="outerbox">
+<div class="single-content-area toc-page">
+  
+    
+
+
+    
+
+
+
+
+<script langage="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        $('body').scrollspy({ target: '.toc', offset: 90 });
+        $(window).on('activate.bs.scrollspy', function (e, o) {
+            
+            
+            
+        });
+      });    
+
+</script>
+
+
+<div class="toc">
+    <aside>
+        <div id="toc-top-container" style="
+        text-align: center;
+    ">
+        </div>
+        <header>
+            
+            <a href="index.html">List Components</a>
+        </header>
+        <nav id="TableOfContents" class="scrollbar">
+                
+<ul class="nav">
+        
+
+        
+        <li class="nav-item" >
+        <a href="index.html#overview" class="nav-link">Overview</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#list-parameters" class="nav-link">List Parameters</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#solving-routine" class="nav-link">Solving Routine</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#related-topics" class="nav-link">Related Topics</a>
+    </li></ul>
+                <div id="toc-bottom-container" style="
+                text-align: center;
+            ">
+                </div>
+        </nav>
+    </aside>
+</div>
+
+  
+  
+  <div class="main-content ">
+    <div id="breadcrumbs">
+    
+    
+        
+    
+        <a href="https://developer.rhino3d.com/en/guides/">Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/">Grasshopper Guides</a> /
+    
+
+</div>
+
+ 
+
+      <div class="feature-title-container">
+        <div class="feature-title">List Components</div><div class="platform-callout">    
+    
+        
+        
+        
+        
+    
+</div></div>
+      <p>
+        
+    <span class="byline">
+        by
+        
+        
+        
+        
+            
+            
+            
+              
+            <a href="https://discourse.mcneel.com/u/davidrutten/">David Rutten</a>                              
+         (Last updated:&nbsp; Wednesday, December 5, 2018)
+  </span>
+  
+</p>
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="overview">Overview<a aria-label="Overview" href="index.html#overview"></a></h2>
+<p>So far the example components have all operated on individual data items.  This is known as One-In-One-Out.  But what if you want to operate on more than one item at a time; One-In-Many-Out, Many-In-One-Out or Many-In-Many-Out?  This requires that input or output parameters have a non-standard <a href="https://developer.rhino3d.com/api/grasshopper/html/T_Grasshopper_Kernel_GH_ParamAccess.htm">Grasshopper.Kernel.GH_ParamAccess</a> flag.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="list-parameters">List Parameters<a aria-label="List Parameters" href="index.html#list-parameters"></a></h2>
+<p>Input and Output parameters that are part of Grasshopper components have an access flag that affects how the component treats data stored in these parameters.  Take for example the Polyline component.  It creates a single polyline object from a <em>collection</em> of corner-points.  This is a Many-In-One-Out kind of logic.  The Divide component creates a whole bunch of division points from a single curve. This is an example of One-In-Many-Out.  The Cull components remove certain items from lists, this is an example of Many-In-Many-Out.</p>
+<p>Most components treat their inputs and outputs as parameters that provide individual instances of data, rather than related collections of data.  This is indicated by all parameters having an <a href="https://developer.rhino3d.com/api/grasshopper/html/T_Grasshopper_Kernel_GH_ParamAccess.htm">GH_ParamAccess.item</a> access flag.  You can however assign different access flags to parameters.  Preferably this flag should be assigned only once, namely in the <a href="https://developer.rhino3d.com/api/grasshopper/html/M_Grasshopper_Kernel_GH_Component_RegisterInputParams.htm">RegisterInputParams</a> or <a href="https://developer.rhino3d.com/api/grasshopper/html/M_Grasshopper_Kernel_GH_Component_RegisterOutputParams.htm">RegisterOutputParams</a> method overrides.  It is legal to modify an access flag as long as a solution is not currently in progress, but it is not recommended.</p>
+<p>In this guide, we&rsquo;ll be writing a component that removes (culls) the bottom-most N objects in a collection of geometric shapes.  As inputs we&rsquo;ll need a collection of geometry and an integer indicating how many objects the user wants to remove, and as output we&rsquo;ll provide the same collection of geometry, but with the bottom-most objects missing.  This is therefore a Many-In-Many-Out case.</p>
+<p>The Component code (without the <code>RegisterInputParams</code>, <code>RegisterOutputParams</code> and <code>SolveInstance</code> methods) may look like this:</p>
+<div class="codetab">
+  <button class="tablinks" onclick="openCodeTab(event, 'cs')" id="defaultOpen">C#</button>
+  <button class="tablinks" onclick="openCodeTab(event, 'vb')">VB.NET</button>
+</div>
+<div class="tab-content">
+<div class="codetab-content" id="cs">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Component_CullByElevation</span> : GH_Component
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">public</span> Component_CullByElevation()
+</span></span><span style="display:flex;"><span>    : <span style="color:#00f">base</span>(<span style="color:#a31515">&#34;Cull Elevation&#34;</span>, <span style="color:#a31515">&#34;CullZ&#34;</span>, <span style="color:#a31515">&#34;Cull objects by relative elevation&#34;</span>, <span style="color:#a31515">&#34;Sets&#34;</span>, <span style="color:#a31515">&#34;Sequence&#34;</span>)
+</span></span><span style="display:flex;"><span>  { }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">public</span> <span style="color:#00f">override</span> Kernel.GH_Exposure Exposure
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">get</span> { <span style="color:#00f">return</span> GH_Exposure.primary | GH_Exposure.obscure; }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">public</span> <span style="color:#00f">override</span> System.Guid ComponentGuid
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">get</span> { <span style="color:#00f">return</span> <span style="color:#00f">new</span> Guid(<span style="color:#a31515">&#34;{A8FF9CBA-0837-4cd6-9198-0D17325D3F8F}&#34;</span>); }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//...additional component code will go here..</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></div>
+<div class="codetab-content" id="vb">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vbnet" data-lang="vbnet"><span style="display:flex;"><span><span style="color:#00f">Public</span> <span style="color:#00f">Class</span> <span style="color:#2b91af">Component_CullByElevation</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">Inherits</span> GH_Component
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">Public</span> <span style="color:#00f">Sub</span> New()
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">MyBase</span>.New(<span style="color:#a31515">&#34;Cull Elevation&#34;</span>, <span style="color:#a31515">&#34;CullZ&#34;</span>, <span style="color:#a31515">&#34;Cull objects by relative elevation&#34;</span>, <span style="color:#a31515">&#34;Sets&#34;</span>, <span style="color:#a31515">&#34;Sequence&#34;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">End</span> <span style="color:#00f">Sub</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">Protected</span> <span style="color:#00f">Overrides</span> <span style="color:#00f">ReadOnly</span> <span style="color:#00f">Property</span> Icon() <span style="color:#00f">As</span> System.Drawing.Bitmap
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">Get</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">Return</span> My.Resources.TheIconNameForThisComponent
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">End</span> <span style="color:#00f">Get</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">End</span> <span style="color:#00f">Property</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">Public</span> <span style="color:#00f">Overrides</span> <span style="color:#00f">ReadOnly</span> <span style="color:#00f">Property</span> Exposure() <span style="color:#00f">As</span> Kernel.GH_Exposure
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">Get</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">Return</span> GH_Exposure.primary <span style="color:#00f">Or</span> GH_Exposure.obscure
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">End</span> <span style="color:#00f">Get</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">End</span> <span style="color:#00f">Property</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">Public</span> <span style="color:#00f">Overrides</span> <span style="color:#00f">ReadOnly</span> <span style="color:#00f">Property</span> ComponentGuid() <span style="color:#00f">As</span> System.Guid
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">Get</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">Return</span> <span style="color:#00f">New</span> Guid(<span style="color:#a31515">&#34;{A8FF9CBA-0837-4cd6-9198-0D17325D3F8F}&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">End</span> <span style="color:#00f">Get</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">End</span> <span style="color:#00f">Property</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;...further example code will come here...
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">End</span> <span style="color:#00f">Class</span>
+</span></span></code></pre></div></div>
+</div>
+<p>We&rsquo;ll need to register the parameters as well, and we&rsquo;ll use the overloaded methods to immediately assign the correct parameter access flags&hellip;</p>
+<div class="codetab">
+  <button class="tablinks1" onclick="openCodeTab(event, 'cs1')" id="defaultOpen1">C#</button>
+  <button class="tablinks1" onclick="openCodeTab(event, 'vb1')">VB.NET</button>
+</div>
+<div class="tab-content">
+<div class="codetab-content1" id="cs1">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#00f">protected</span> <span style="color:#00f">override</span> <span style="color:#00f">void</span> RegisterInputParams(Kernel.GH_Component.GH_InputParamManager pManager)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  pManager.AddGeometryParameter(<span style="color:#a31515">&#34;Geometry&#34;</span>, <span style="color:#a31515">&#34;G&#34;</span>, <span style="color:#a31515">&#34;Geometry to cull&#34;</span>, GH_ParamAccess.list);
+</span></span><span style="display:flex;"><span>  pManager.AddIntegerParameter(<span style="color:#a31515">&#34;Count&#34;</span>, <span style="color:#a31515">&#34;C&#34;</span>, <span style="color:#a31515">&#34;Number of objects to cull&#34;</span>, GH_ParamAccess.item, 1);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#00f">protected</span> <span style="color:#00f">override</span> <span style="color:#00f">void</span> RegisterOutputParams(Kernel.GH_Component.GH_OutputParamManager pManager)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  pManager.AddGeometryParameter(<span style="color:#a31515">&#34;Geometry&#34;</span>, <span style="color:#a31515">&#34;G&#34;</span>, <span style="color:#a31515">&#34;Culled geometry&#34;</span>, GH_ParamAccess.list);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></div>
+<div class="codetab-content1" id="vb1">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vbnet" data-lang="vbnet"><span style="display:flex;"><span><span style="color:#00f">Protected</span> <span style="color:#00f">Overrides</span> <span style="color:#00f">Sub</span> RegisterInputParams(<span style="color:#00f">ByVal</span> pManager <span style="color:#00f">As</span> Kernel.GH_Component.GH_InputParamManager)
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;list access is non-standard, so we need to specifically assign it.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  pManager.AddGeometryParameter(<span style="color:#a31515">&#34;Geometry&#34;</span>, <span style="color:#a31515">&#34;G&#34;</span>, <span style="color:#a31515">&#34;Geometry to cull&#34;</span>, GH_ParamAccess.list)
+</span></span><span style="display:flex;"><span>  pManager.AddIntegerParameter(<span style="color:#a31515">&#34;Count&#34;</span>, <span style="color:#a31515">&#34;C&#34;</span>, <span style="color:#a31515">&#34;Number of objects to cull&#34;</span>, GH_ParamAccess.item, 1)
+</span></span><span style="display:flex;"><span><span style="color:#00f">End</span> <span style="color:#00f">Sub</span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">Protected</span> <span style="color:#00f">Overrides</span> <span style="color:#00f">Sub</span> RegisterOutputParams(<span style="color:#00f">ByVal</span> pManager <span style="color:#00f">As</span> Kernel.GH_Component.GH_OutputParamManager)
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;Again, we need to specify list access as that is not default.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  pManager.AddGeometryParameter(<span style="color:#a31515">&#34;Geometry&#34;</span>, <span style="color:#a31515">&#34;G&#34;</span>, <span style="color:#a31515">&#34;Culled geometry&#34;</span>, GH_ParamAccess.list)
+</span></span><span style="display:flex;"><span><span style="color:#00f">End</span> <span style="color:#00f">Sub</span>
+</span></span></code></pre></div></div>
+</div>
+<p>Input parameters rigorously enforce their access.  You are only allowed to retrieve individual items from inputs that have the <a href="https://developer.rhino3d.com/api/grasshopper/html/T_Grasshopper_Kernel_GH_ParamAccess.htm">GH_ParamAccess.item</a> flag set.  Lists can only be retrieved when the access is set to <code>GH_ParamAccess.list</code> and data trees can only be gotten from a <code>GH_ParamAccess.tree</code> parameter.  Failure to do so will result in an error message at runtime.  Output parameter are more flexible, but this is only because output access was added only in Grasshopper 0.9.0001 and strict enforcement would result in SDK breakage with previous versions.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="solving-routine">Solving Routine<a aria-label="Solving Routine" href="index.html#solving-routine"></a></h2>
+<p>The <code>SolveInstance</code> implementation is basically identical to previous examples, the only difference is the way the component interacts with the parameters&hellip;</p>
+<div class="codetab">
+  <button class="tablinks2" onclick="openCodeTab(event, 'cs2')" id="defaultOpen2">C#</button>
+  <button class="tablinks2" onclick="openCodeTab(event, 'vb2')">VB.NET</button>
+</div>
+<div class="tab-content">
+<div class="codetab-content2" id="cs2">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#00f">protected</span> <span style="color:#00f">override</span> <span style="color:#00f">void</span> SolveInstance(Kernel.IGH_DataAccess DA)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//Declare a new List(Of T) to hold your data.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//This list must exist and should probably be empty.</span>
+</span></span><span style="display:flex;"><span>  List&lt;IGH_GeometricGoo&gt; geometry = <span style="color:#00f">new</span> List&lt;IGH_GeometricGoo&gt;();
+</span></span><span style="display:flex;"><span>  Int32 count = 0;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//Retrieve the whole list using Da.GetDataList().</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">if</span> ((!DA.GetDataList(0, geometry)))
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">return</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">if</span> ((!DA.GetData(1, count)))
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//Validate inputs.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">if</span> ((count &lt; 0))
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    AddRuntimeMessage(GH_RuntimeMessageLevel.Error, <span style="color:#a31515">&#34;Count must be a positive integer&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">return</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//The number of objects to cull is larger than or</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//equal to the total number of objects. I.e. cull them all.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">if</span> ((geometry.Count &lt;= count))
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//Iteratively remove the lowest object from the list.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">for</span> (Int32 N = 1; N &lt;= count; N++)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#2b91af">double</span> lowestElevation = <span style="color:#2b91af">double</span>.MaxValue;
+</span></span><span style="display:flex;"><span>    Int32 lowestIndex = -1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">//Iterate over all remaining geometry and find the lowest one.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">for</span> (Int32 i = 0; i &lt;= geometry.Count - 1; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> ((geometry[i] == <span style="color:#00f">null</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">continue</span>;
+</span></span><span style="display:flex;"><span>      BoundingBox bbox = geometry[i].Boundingbox;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> ((!bbox.IsValid))
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">continue</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#2b91af">double</span> localElevation = bbox.Min.Z;
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">if</span> ((localElevation &lt; lowestElevation))
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        lowestElevation = localElevation;
+</span></span><span style="display:flex;"><span>        lowestIndex = i;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">//Delete the lowest object.</span>
+</span></span><span style="display:flex;"><span>    geometry.RemoveAt(lowestIndex);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//Assign the remaining geometry</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//(even if it is only a single item!)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">//using the DA.SetDataList() method.</span>
+</span></span><span style="display:flex;"><span>  DA.SetDataList(0, geometry);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></div>
+<div class="codetab-content2" id="vb2">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vbnet" data-lang="vbnet"><span style="display:flex;"><span><span style="color:#00f">Protected</span> <span style="color:#00f">Overrides</span> <span style="color:#00f">Sub</span> SolveInstance(<span style="color:#00f">ByVal</span> DA <span style="color:#00f">As</span> Kernel.IGH_DataAccess)
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;Declare a new List(Of T) to hold your data.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#008000">&#39;This list cannot be a null reference.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#00f">Dim</span> geometry <span style="color:#00f">As</span> <span style="color:#00f">New</span> List(<span style="color:#00f">Of</span> IGH_GeometricGoo)
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">Dim</span> count <span style="color:#00f">As</span> Int32 = 0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;Retrieve the whole list using DA.GetDataList().
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#00f">If</span> (<span style="color:#00f">Not</span> DA.GetDataList(0, geometry)) <span style="color:#00f">Then</span> <span style="color:#00f">Return</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">If</span> (<span style="color:#00f">Not</span> DA.GetData(1, count)) <span style="color:#00f">Then</span> <span style="color:#00f">Return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;Validate inputs.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#00f">If</span> (count &lt; 0) <span style="color:#00f">Then</span>
+</span></span><span style="display:flex;"><span>    AddRuntimeMessage(GH_RuntimeMessageLevel.Error, <span style="color:#a31515">&#34;Count must be a positive integer&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">Return</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">End</span> <span style="color:#00f">If</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;The number of objects to cull is larger than or
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#008000">&#39;equal to the total number of objects. I.e. cull them all.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#00f">If</span> (geometry.Count &lt;= count) <span style="color:#00f">Then</span> <span style="color:#00f">Return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;Iteratively remove the lowest object from the list.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  <span style="color:#00f">For</span> N <span style="color:#00f">As</span> Int32 = 1 <span style="color:#00f">To</span> count
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">Dim</span> lowestElevation <span style="color:#00f">As</span> <span style="color:#2b91af">Double</span> = <span style="color:#2b91af">Double</span>.MaxValue
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">Dim</span> lowestIndex <span style="color:#00f">As</span> Int32 = -1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">&#39;Iterate over all remaining geometry and find the lowest one.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>    <span style="color:#00f">For</span> i <span style="color:#00f">As</span> Int32 = 0 <span style="color:#00f">To</span> geometry.Count - 1
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">If</span> (geometry(i) <span style="color:#00f">Is</span> <span style="color:#00f">Nothing</span>) <span style="color:#00f">Then</span> <span style="color:#00f">Continue</span> <span style="color:#00f">For</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">Dim</span> bbox <span style="color:#00f">As</span> BoundingBox = geometry(i).Boundingbox
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">If</span> (<span style="color:#00f">Not</span> bbox.IsValid) <span style="color:#00f">Then</span> <span style="color:#00f">Continue</span> <span style="color:#00f">For</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">Dim</span> localElevation <span style="color:#00f">As</span> <span style="color:#2b91af">Double</span> = bbox.Min.Z
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">If</span> (localElevation &lt; lowestElevation) <span style="color:#00f">Then</span>
+</span></span><span style="display:flex;"><span>        lowestElevation = localElevation
+</span></span><span style="display:flex;"><span>        lowestIndex = i
+</span></span><span style="display:flex;"><span>      <span style="color:#00f">End</span> <span style="color:#00f">If</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">Next</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000">&#39;Delete the lowest object.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>    <span style="color:#00f">If</span> (lowestIndex &gt;= 0) <span style="color:#00f">Then</span> geometry.RemoveAt(lowestIndex)
+</span></span><span style="display:flex;"><span>  <span style="color:#00f">Next</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000">&#39;Assign the remaining geometry using the DA.SetDataList() method.
+</span></span></span><span style="display:flex;"><span><span style="color:#008000"></span>  DA.SetDataList(0, geometry)
+</span></span><span style="display:flex;"><span><span style="color:#00f">End</span> <span style="color:#00f">Sub</span>
+</span></span></code></pre></div></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="related-topics">Related Topics<a aria-label="Related Topics" href="index.html#related-topics"></a></h2>
+<ul>
+<li><a href="../what-is-a-grasshopper-component/index.html">What is a Grasshopper Component?</a></li>
+<li><a href="../your-first-component-windows/index.html">Your First Component</a></li>
+<li><a href="../simple-component/index.html">Simple Component</a></li>
+<li><a href="../simple-mathematics-component/index.html">Simple Mathematics Component</a></li>
+<li><a href="../simple-geometry-component/index.html">Simple Geometry Component</a></li>
+</ul>
+<span class="mcneel_only hidden">
+    <div style="text-align: center;">
+        <div class="editdropdown" style="text-align: left;">
+            <button class="editbutton"><div class="fas fa-pencil-alt"></div> Edit this page</button>
+            <div class="editdropdown-content">
+                
+                
+                <a href="https://github.com/mcneel/developer.rhino3d.com/edit/master/content/en/guides/grasshopper/list-components/index.md" target="_blank" rel="noopener noreferrer"><div class="fab fa-github"></div> Edit on GitHub</a>
+                <a href="https://github.com/mcneel/developer.rhino3d.com/commits/master/content/en/guides/grasshopper/list-components/index.md" target="_blank" rel="noopener noreferrer"><div class="fas fa-history"></div> History</a>
+                <a href="https://developer.rhino3d.com/admin" target="_blank"><div class="fas fa-cog"></div> Admin</a>
+            </div>
+        </div>
+    </div>
+</span>
+  </div>
+</div><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha384-a4pIV46KBffvdjRuStQik2G6mPrTxdtAiZFQCdpsP4fyplWNoQ7fXlLMiIGcAP+M" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/vbnet.min.js" integrity="sha384-EN9fHTs/Ki0RX5/vXR4Y2Qb0XnV2+j2GVj86nencgtJYbNlNanf3ogcbPVkgFKBf" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/yaml.min.js" integrity="sha384-vLBVpaJcrTRsLBHhkvU9neJTiLqRgYWBnEg3o4eLgTKw1+hWbSr/QaNuSB9XWftA" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/powershell.min.js" integrity="sha384-5dY/Kkeznu4IIDRQyT6jL9e1XwSy39f1/sqYLFifcz2CfKQe9AunCsb7lBEeMh+f" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../script/highlightjs-line-numbers.1b36d98c62cb9f88ab73b1b24041fe3ba7331949ff54dd3737d99f5e362a8abb.js"></script>
+
+<script>hljs.highlightAll();</script>
+<script>hljs.initLineNumbersOnLoad();</script>
+
+
+<script type="text/javascript" src="../../../script/copy-code.d299324970feb9b7a8b27c988252faacbbb6adb5658c8de5c3378ba9844c7845.js"></script>
+
+<script>
+    function openCodeTab(evt, tabName) {
+      
+      var i, tabcontent, tablinks;
+      
+      
+      var matches = tabName.match(/\d+$/); 
+      var tabCounter = "";
+      if (matches)
+        tabCounter = matches[0];
+      
+      
+      tabcontent = document.getElementsByClassName("codetab-content" + tabCounter);
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      
+      tablinks = document.getElementsByClassName("tablinks" + tabCounter);
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  
+    
+    var defaultTabs = document.querySelectorAll(`*[id^="defaultOpen"]`);
+    defaultTabs.forEach(element => {
+      element.click();
+    });
+
+</script>
+<div class="footer footer-area">
+    <div class="footer-columns">
+        <div class="footer-column footer-left default"><a href="https://www.rhino3d.com/sales">Find a Reseller</a></div>
+        <div class="footer-column footer-left skin-napa">
+            <a href="https://www.rhino3d.com/store">Shop online</a>
+            or find a
+            <a href="https://www.rhino3d.com/sales">Reseller</a>
+        </div>
+        <div class="footer-column footer-left skin-not-napa">
+            <a href="https://www.rhino3d.com/sales">Find a Reseller</a>
+        </div>
+        <div class="footer-column footer-right">           
+                <a href="https://www.rhino3d.com/privacy">Privacy Policy</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/about">About</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/contact">Contact Us</a> &bull;
+                <a href="https://www.rhino3d.com/language" title="Change to a different region or language">
+                    Language</a>            
+        </div>
+    </div>    
+    <div class="footer-middle">       
+        <a href="https://www.rhino3d.com/mcneel/about" alt="About McNeel">Copyright © 1993-2026 Robert McNeel &amp; Associates. All Rights Reserved.</a>
+    </div>
+    <div class="footer-middle">
+        <a href="https://www.facebook.com/McNeelRhinoceros/" aria-label="Facebook" class="fab fa-facebook" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        
+        <a href="https://www.linkedin.com/groups/75313/" aria-label="LinkedIn" class="fab fa-linkedin" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://www.youtube.com/user/RhinoGuide/videos" aria-label="YouTube" class="fab fa-youtube" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://vimeo.com/rhino" aria-label="Vimeo" class="fab fa-vimeo" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="http://blog.rhino3d.com/" aria-label="Blogger" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Blogger icon" src="../../../images/blogger.svg"></a>
+        <a href="https://www.food4rhino.com" aria-label="Food4Rhino" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Food4Rhino" src="../../../images/f4r_icon_01.svg" height="32" width="32"></a>
+    </div>
+</div>
+      </div><script type="text/javascript" src="../../../script/jquery-3.5.1.min.f7f6a5894f1d19ddad6fa392b2ece2c5e578cbf7da4ea805b6885eb6985b6e3d.js"></script>
+<script type="text/javascript" src="../../../script/jquery-ui.min.793cb14b4ae48e92c4a35eae5d34b4b95092e3cd7995ce342b6895a560ef7526.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="../../../script/rhino.05c268ec655ef5ff95646d1f4c93dd13f833bb83b30ad95a68bbd8a7f15f9d26.js"></script>
+
+<script type="text/javascript" src="../../../script/protocolcheck.e5a8f6d34595c946cfc9f84fce91cd8fb625ce62380441a75d5de802cc2819e4.js"></script>
+<script type="text/javascript" src="../../../script/theme.55f13be26c834445d530dbfb196c7a9ef2692979b20258caa03793331a316a0e.js"></script>
+<script>
+    mca.addLogoutListenerForClientId(window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG", function (url) {
+      console.log("Redirecting to logout URL: " + url);
+      window.location.href = url;
+    });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-512742-1" crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-512742-1');
+</script>
+<script type="text/javascript" async
+src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<script type="text/javascript" src="../../../script/anchor.min.1384657f1c322559a4924d2ccf0ecb609c6e3e5a7a7afb4f4810e5587b1860bf.js"></script>
+<script>
+	
+	(function () {
+		'use strict';
+		anchors.options.placement = 'right';
+		anchors.add();
+		}
+	)();
+</script>
+
+
+
+
+    
+  </body>
+</html>

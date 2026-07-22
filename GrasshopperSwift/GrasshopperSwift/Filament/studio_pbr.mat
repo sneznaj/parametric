@@ -1,0 +1,62 @@
+// Filament PBR material for studio-style geometry preview.
+// Maps to the Material3D struct parameters in the Swift model layer.
+
+material {
+    name : studio_pbr,
+    parameters : [
+        {
+            type : float4,
+            name : baseColorFactor
+        },
+        {
+            type : float,
+            name : metallicFactor
+        },
+        {
+            type : float,
+            name : roughnessFactor
+        },
+        {
+            type : float,
+            name : reflectance
+        },
+        {
+            type : float,
+            name : clearCoatFactor
+        },
+        {
+            type : float,
+            name : clearCoatRoughness
+        },
+        {
+            type : float,
+            name : anisotropy
+        }
+    ],
+    requires : [
+        uv0
+    ],
+    shadingModel : lit,
+    blending : opaque,
+    culling : back
+}
+
+vertex {
+    void materialVertex(inout MaterialVertexInputs material) {
+        // Standard vertex shader — no customizations needed.
+    }
+}
+
+fragment {
+    void material(inout MaterialInputs material) {
+        prepareMaterial(material);
+        // Apply the parameterized PBR values to the standard lit material.
+        material.baseColor = materialParams.baseColorFactor;
+        material.metallic  = materialParams.metallicFactor;
+        material.roughness = materialParams.roughnessFactor;
+        material.reflectance = materialParams.reflectance;
+        material.clearCoat = materialParams.clearCoatFactor;
+        material.clearCoatRoughness = materialParams.clearCoatRoughness;
+        material.anisotropy = materialParams.anisotropy;
+    }
+}

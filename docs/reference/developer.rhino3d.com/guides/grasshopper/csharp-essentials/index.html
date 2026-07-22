@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="rendering, raytracing, radiosity, computer graphics, NURBS, CAD, CAM, CAE, computer aided design, design, modeling, 3DM, Rhino, AutoCAD, AccuRender, DWG, DXF" http-equiv="Keywords" />
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    <link href="../../../images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../../images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+   
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto+Mono' type='text/css' media="all" />
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github.min.css">
+    
+    
+    
+    <link rel="stylesheet" href="../../../scss/style.min.4515315bf66c3671b457c25338ed76b899746b6d65c438664f0f87f5ea2fbfbb.css">
+    
+    
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-brands-400.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-solid-900.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="https://developer.rhino3d.com/webfonts/fa-regular-400.woff2" crossorigin="anonymous"/>
+
+    
+<title>Rhino - Essential C# Scripting for Grasshopper</title>
+
+
+<meta name="description" content="Rhinoceros 3D: A full course on RhinoComon in Grasshopper using C#"> 
+<meta name="author" content="Robert McNeel &amp; Associates">
+
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://developer.rhino3d.com/en/guides/grasshopper/csharp-essentials/" />
+<meta property="og:title" content="Essential C# Scripting for Grasshopper" />
+<meta property="og:description" content="A full course on RhinoComon in Grasshopper using C#" />
+<meta property="og:site_name" content="www.rhino3d.com"/>
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+<meta name="twitter:domain" value="rhino3d.com" />
+<meta name="twitter:title" value="Essential C# Scripting for Grasshopper" />
+<meta name="twitter:description" value="A full course on RhinoComon in Grasshopper using C#" />
+
+
+
+
+
+  
+
+
+
+
+<meta name="twitter:url" value="https://developer.rhino3d.com/en/guides/grasshopper/csharp-essentials/" />
+<meta name="application-name" content="Rhino Developer Docs">
+<meta name="apple-mobile-web-app-title" content="Rhino Developer Docs"></head>
+
+
+  
+
+  <body>
+  
+     
+      <div id="mask"></div><div class='heading header-area'><div id="navbar">
+  <div id="wrap">
+    
+    <div id="sitesearch">
+      
+      
+      
+      <form id="cref" action="https://developer.rhino3d.com/searchresults/">
+        <label for="search"><input id="searchtext" type="text" name="q" size="24" value="" placeholder="search" /></label>  
+        <input class="searchBox" type="submit" name="sa" size="2" aria-label="Search" value=" "/>
+      </form>
+    </div>
+
+    
+    <div id="logo-container">
+      <div id="logo-inner-container">
+        <div id="logo-title-text">
+          <a href="https://developer.rhino3d.com/"><span id="logo-title-text-primary">Rhino</span><span id="logo-title-text-secondary">Developer</span><sup id="protected-mark">®</sup></a>
+        </div>
+        <div id="logo-subtitle">
+          <a href="https://developer.rhino3d.com/"><span class="logo-text-secondary">design, model, present, analyze, realize...</span></a>
+        </div>
+        
+        <a href="https://developer.rhino3d.com/"><img id="site-nav-logo" src="../../../images/rhinodevlogo.png" alt="Rhino Logo"/></a>
+        <div class="clear"></div>
+      </div>
+      <div class="overlayMenuIcon" id="theoverlayMenuIcon">
+        <span onclick="toggleMenu()"><i class="fa fa-bars" id="menuToggleIcon" style="color: #c2c2c2; font-size: 2.5em"></i></span>
+      </div>
+    </div>
+
+    
+    <div class="menu-items" id="theMenuItems">
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/guides" target="_self">Guides</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/samples" target="_self">Samples</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/api" target="_self">API</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/videos" target="_self">Videos</a>
+        
+          
+        
+        <a class="menu-item" href="https://discourse.mcneel.com/c/rhino-developer" target="_blank">Community</a><span class="logged_in">
+        <a href="https://www.rhino3d.com/my-account/" title="Manage your account, licenses, and teams">my account
+        </a>
+      </span></div>
+
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../script/mcneel_accounts_login_status.53c592c69219db2067e789870d0449b68ca1dd6f2fd14733a5fcac75cfdb715e.js"></script>
+<script>
+  const logout = () => {
+        
+        const clientId = window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG";
+        var infoCookie = mca.utilities.getCookieForName("MCA_CLIENT_USER_SESSION_INFO-" + clientId);
+  
+        if (infoCookie)
+          {
+            
+            
+            infoCookie = JSON.parse(infoCookie);
+            const dropdownLogoutUrl = mca.utilities.buildURL("https://developer.rhino3d.com/user/logout", {
+              nonce: infoCookie.nonce,
+              redirect_uri: window.location.href
+            });
+            console.log("dropdownLogoutUrl:", dropdownLogoutUrl)
+            window.location.href = dropdownLogoutUrl;
+          }
+          else{
+          console.log("not logged in");
+          }
+  }
+
+  const toAccount = () => {
+    window.location.href = "https://developer.rhino3d.com/my-account";
+  }
+
+  
+  $('#nav-avatar').click(function(event){
+    event.stopPropagation();
+  });
+
+  $(window).click(function(event) {
+    if(event.target.id == "nav-avatar"){
+      event.stopPropagation();
+    }
+    else{
+      
+      $('#nav-avatar').prop('checked', false); 
+    }
+  });
+</script>
+</div>
+      <div class="outerbox">
+<div class="single-content-area toc-page">
+  
+  <div class="main-content toc-no">
+    <div class="feature-title-container">
+      <div class="feature-title">Essential C# Scripting for Grasshopper</div><div class="platform-callout">    
+    
+        
+        
+        
+        
+    
+</div></div>
+    A full course on RhinoComon in Grasshopper using C#
+    
+    <p>This is an essential scripting guide</p>
+<div class="row">
+<div class="col-12" markdown="1">   
+</div>
+<div class="column">
+    <img src="cover_csharp.png" alt="https://developer.rhino3d.com/images/math-logo.svg" class="float_right" width="35%" height="">
+<p>This manual is intended for designers who are experienced in <a href="https://www.grasshopper3d.com">Grasshopper® (GH)</a> visual scripting, and would like to take their skills to the next level to create their own custom scripts using C# programming language. This guide does not assume nor require any background in programming. The document is divided into four parts.</p>
+<ol>
+<li><a href="1-grasshopper-csharp-component/index.html">C# Component in Grasshopper</a> explains the general interface of the C# scripting component in Grasshopper.</li>
+<li><a href="2-csharp-basics/index.html">C# Programming Basics</a> reviews the basics of the C# DotNet programming language.</li>
+<li><a href="3-rhinocommon-geometry/index.html">RhinoCommon Geometry</a> covers the main geometry types and functions in the RhinoCommon SDK.</li>
+<li><a href="4-design-algorithms/index.html">Design Algorithms</a> includes examples of a number of design algorithms.</li>
+</ol>
+<p>The guide includes many examples that are also available as a Grasshopper file available with the download of this guide. Note that all examples are written in version 8 of <a href="https://www.rhino3d.com">Rhinoceros® (Rhino)</a> and Grasshopper.</p>
+<p>I would like to acknowledge the excellent technical review by Mr. Steve Baer of Robert McNeel and Associates. I would also like to acknowledge Ms. Sandy McNeel for reviewing the writing and formatting of this document.</p>
+
+</div>  
+</div>  
+<div class="row">  
+<div class="col-md-12" markdown="1">  
+<p><em><strong><a href="https://discourse.mcneel.com/u/rajaa/activity">Rajaa Issa</a></strong></em></p>
+<p>Robert McNeel &amp; Associates</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h3 id="table-of-contents">Table of Contents<a aria-label="Table of Contents" href="index.html#table-of-contents"></a></h3>
+</div>  
+</div>  
+<div class="flex-container">
+    <div class="column">
+    <h3 id="1-c-component-in-grasshopperguidesgrasshoppercsharp-essentials1-grasshopper-csharp-component">1. <a href="1-grasshopper-csharp-component/index.html">C# Component in Grasshopper</a><a aria-label="1. C# Component in Grasshopper" href="index.html#1-c-component-in-grasshopperguidesgrasshoppercsharp-essentials1-grasshopper-csharp-component"></a></h3>
+<p>1.1 <a href="1-grasshopper-csharp-component/index.html#11-introduction">Introduction</a><br>
+1.2 <a href="1-grasshopper-csharp-component/index.html#12-c-component-interface">C# component interface</a><br>
+1.3 <a href="1-grasshopper-csharp-component/index.html#13-the-input-parameters">The input parameters</a><br>
+1.4 <a href="1-grasshopper-csharp-component/index.html#14-the-output-parameters">The output parameters</a><br>
+1.5 <a href="1-grasshopper-csharp-component/index.html#15-the-out-string">The out string</a><br>
+1.6 <a href="1-grasshopper-csharp-component/index.html#16-main-menu">Main menu</a><br>
+1.7 <a href="1-grasshopper-csharp-component/index.html#17-code-editor">Code editor</a><br>
+   1.7.1 <a href="1-grasshopper-csharp-component/index.html#171-imports">Imports</a><br>
+   1.7.2 <a href="1-grasshopper-csharp-component/index.html#172-utility-members--functions">Utility members and functions</a><br>
+   1.7.3 <a href="1-grasshopper-csharp-component/index.html#173-the-runscript">The RunScript</a><br>
+1.8 <a href="1-grasshopper-csharp-component/index.html#18-data-access">Data access</a><br>
+   1.8.1 <a href="1-grasshopper-csharp-component/index.html#181-item-access">Item access</a><br>
+   1.8.2 <a href="1-grasshopper-csharp-component/index.html#182-list-access">Lists access</a><br>
+   1.8.3 <a href="1-grasshopper-csharp-component/index.html#183-tree-access">Tree access</a></p>
+</div>
+<div class="column">
+    <h3 id="2-c-programming-basicsguidesgrasshoppercsharp-essentials2-csharp-basics">2. <a href="2-csharp-basics/index.html">C# Programming Basics</a><a aria-label="2. C# Programming Basics" href="index.html#2-c-programming-basicsguidesgrasshoppercsharp-essentials2-csharp-basics"></a></h3>
+<p>2.1 <a href="2-csharp-basics/index.html#21-introduction">Introduction</a><br>
+2.2 <a href="2-csharp-basics/index.html#22-comments">Comments</a><br>
+2.3 <a href="2-csharp-basics/index.html#23-variables">Variables</a><br>
+2.4 <a href="2-csharp-basics/index.html#24-operators">Operators</a><br>
+2.5 <a href="2-csharp-basics/index.html#25-namespaces">Namespaces</a><br>
+2.6 <a href="2-csharp-basics/index.html#26-data">Data</a><br>
+   2.6.1 <a href="2-csharp-basics/index.html#261-primitive-data-types">Primitive data types</a><br>
+   2.6.2 <a href="2-csharp-basics/index.html#262-collections">Collections</a><br>
+2.7 <a href="2-csharp-basics/index.html#27-flow-control">Flow control</a><br>
+   2.7.1 <a href="2-csharp-basics/index.html#271-conditional-statements">Conditional statements</a><br>
+   2.7.2 <a href="2-csharp-basics/index.html#272-loops">Loops</a><br>
+2.8 <a href="2-csharp-basics/index.html#28-methods">Methods</a><br>
+   2.8.1 <a href="2-csharp-basics/index.html#281-overview">Overview</a><br>
+   2.8.2 <a href="2-csharp-basics/index.html#282-method-parameters">Method parameters</a><br>
+2.9 <a href="2-csharp-basics/index.html#29-user-defined-data-types">User-defined data types</a><br>
+   2.9.1 <a href="2-csharp-basics/index.html#291-enumerations">Enumerations</a><br>
+   2.9.2 <a href="2-csharp-basics/index.html#292-structures">Structures</a><br>
+   2.9.3 <a href="2-csharp-basics/index.html#293-classes">Classes</a><br>
+   2.9.4 <a href="2-csharp-basics/index.html#294-value-vs-reference-types">Value vs reference types</a><br>
+   2.9.5 <a href="2-csharp-basics/index.html#295-interface">Interface</a><br>
+2.10 <a href="2-csharp-basics/index.html#210--read--write-text-files">Read and write text files</a><br>
+2.11 <a href="2-csharp-basics/index.html#211-recursive-functions">Recursive functions</a></p>
+</div>
+<div class="column">
+<h3 id="3-rhinocommon-geometryguidesgrasshoppercsharp-essentials3-rhinocommon-geometry">3. <a href="3-rhinocommon-geometry/index.html">RhinoCommon Geometry</a><a aria-label="3. RhinoCommon Geometry" href="index.html#3-rhinocommon-geometryguidesgrasshoppercsharp-essentials3-rhinocommon-geometry"></a></h3>
+<p>3.1 <a href="3-rhinocommon-geometry/index.html#31-overview">Overview</a><br>
+3.2 <a href="3-rhinocommon-geometry/index.html#32-geometry-structures">Geometry structures</a><br>
+   3.2.1 <a href="3-rhinocommon-geometry/index.html#321-the-point3d-structure">The Point3d structure</a><br>
+   3.2.2 <a href="3-rhinocommon-geometry/index.html#322-points--vectors">Points and vectors</a><br>
+   3.2.3 <a href="3-rhinocommon-geometry/index.html#323-lightweight-curves">Lightweight curves</a><br>
+   3.2.4 <a href="3-rhinocommon-geometry/index.html#324-lightweight-surfaces">Lightweight surfaces</a><br>
+   3.2.5 <a href="3-rhinocommon-geometry/index.html#325-other-geometry-structures">Lightweight surfaces</a><br>
+3.3 <a href="3-rhinocommon-geometry/index.html#33-geometry-classes">Geometry classes</a><br>
+   3.3.1 <a href="3-rhinocommon-geometry/index.html#331-curves">Curves</a><br>
+   3.3.2 <a href="3-rhinocommon-geometry/index.html#332-surfaces">Surfaces</a><br>
+   3.3.3 <a href="3-rhinocommon-geometry/index.html#333-meshes">Meshes</a><br>
+   3.3.4 <a href="3-rhinocommon-geometry/index.html#334-boundary-representation-brep">Boundary representation (Brep)</a><br>
+   3.3.5 <a href="3-rhinocommon-geometry/index.html#335-other-geometry-classes">Other geometry classes</a><br>
+3.4 <a href="3-rhinocommon-geometry/index.html#34-geometry-transformations">Geometry transformations</a></p>
+<h3 id="4-design-algorithmsguidesgrasshoppercsharp-essentials4-design-algorithms">4. <a href="4-design-algorithms/index.html">Design Algorithms</a><a aria-label="4. Design Algorithms" href="index.html#4-design-algorithmsguidesgrasshoppercsharp-essentials4-design-algorithms"></a></h3>
+<p>4.1 <a href="4-design-algorithms/index.html#41-introduction">Introduction</a><br>
+4.2 <a href="4-design-algorithms/index.html#42-geometry-algorithms">Geometry algorithms</a><br>
+   4.2.1 <a href="4-design-algorithms/index.html#421-sine-curves-and-surface">Sine curves and surface</a><br>
+   4.2.2 <a href="4-design-algorithms/index.html#421-sine-curves-and-surface">De Casteljau algorithm to interpolate a Bezier curve</a><br>
+   4.2.3 <a href="4-design-algorithms/index.html#422-de-casteljau-algorithm-to-interpolate-a-bezier-curve">Simple subdivision mesh</a><br>
+4.3 <a href="4-design-algorithms/index.html#43-generative-algorithms">Generative algorithms</a><br>
+   4.3.1 <a href="4-design-algorithms/index.html#431-dragon-curve">Dragon curve</a><br>
+   4.3.2 <a href="4-design-algorithms/index.html#432-fractal-tree">Fractal tree</a><br>
+   4.3.3 <a href="4-design-algorithms/index.html#433-penrose-tiling">Penrose tiling</a><br>
+   4.3.4 <a href="4-design-algorithms/index.html#434-conway-game-of-life">Conway Game of Life</a></p>
+</div>
+
+</div>
+<span class="mcneel_only hidden">
+    <div style="text-align: center;">
+        <div class="editdropdown" style="text-align: left;">
+            <button class="editbutton"><div class="fas fa-pencil-alt"></div> Edit this page</button>
+            <div class="editdropdown-content">
+                
+                
+                <a href="https://github.com/mcneel/developer.rhino3d.com/edit/master/content/en/guides/grasshopper/csharp-essentials/_index.md" target="_blank" rel="noopener noreferrer"><div class="fab fa-github"></div> Edit on GitHub</a>
+                <a href="https://github.com/mcneel/developer.rhino3d.com/commits/master/content/en/guides/grasshopper/csharp-essentials/_index.md" target="_blank" rel="noopener noreferrer"><div class="fas fa-history"></div> History</a>
+                <a href="https://developer.rhino3d.com/admin" target="_blank"><div class="fas fa-cog"></div> Admin</a>
+            </div>
+        </div>
+    </div>
+</span></div>
+</div><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha384-a4pIV46KBffvdjRuStQik2G6mPrTxdtAiZFQCdpsP4fyplWNoQ7fXlLMiIGcAP+M" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/vbnet.min.js" integrity="sha384-EN9fHTs/Ki0RX5/vXR4Y2Qb0XnV2+j2GVj86nencgtJYbNlNanf3ogcbPVkgFKBf" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/yaml.min.js" integrity="sha384-vLBVpaJcrTRsLBHhkvU9neJTiLqRgYWBnEg3o4eLgTKw1+hWbSr/QaNuSB9XWftA" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/powershell.min.js" integrity="sha384-5dY/Kkeznu4IIDRQyT6jL9e1XwSy39f1/sqYLFifcz2CfKQe9AunCsb7lBEeMh+f" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../script/highlightjs-line-numbers.1b36d98c62cb9f88ab73b1b24041fe3ba7331949ff54dd3737d99f5e362a8abb.js"></script>
+
+<script>hljs.highlightAll();</script>
+<script>hljs.initLineNumbersOnLoad();</script>
+
+
+<script type="text/javascript" src="../../../script/copy-code.d299324970feb9b7a8b27c988252faacbbb6adb5658c8de5c3378ba9844c7845.js"></script>
+
+<script>
+    function openCodeTab(evt, tabName) {
+      
+      var i, tabcontent, tablinks;
+      
+      
+      var matches = tabName.match(/\d+$/); 
+      var tabCounter = "";
+      if (matches)
+        tabCounter = matches[0];
+      
+      
+      tabcontent = document.getElementsByClassName("codetab-content" + tabCounter);
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      
+      tablinks = document.getElementsByClassName("tablinks" + tabCounter);
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  
+    
+    var defaultTabs = document.querySelectorAll(`*[id^="defaultOpen"]`);
+    defaultTabs.forEach(element => {
+      element.click();
+    });
+
+</script>
+<div class="footer footer-area">
+    <div class="footer-columns">
+        <div class="footer-column footer-left default"><a href="https://www.rhino3d.com/sales">Find a Reseller</a></div>
+        <div class="footer-column footer-left skin-napa">
+            <a href="https://www.rhino3d.com/store">Shop online</a>
+            or find a
+            <a href="https://www.rhino3d.com/sales">Reseller</a>
+        </div>
+        <div class="footer-column footer-left skin-not-napa">
+            <a href="https://www.rhino3d.com/sales">Find a Reseller</a>
+        </div>
+        <div class="footer-column footer-right">           
+                <a href="https://www.rhino3d.com/privacy">Privacy Policy</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/about">About</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/contact">Contact Us</a> &bull;
+                <a href="https://www.rhino3d.com/language" title="Change to a different region or language">
+                    Language</a>            
+        </div>
+    </div>    
+    <div class="footer-middle">       
+        <a href="https://www.rhino3d.com/mcneel/about" alt="About McNeel">Copyright © 1993-2026 Robert McNeel &amp; Associates. All Rights Reserved.</a>
+    </div>
+    <div class="footer-middle">
+        <a href="https://www.facebook.com/McNeelRhinoceros/" aria-label="Facebook" class="fab fa-facebook" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        
+        <a href="https://www.linkedin.com/groups/75313/" aria-label="LinkedIn" class="fab fa-linkedin" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://www.youtube.com/user/RhinoGuide/videos" aria-label="YouTube" class="fab fa-youtube" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://vimeo.com/rhino" aria-label="Vimeo" class="fab fa-vimeo" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="http://blog.rhino3d.com/" aria-label="Blogger" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Blogger icon" src="../../../images/blogger.svg"></a>
+        <a href="https://www.food4rhino.com" aria-label="Food4Rhino" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Food4Rhino" src="../../../images/f4r_icon_01.svg" height="32" width="32"></a>
+    </div>
+</div>
+      </div><script type="text/javascript" src="../../../script/jquery-3.5.1.min.f7f6a5894f1d19ddad6fa392b2ece2c5e578cbf7da4ea805b6885eb6985b6e3d.js"></script>
+<script type="text/javascript" src="../../../script/jquery-ui.min.793cb14b4ae48e92c4a35eae5d34b4b95092e3cd7995ce342b6895a560ef7526.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="../../../script/rhino.05c268ec655ef5ff95646d1f4c93dd13f833bb83b30ad95a68bbd8a7f15f9d26.js"></script>
+
+<script type="text/javascript" src="../../../script/protocolcheck.e5a8f6d34595c946cfc9f84fce91cd8fb625ce62380441a75d5de802cc2819e4.js"></script>
+<script type="text/javascript" src="../../../script/theme.55f13be26c834445d530dbfb196c7a9ef2692979b20258caa03793331a316a0e.js"></script>
+<script>
+    mca.addLogoutListenerForClientId(window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG", function (url) {
+      console.log("Redirecting to logout URL: " + url);
+      window.location.href = url;
+    });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-512742-1" crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-512742-1');
+</script>
+<script type="text/javascript" async
+src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<script type="text/javascript" src="../../../script/anchor.min.1384657f1c322559a4924d2ccf0ecb609c6e3e5a7a7afb4f4810e5587b1860bf.js"></script>
+<script>
+	
+	(function () {
+		'use strict';
+		anchors.options.placement = 'right';
+		anchors.add();
+		}
+	)();
+</script>
+
+
+
+
+    
+  </body>
+</html>

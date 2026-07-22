@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="rendering, raytracing, radiosity, computer graphics, NURBS, CAD, CAM, CAE, computer aided design, design, modeling, 3DM, Rhino, AutoCAD, AccuRender, DWG, DXF" http-equiv="Keywords" />
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    <link href="../../../images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../../images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+   
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto' type='text/css' media="all" />
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto+Mono' type='text/css' media="all" />
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github.min.css">
+    
+    
+    
+    <link rel="stylesheet" href="../../../scss/style.min.4515315bf66c3671b457c25338ed76b899746b6d65c438664f0f87f5ea2fbfbb.css">
+    
+    
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-brands-400.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="../../../webfonts/fa-solid-900.woff2" crossorigin="anonymous"/>
+    <link rel="preload" as="font" type="font/woff2" href="https://developer.rhino3d.com/webfonts/fa-regular-400.woff2" crossorigin="anonymous"/>
+
+    
+<title>Rhino - The Why and How of Data Trees</title>
+
+
+<meta name="description" content="Rhinoceros 3D: This guide explains why data trees are used in Grasshopper."> 
+<meta name="author" content="Robert McNeel &amp; Associates">
+
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://developer.rhino3d.com/en/guides/grasshopper/the-why-and-how-of-data-trees/" />
+<meta property="og:title" content="The Why and How of Data Trees" />
+<meta property="og:description" content="This guide explains why data trees are used in Grasshopper." />
+<meta property="og:site_name" content="www.rhino3d.com"/>
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+<meta name="twitter:domain" value="rhino3d.com" />
+<meta name="twitter:title" value="The Why and How of Data Trees" />
+<meta name="twitter:description" value="This guide explains why data trees are used in Grasshopper." />
+
+
+
+
+
+  
+
+
+
+
+<meta name="twitter:url" value="https://developer.rhino3d.com/en/guides/grasshopper/the-why-and-how-of-data-trees/" />
+<meta name="application-name" content="Rhino Developer Docs">
+<meta name="apple-mobile-web-app-title" content="Rhino Developer Docs"></head>
+
+
+  
+
+  <body>
+  
+     
+      <div id="mask"></div><div class='heading header-area'><div id="navbar">
+  <div id="wrap">
+    
+    <div id="sitesearch">
+      
+      
+      
+      <form id="cref" action="https://developer.rhino3d.com/searchresults/">
+        <label for="search"><input id="searchtext" type="text" name="q" size="24" value="" placeholder="search" /></label>  
+        <input class="searchBox" type="submit" name="sa" size="2" aria-label="Search" value=" "/>
+      </form>
+    </div>
+
+    
+    <div id="logo-container">
+      <div id="logo-inner-container">
+        <div id="logo-title-text">
+          <a href="https://developer.rhino3d.com/"><span id="logo-title-text-primary">Rhino</span><span id="logo-title-text-secondary">Developer</span><sup id="protected-mark">®</sup></a>
+        </div>
+        <div id="logo-subtitle">
+          <a href="https://developer.rhino3d.com/"><span class="logo-text-secondary">design, model, present, analyze, realize...</span></a>
+        </div>
+        
+        <a href="https://developer.rhino3d.com/"><img id="site-nav-logo" src="../../../images/rhinodevlogo.png" alt="Rhino Logo"/></a>
+        <div class="clear"></div>
+      </div>
+      <div class="overlayMenuIcon" id="theoverlayMenuIcon">
+        <span onclick="toggleMenu()"><i class="fa fa-bars" id="menuToggleIcon" style="color: #c2c2c2; font-size: 2.5em"></i></span>
+      </div>
+    </div>
+
+    
+    <div class="menu-items" id="theMenuItems">
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/guides" target="_self">Guides</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/samples" target="_self">Samples</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/api" target="_self">API</a>
+        
+          
+        
+        <a class="menu-item" href="https://developer.rhino3d.com/videos" target="_self">Videos</a>
+        
+          
+        
+        <a class="menu-item" href="https://discourse.mcneel.com/c/rhino-developer" target="_blank">Community</a><span class="logged_in">
+        <a href="https://www.rhino3d.com/my-account/" title="Manage your account, licenses, and teams">my account
+        </a>
+      </span></div>
+
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../script/mcneel_accounts_login_status.53c592c69219db2067e789870d0449b68ca1dd6f2fd14733a5fcac75cfdb715e.js"></script>
+<script>
+  const logout = () => {
+        
+        const clientId = window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG";
+        var infoCookie = mca.utilities.getCookieForName("MCA_CLIENT_USER_SESSION_INFO-" + clientId);
+  
+        if (infoCookie)
+          {
+            
+            
+            infoCookie = JSON.parse(infoCookie);
+            const dropdownLogoutUrl = mca.utilities.buildURL("https://developer.rhino3d.com/user/logout", {
+              nonce: infoCookie.nonce,
+              redirect_uri: window.location.href
+            });
+            console.log("dropdownLogoutUrl:", dropdownLogoutUrl)
+            window.location.href = dropdownLogoutUrl;
+          }
+          else{
+          console.log("not logged in");
+          }
+  }
+
+  const toAccount = () => {
+    window.location.href = "https://developer.rhino3d.com/my-account";
+  }
+
+  
+  $('#nav-avatar').click(function(event){
+    event.stopPropagation();
+  });
+
+  $(window).click(function(event) {
+    if(event.target.id == "nav-avatar"){
+      event.stopPropagation();
+    }
+    else{
+      
+      $('#nav-avatar').prop('checked', false); 
+    }
+  });
+</script>
+</div>
+      <div class="outerbox">
+<div class="single-content-area toc-page">
+  
+    
+
+
+    
+
+
+
+
+<script langage="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        $('body').scrollspy({ target: '.toc', offset: 90 });
+        $(window).on('activate.bs.scrollspy', function (e, o) {
+            
+            
+            
+        });
+      });    
+
+</script>
+
+
+<div class="toc">
+    <aside>
+        <div id="toc-top-container" style="
+        text-align: center;
+    ">
+        </div>
+        <header>
+            
+            <a href="index.html">The Why and How of Data Trees</a>
+        </header>
+        <nav id="TableOfContents" class="scrollbar">
+                
+<ul class="nav">
+        
+
+        
+        <li class="nav-item" >
+        <a href="index.html#data-storage-in-general-programming" class="nav-link">Data storage in general programming</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#data-storage-in-grasshopper" class="nav-link">Data storage in Grasshopper</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#data-storage-as-the-outcome-of-a-process" class="nav-link">Data storage as the outcome of a process</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#a-flexible-mechanism-for-variable-history-records" class="nav-link">A flexible mechanism for variable history records</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#the-messy-reality" class="nav-link">The messy reality</a>
+        
+
+        
+        </li><li class="nav-item">
+            <a href="index.html#conclusion" class="nav-link">Conclusion</a>
+    </li></ul>
+                <div id="toc-bottom-container" style="
+                text-align: center;
+            ">
+                </div>
+        </nav>
+    </aside>
+</div>
+
+  
+  
+  <div class="main-content ">
+    <div id="breadcrumbs">
+    
+    
+        
+    
+        <a href="https://developer.rhino3d.com/en/guides/">Guides</a> /
+    
+
+        <a href="https://developer.rhino3d.com/en/guides/grasshopper/">Grasshopper Guides</a> /
+    
+
+</div>
+
+ 
+
+      <div class="feature-title-container">
+        <div class="feature-title">The Why and How of Data Trees</div><div class="platform-callout">    
+    
+        
+        
+        
+        
+    
+</div></div>
+      <p>
+        
+    <span class="byline">
+        by
+        
+        
+        
+        
+            
+            
+            
+              
+            <a href="https://discourse.mcneel.com/u/davidrutten/">David Rutten</a>                              
+         (Last updated:&nbsp; Wednesday, December 5, 2018)
+  </span>
+  
+</p>
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="data-storage-in-general-programming">Data storage in general programming<a aria-label="Data storage in general programming" href="index.html#data-storage-in-general-programming"></a></h2>
+<p>One of the key aspects of programming is deciding how and where to store your data.  If you&rsquo;re writing textual code using any one of a huge number of programming languages there are a lot of different options, each with its own benefits and drawbacks.  Sometimes you just need to store a single data point.  At other times you may need a list of exactly one hundred data points.  At other times still circumstances may demand a list of a <em>variable</em> number of data points.</p>
+<p>In programming jargon, <a href="https://msdn.microsoft.com/en-us/library/6sh2ey19%28v=vs.110%29.aspx">lists</a> and <a href="https://msdn.microsoft.com/en-us/library/system.array%28v=vs.110%29.aspx">arrays</a> are typically used to store an ordered collection of data points, where each item is directly accessible. <a href="https://msdn.microsoft.com/en-us/library/dd381779%28v=vs.110%29.aspx">Bags</a> and <a href="https://msdn.microsoft.com/en-us/library/bb359438%28v=vs.110%29.aspx">hash sets</a> are examples of <em>unordered</em> data storage.  These storage mechanisms do not have a concept of which data comes first and which next, but they are much better at searching the data set for specific values.  <a href="https://msdn.microsoft.com/en-us/library/3278tedw%28v=vs.110%29.aspx">Stacks</a> and <a href="https://msdn.microsoft.com/en-us/library/7977ey2c%28v=vs.110%29.aspx">queues</a> are ordered data structures where only the youngest or oldest data points are accessible respectively.  These are popular structures for code designed to create and execute schedules.  <a href="https://msdn.microsoft.com/en-us/library/he2s3bh7%28v=vs.110%29.aspx">Linked lists</a> are chains of consecutive data points, where each point knows only about its direct neighbours.  As a result, it&rsquo;s a lot of work to find the one-millionth point in a linked list, but it&rsquo;s incredibly efficient to insert or remove points from the middle of the chain.  <a href="https://msdn.microsoft.com/en-us/library/xfhwa508%28v=vs.110%29.aspx">Dictionaries</a> store data in the form of key-value pairs, allowing one to index complicated data points using simple lookup codes.</p>
+<p>The above is a just a small sampling of popular data storage mechanisms, there are many, many others.  From <a href="https://msdn.microsoft.com/en-us/library/2yd9wwz4.aspx">multidimensional arrays</a> to <a href="http://en.wikipedia.org/wiki/SQL">SQL databases</a>.  From <a href="https://msdn.microsoft.com/en-us/library/ms132474%28v=vs.110%29.aspx">readonly collections</a> to concurrent <a href="http://en.wikipedia.org/wiki/K-d_tree">k-dTrees</a>.  It takes a fair amount of knowledge and practice to be able to navigate this bewildering sea of options and pick the best suited storage mechanism for any particular problem.  We did not wish to confront our users with this plethora of programmatic principles, and instead decided to offer only a single data storage mechanism.<sup id="fnref:1"><a href="index.html#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="data-storage-in-grasshopper">Data storage in Grasshopper<a aria-label="Data storage in Grasshopper" href="index.html#data-storage-in-grasshopper"></a></h2>
+<p>In order to see what mechanism would be optimal for Grasshopper, it is necessary to first list the different possible ways in which components may wish to access and store data, and also how families of data points flow through a Grasshopper network, often acquiring more complexity over time.</p>
+<ul>
+<li>
+<p>A lot of components operate on individual values and also output individual values as results. This is the simplest category, let&rsquo;s call it <code>1:1</code> (pronounced as &ldquo;one to one&rdquo;, indicating a mapping from single inputs to single outputs).  Two examples of <code>1:1</code> components are Subtraction and Construct Point.  Subtraction takes two arguments on the left (A and B), and outputs the difference (A-B) to the right.  Even when the component is called upon to calculate the difference between two collections of 12 million values each, at any one time it only cares about three values; A, B and the difference between the two.  Similarly, Construct Point takes three separate numbers as input arguments and combines them to form a single xyz point.</p>
+</li>
+<li>
+<p>Another common category of components create lists of data from single input values. We&rsquo;ll refer to these components as <code>1:N</code>. Range and Divide Curve are oft used examples in this category. Range takes a single numeric domain and a single integer, but it outputs a list of numbers that divide the domain into the specified number of steps. Similarly, Divide Curve requires a single curve and a division count, but it outputs several lists of data, where the length of each list is a function of the division count.</p>
+</li>
+<li>
+<p>The opposite behaviour also occurs. Common <code>N:1</code> components are Polyline and Loft, both of which consume a list of points and curves respectively, yet output only a single curve or surface.</p>
+</li>
+<li>
+<p>Lastly (in the list category), <code>N:N</code> components are also available. A fair number of components operate on lists of data and also output lists of data.  Sort and Reverse List are examples of N:N components you will almost certainly encounter when using Grasshopper.  It is true that <code>N:N</code> components mostly fall into the data management category, in the sense that they are mostly employed to change the way data is stored, rather than to create entirely new data, but they are common and important nonetheless.</p>
+</li>
+<li>
+<p>A rare few components are even more complex than <code>1:N</code>, <code>N:1</code>, or <code>N:N</code>, in that they are not content to operate on or output single lists of data points.  The Divide Surface and Square Grid components want to output not just lists of points, but several lists of points, each of which represents a single row or column in a grid. We can refer to these components as <code>1:N'</code> or <code>N':1</code> or <code>N:N'</code> or &hellip; depending on how the inputs and outputs are defined.</p>
+</li>
+</ul>
+<p>The above listing of data mapping categories encapsulate all components that ship with Grasshopper, though they do not necessarily minister to all imaginable mappings. However in the spirit of getting on with the software it was decided that a data structure that could handle individual values, lists of values, and lists of lists of values would solve at least 99% of the then existing problems and was thus considered to be a &lsquo;good thing&rsquo;.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="data-storage-as-the-outcome-of-a-process">Data storage as the outcome of a process<a aria-label="Data storage as the outcome of a process" href="index.html#data-storage-as-the-outcome-of-a-process"></a></h2>
+<p>If the problems of <code>1:N'</code> mappings only occurred in those few components to do with grids, it would probably not warrant support for lists-of-lists in the core data structure.  However, <code>1:N'</code> or <code>N:N'</code> mappings can be the result of the concatenation of two or more <code>1:N</code> components.  Consider the following case: A collection of three polysurfaces (a box, a capped cylinder, and a triangular prism) is imported from Rhino into Grasshopper.  The shapes are all exploded into their separate faces, resulting in 6 faces for the box, 3 for the cylinder, and 5 for the prism. Across each face, a collection of isocurves is drawn, resembling a hatching.  Ultimately, each isocurve is divided into equally spaced points.</p>
+<p><img src="../../../images/the-why-and-how-of-data-trees-01.png" alt="Data Storage">
+<br/>
+<img src="../../../images/the-why-and-how-of-data-trees-02.png" alt="Data Storage">
+<br/>
+<img src="../../../images/the-why-and-how-of-data-trees-03.png" alt="Data Storage">
+<br/>
+<img src="../../../images/the-why-and-how-of-data-trees-04.png" alt="Data Storage"></p>
+<p>This is not an unreasonably elaborate case, but it already shows how shockingly quickly layers of complexity are introduced into the data as it flows from the left to the right side of the network.</p>
+<p>It&rsquo;s no good ending up with a single huge list containing all the points. The data structure we use must be detailed enough to allow us to select from it any logical subset. This means that the ultimate data structure must contain a record of all the mappings that were applied from start to finish. It must be possible to select all the points that are associated with the second polysurface, but not the first or third. It must also be possible to select all points that are associated with the first face of each polysurface, but not any subsequent faces. Or a selection which includes only the fourth point of each division and no others.</p>
+<p><img src="../../../images/the-why-and-how-of-data-trees-05.png" alt="Data Storage">
+<br/>
+<img src="../../../images/the-why-and-how-of-data-trees-06.png" alt="Data Storage">
+<br/>
+<img src="../../../images/the-why-and-how-of-data-trees-07.png" alt="Data Storage"></p>
+<p>The only way such selection sets can be defined, is if the data structure contains a record of the &ldquo;history&rdquo; of each data point. I.e. for every point we must be able to figure out which original shape it came from (the cube, the cylinder or the prism), which of the exploded faces it is associated with, which isocurve on that face was involved and the index of the point within the curve division family.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="a-flexible-mechanism-for-variable-history-records">A flexible mechanism for variable history records<a aria-label="A flexible mechanism for variable history records" href="index.html#a-flexible-mechanism-for-variable-history-records"></a></h2>
+<p>The storage constraints mentioned so far (to wit, the requirement of storing individual values, lists of values, and lists of lists of values), combined with the relational constraints (to wit, the ability to measure the relatedness of various lists within the entire collection) lead us to Data Trees.  The data structure we chose is certainly not the only imaginable solution to this problem, and due to its terse notation can appear fairly obtuse to the untrained eye.  However since data trees only employ non-negative integers to identify both lists and items within lists, the structure is very amenable to simple arithmetic operations, which makes the structure very pliable from an algorithmic point of view.</p>
+<p>A data tree is an <em>ordered collection of lists</em>.  Each list is associated with a <em>path</em>, which serves as the identifier of that list. This means that two lists in the same tree cannot have the same path.  A path is a collection of one or more non-negative integers. Path notation employs curly brackets and semi-colons as separators.  The simplest path contains only the number zero and is written as: <code>{0}</code>.  More complicated paths containing more elements are written as: <code>{2;4;6}</code>. Just as a path identifies a list within the tree, an <em>index</em> identifies a data point within a list.  An index is always a single, non-negative integer. Indices are written inside square brackets and appended to path notation, in order to fully identify a single piece of data within an entire data tree: <code>{2,4,6}[10]</code>.</p>
+<p>Since both path elements and indices are zero-based (we start counting at zero, not one), there is a slight disconnect between the ordinality and the cardinality of numbers within data trees. The <em>first</em> element equals index 0, the <em>second</em> element can be found at index 1, the <em>third</em> element maps to index 2, and so on and so forth. This means that the &ldquo;Eleventh point of the seventh isocurve of the fifth face of the third polysurface&rdquo; will be written as <code>{2;4;6}[10]</code>. The first path element corresponds with the oldest mapping that occurred within the file, and each subsequent element represents a more recent operation.  In this sense the path elements can be likened to taxonomic identifiers.  The species <code>{Animalia;Mammalia;Hominidea;Homo}</code> and <code>{Animalia;Mammalia;Hominidea;Pan}</code> are more closely related to each other than to <code>{Animalia;Mammalia; Cervidea;Rangifer}</code><sup id="fnref:2"><a href="index.html#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> because they share more codes at the start of their classification.  Similarly, the paths <code>{2;4;4}</code> and <code>{2;4;6}</code> are more closely related to each other than they are to <code>{2;3;5}</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="the-messy-reality">The messy reality<a aria-label="The messy reality" href="index.html#the-messy-reality"></a></h2>
+<p>Although you may agree with me that in theory the data tree approach is solid, you may
+still get frustrated at the rate at which data trees grow more complex.  Often Grasshopper will choose to add additional elements to the paths in a tree where none in fact is needed, resulting in paths that all share a lot of zeroes in certain places. For example a data tree might contain the paths:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span>{0;0;0;0;0}
+</span></span><span style="display:flex;"><span>{0;0;0;0;1}
+</span></span><span style="display:flex;"><span>{0;0;0;0;2}
+</span></span><span style="display:flex;"><span>{0;0;0;0;3}
+</span></span><span style="display:flex;"><span>{0;0;1;0;0}
+</span></span><span style="display:flex;"><span>{0;0;1;0;1}
+</span></span><span style="display:flex;"><span>{0;0;1;0;2}
+</span></span><span style="display:flex;"><span>{0;0;1;0;3}
+</span></span></code></pre></div><p>instead of the far more economical:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span>{0;0}
+</span></span><span style="display:flex;"><span>{0;1}
+</span></span><span style="display:flex;"><span>{0;2}
+</span></span><span style="display:flex;"><span>{0;3}
+</span></span><span style="display:flex;"><span>{1;0}
+</span></span><span style="display:flex;"><span>{1;1}
+</span></span><span style="display:flex;"><span>{1;2}
+</span></span><span style="display:flex;"><span>{1;3}
+</span></span></code></pre></div><p>The reason all these zeroes are added is because we value consistency over economics.  It doesn&rsquo;t matter whether a component actually outputs more than one list, if the component belongs to the <code>1:N</code>, <code>1:N'</code>, or <code>N:N'</code> groups, it will <em>always</em> add an extra integer to all the paths, because some day in the future, when the inputs change, it may need that extra integer to keep its lists untangled. We feel it&rsquo;s bad behaviour for the topology of a data tree to be subject to the topical values in that tree. Any component which relies on a specific topology will no longer work when that topology changes, and that should happen as seldom as possible.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<h2 id="conclusion">Conclusion<a aria-label="Conclusion" href="index.html#conclusion"></a></h2>
+<p>Although data trees can be difficult to work with and probably cause more confusion than any other part of Grasshopper, they seem to work well in the majority of cases and we haven&rsquo;t been able to come up with a better solution.  That&rsquo;s not to say we never will, but data trees are here to stay for the foreseeable future.</p>
+<p><strong>Footnotes</strong></p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>This is not something we hit on immediately. The very first versions of Grasshopper only allowed for the storage of a single data point per parameter, making operations like [Loft] or [Divide Curve] impossible. Later versions allowed for a single list per parameter, which was still insufficient for all but the most simple algorithms.&#160;<a href="index.html#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>I&rsquo;m skipping a lot of taxonometric classifications here to keep it simple.&#160;<a href="index.html#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<span class="mcneel_only hidden">
+    <div style="text-align: center;">
+        <div class="editdropdown" style="text-align: left;">
+            <button class="editbutton"><div class="fas fa-pencil-alt"></div> Edit this page</button>
+            <div class="editdropdown-content">
+                
+                
+                <a href="https://github.com/mcneel/developer.rhino3d.com/edit/master/content/en/guides/grasshopper/the-why-and-how-of-data-trees/index.md" target="_blank" rel="noopener noreferrer"><div class="fab fa-github"></div> Edit on GitHub</a>
+                <a href="https://github.com/mcneel/developer.rhino3d.com/commits/master/content/en/guides/grasshopper/the-why-and-how-of-data-trees/index.md" target="_blank" rel="noopener noreferrer"><div class="fas fa-history"></div> History</a>
+                <a href="https://developer.rhino3d.com/admin" target="_blank"><div class="fas fa-cog"></div> Admin</a>
+            </div>
+        </div>
+    </div>
+</span>
+  </div>
+</div><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha384-a4pIV46KBffvdjRuStQik2G6mPrTxdtAiZFQCdpsP4fyplWNoQ7fXlLMiIGcAP+M" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/vbnet.min.js" integrity="sha384-EN9fHTs/Ki0RX5/vXR4Y2Qb0XnV2+j2GVj86nencgtJYbNlNanf3ogcbPVkgFKBf" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/yaml.min.js" integrity="sha384-vLBVpaJcrTRsLBHhkvU9neJTiLqRgYWBnEg3o4eLgTKw1+hWbSr/QaNuSB9XWftA" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/powershell.min.js" integrity="sha384-5dY/Kkeznu4IIDRQyT6jL9e1XwSy39f1/sqYLFifcz2CfKQe9AunCsb7lBEeMh+f" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../script/highlightjs-line-numbers.1b36d98c62cb9f88ab73b1b24041fe3ba7331949ff54dd3737d99f5e362a8abb.js"></script>
+
+<script>hljs.highlightAll();</script>
+<script>hljs.initLineNumbersOnLoad();</script>
+
+
+<script type="text/javascript" src="../../../script/copy-code.d299324970feb9b7a8b27c988252faacbbb6adb5658c8de5c3378ba9844c7845.js"></script>
+
+<script>
+    function openCodeTab(evt, tabName) {
+      
+      var i, tabcontent, tablinks;
+      
+      
+      var matches = tabName.match(/\d+$/); 
+      var tabCounter = "";
+      if (matches)
+        tabCounter = matches[0];
+      
+      
+      tabcontent = document.getElementsByClassName("codetab-content" + tabCounter);
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      
+      tablinks = document.getElementsByClassName("tablinks" + tabCounter);
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  
+    
+    var defaultTabs = document.querySelectorAll(`*[id^="defaultOpen"]`);
+    defaultTabs.forEach(element => {
+      element.click();
+    });
+
+</script>
+<div class="footer footer-area">
+    <div class="footer-columns">
+        <div class="footer-column footer-left default"><a href="https://www.rhino3d.com/sales">Find a Reseller</a></div>
+        <div class="footer-column footer-left skin-napa">
+            <a href="https://www.rhino3d.com/store">Shop online</a>
+            or find a
+            <a href="https://www.rhino3d.com/sales">Reseller</a>
+        </div>
+        <div class="footer-column footer-left skin-not-napa">
+            <a href="https://www.rhino3d.com/sales">Find a Reseller</a>
+        </div>
+        <div class="footer-column footer-right">           
+                <a href="https://www.rhino3d.com/privacy">Privacy Policy</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/about">About</a> &bull;
+                <a href="https://www.rhino3d.com/mcneel/contact">Contact Us</a> &bull;
+                <a href="https://www.rhino3d.com/language" title="Change to a different region or language">
+                    Language</a>            
+        </div>
+    </div>    
+    <div class="footer-middle">       
+        <a href="https://www.rhino3d.com/mcneel/about" alt="About McNeel">Copyright © 1993-2026 Robert McNeel &amp; Associates. All Rights Reserved.</a>
+    </div>
+    <div class="footer-middle">
+        <a href="https://www.facebook.com/McNeelRhinoceros/" aria-label="Facebook" class="fab fa-facebook" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        
+        <a href="https://www.linkedin.com/groups/75313/" aria-label="LinkedIn" class="fab fa-linkedin" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://www.youtube.com/user/RhinoGuide/videos" aria-label="YouTube" class="fab fa-youtube" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="https://vimeo.com/rhino" aria-label="Vimeo" class="fab fa-vimeo" style="padding: 10px; font-size: 30px; text-decoration: none;" target="_blank" rel="noopener noreferrer"></a>
+        <a href="http://blog.rhino3d.com/" aria-label="Blogger" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Blogger icon" src="../../../images/blogger.svg"></a>
+        <a href="https://www.food4rhino.com" aria-label="Food4Rhino" class="fa"
+            style="padding: 10px; font-size: 30px; text-decoration: none;  display: inline-flex" target="_blank"
+            rel="noopener noreferrer"><img alt="Food4Rhino" src="../../../images/f4r_icon_01.svg" height="32" width="32"></a>
+    </div>
+</div>
+      </div><script type="text/javascript" src="../../../script/jquery-3.5.1.min.f7f6a5894f1d19ddad6fa392b2ece2c5e578cbf7da4ea805b6885eb6985b6e3d.js"></script>
+<script type="text/javascript" src="../../../script/jquery-ui.min.793cb14b4ae48e92c4a35eae5d34b4b95092e3cd7995ce342b6895a560ef7526.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="../../../script/rhino.05c268ec655ef5ff95646d1f4c93dd13f833bb83b30ad95a68bbd8a7f15f9d26.js"></script>
+
+<script type="text/javascript" src="../../../script/protocolcheck.e5a8f6d34595c946cfc9f84fce91cd8fb625ce62380441a75d5de802cc2819e4.js"></script>
+<script type="text/javascript" src="../../../script/theme.55f13be26c834445d530dbfb196c7a9ef2692979b20258caa03793331a316a0e.js"></script>
+<script>
+    mca.addLogoutListenerForClientId(window.location.host == "www.rhino3d.com" ? "rhino3dWebsite" : "rhino3dWebsiteDEBUG", function (url) {
+      console.log("Redirecting to logout URL: " + url);
+      window.location.href = url;
+    });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-512742-1" crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-512742-1');
+</script>
+<script type="text/javascript" async
+src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<script type="text/javascript" src="../../../script/anchor.min.1384657f1c322559a4924d2ccf0ecb609c6e3e5a7a7afb4f4810e5587b1860bf.js"></script>
+<script>
+	
+	(function () {
+		'use strict';
+		anchors.options.placement = 'right';
+		anchors.add();
+		}
+	)();
+</script>
+
+
+
+
+    
+  </body>
+</html>

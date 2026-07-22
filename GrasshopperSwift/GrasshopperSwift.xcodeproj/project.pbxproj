@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0984E0A4D01433C2EB43D327 /* FilamentBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 19618F2FDFC117513E44138D /* FilamentBridge.mm */; };
+		32CD12238550ED2CB2775D61 /* FilamentRenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F5AAE835EC5966FC5BA97 /* FilamentRenderView.swift */; };
+		3446D9E75DA0C96805F114AD /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F75D6DC3A0D64A98323CBEB /* ConnectionsView.swift */; };
+		3714FE81746732F4D874948E /* NodeLibraryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1781C6F453582B44D6407136 /* NodeLibraryPanel.swift */; };
+		8087D57352D92B33D8E19444 /* studio_pbr.filamat in Resources */ = {isa = PBXBuildFile; fileRef = 6F28129B765A9AECDBF8189D /* studio_pbr.filamat */; };
+		85F36D9D3AD249AD8824635C /* GeometryPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329F83B1DF16E102FF49639 /* GeometryPreviewView.swift */; };
+		8C2FC38289F9F6710FF416FF /* NodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E6D3C9923E12756397D1D1 /* NodeFactory.swift */; };
+		9559DB441D7870B092DE7A68 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28893433F0019BCBCEAF12D7 /* ContentView.swift */; };
+		A25C85CE5D46A6E1F9EB25EC /* studio_pbr.mat in Resources */ = {isa = PBXBuildFile; fileRef = DFC37E34284EA3E504BD3FB5 /* studio_pbr.mat */; };
+		B6F3DB685FCC43F31DF36D09 /* GraphCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A65E7674962017CF6B4FC5 /* GraphCanvas.swift */; };
+		D18D678DB59393BC1FCA289F /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156E5A4F135DAEC2FB705817 /* Geometry.swift */; };
+		E5E959E8EDE2C69182E6B5E5 /* NodeEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE82D5683A41845018D0FE /* NodeEvaluator.swift */; };
+		EA9AC1C979AA21F627A95FF2 /* GrasshopperSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620A50FB57B45296D489B9AE /* GrasshopperSwiftApp.swift */; };
+		EB95E499718B54AF208FACAD /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7839C29916F38F0E537A1D47 /* NodeView.swift */; };
+		FB4BE207B8C5DAC0E0884354 /* NodeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C017416CFD20953D00F863 /* NodeGraph.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		156E5A4F135DAEC2FB705817 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		1781C6F453582B44D6407136 /* NodeLibraryPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeLibraryPanel.swift; sourceTree = "<group>"; };
+		19618F2FDFC117513E44138D /* FilamentBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FilamentBridge.mm; sourceTree = "<group>"; };
+		19E6D3C9923E12756397D1D1 /* NodeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeFactory.swift; sourceTree = "<group>"; };
+		21CBDF549367DA43BAD70179 /* FilamentBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilamentBridge.h; sourceTree = "<group>"; };
+		26A65E7674962017CF6B4FC5 /* GraphCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCanvas.swift; sourceTree = "<group>"; };
+		28893433F0019BCBCEAF12D7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2B8F5AAE835EC5966FC5BA97 /* FilamentRenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilamentRenderView.swift; sourceTree = "<group>"; };
+		2F75D6DC3A0D64A98323CBEB /* ConnectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsView.swift; sourceTree = "<group>"; };
+		37E3F80344EFF118FFB538D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		45C017416CFD20953D00F863 /* NodeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeGraph.swift; sourceTree = "<group>"; };
+		620A50FB57B45296D489B9AE /* GrasshopperSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrasshopperSwiftApp.swift; sourceTree = "<group>"; };
+		643424DD9357FC376669EE71 /* GrasshopperSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrasshopperSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F28129B765A9AECDBF8189D /* studio_pbr.filamat */ = {isa = PBXFileReference; path = studio_pbr.filamat; sourceTree = "<group>"; };
+		73EF54D1C326AB4E3866DDAA /* GrasshopperSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GrasshopperSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		7839C29916F38F0E537A1D47 /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
+		9ECE82D5683A41845018D0FE /* NodeEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeEvaluator.swift; sourceTree = "<group>"; };
+		C329F83B1DF16E102FF49639 /* GeometryPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryPreviewView.swift; sourceTree = "<group>"; };
+		DFC37E34284EA3E504BD3FB5 /* studio_pbr.mat */ = {isa = PBXFileReference; path = studio_pbr.mat; sourceTree = "<group>"; };
+		EF0FB8C6665E0C36B48A88BE /* studio_pbr_filamat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = studio_pbr_filamat.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1A267492346C1F980F9716FB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2F75D6DC3A0D64A98323CBEB /* ConnectionsView.swift */,
+				28893433F0019BCBCEAF12D7 /* ContentView.swift */,
+				2B8F5AAE835EC5966FC5BA97 /* FilamentRenderView.swift */,
+				C329F83B1DF16E102FF49639 /* GeometryPreviewView.swift */,
+				26A65E7674962017CF6B4FC5 /* GraphCanvas.swift */,
+				1781C6F453582B44D6407136 /* NodeLibraryPanel.swift */,
+				7839C29916F38F0E537A1D47 /* NodeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4052A9916B483AC3FC35ED0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				643424DD9357FC376669EE71 /* GrasshopperSwift.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		491F900E7146EA9474398FDC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				156E5A4F135DAEC2FB705817 /* Geometry.swift */,
+				45C017416CFD20953D00F863 /* NodeGraph.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		77AE2F45463F2925220860D7 /* Filament */ = {
+			isa = PBXGroup;
+			children = (
+				21CBDF549367DA43BAD70179 /* FilamentBridge.h */,
+				19618F2FDFC117513E44138D /* FilamentBridge.mm */,
+				EF0FB8C6665E0C36B48A88BE /* studio_pbr_filamat.h */,
+				6F28129B765A9AECDBF8189D /* studio_pbr.filamat */,
+				DFC37E34284EA3E504BD3FB5 /* studio_pbr.mat */,
+			);
+			path = Filament;
+			sourceTree = "<group>";
+		};
+		8411D7D7B904321341ED1A78 = {
+			isa = PBXGroup;
+			children = (
+				8C1204C579E3A1EE2DD4AFB1 /* GrasshopperSwift */,
+				4052A9916B483AC3FC35ED0C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8C1204C579E3A1EE2DD4AFB1 /* GrasshopperSwift */ = {
+			isa = PBXGroup;
+			children = (
+				73EF54D1C326AB4E3866DDAA /* GrasshopperSwift-Bridging-Header.h */,
+				620A50FB57B45296D489B9AE /* GrasshopperSwiftApp.swift */,
+				37E3F80344EFF118FFB538D9 /* Info.plist */,
+				77AE2F45463F2925220860D7 /* Filament */,
+				491F900E7146EA9474398FDC /* Models */,
+				AEB58214CB69672F661E07B2 /* Nodes */,
+				1A267492346C1F980F9716FB /* Views */,
+			);
+			path = GrasshopperSwift;
+			sourceTree = "<group>";
+		};
+		AEB58214CB69672F661E07B2 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				9ECE82D5683A41845018D0FE /* NodeEvaluator.swift */,
+				19E6D3C9923E12756397D1D1 /* NodeFactory.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0ACFB1C2AEB935CA58CAB177 /* GrasshopperSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDFD1899A9368C1A378D6CB1 /* Build configuration list for PBXNativeTarget "GrasshopperSwift" */;
+			buildPhases = (
+				AEE752F1ED41DD55419FCB9D /* Sources */,
+				A3514DAF9EEC3D52E80981B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GrasshopperSwift;
+			packageProductDependencies = (
+			);
+			productName = GrasshopperSwift;
+			productReference = 643424DD9357FC376669EE71 /* GrasshopperSwift.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		013FE01B4DB09906ECDE64AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 5E61FF6CEC49C81185279E31 /* Build configuration list for PBXProject "GrasshopperSwift" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 8411D7D7B904321341ED1A78;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 4052A9916B483AC3FC35ED0C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0ACFB1C2AEB935CA58CAB177 /* GrasshopperSwift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A3514DAF9EEC3D52E80981B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8087D57352D92B33D8E19444 /* studio_pbr.filamat in Resources */,
+				A25C85CE5D46A6E1F9EB25EC /* studio_pbr.mat in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AEE752F1ED41DD55419FCB9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3446D9E75DA0C96805F114AD /* ConnectionsView.swift in Sources */,
+				9559DB441D7870B092DE7A68 /* ContentView.swift in Sources */,
+				0984E0A4D01433C2EB43D327 /* FilamentBridge.mm in Sources */,
+				32CD12238550ED2CB2775D61 /* FilamentRenderView.swift in Sources */,
+				D18D678DB59393BC1FCA289F /* Geometry.swift in Sources */,
+				85F36D9D3AD249AD8824635C /* GeometryPreviewView.swift in Sources */,
+				B6F3DB685FCC43F31DF36D09 /* GraphCanvas.swift in Sources */,
+				EA9AC1C979AA21F627A95FF2 /* GrasshopperSwiftApp.swift in Sources */,
+				E5E959E8EDE2C69182E6B5E5 /* NodeEvaluator.swift in Sources */,
+				8C2FC38289F9F6710FF416FF /* NodeFactory.swift in Sources */,
+				FB4BE207B8C5DAC0E0884354 /* NodeGraph.swift in Sources */,
+				3714FE81746732F4D874948E /* NodeLibraryPanel.swift in Sources */,
+				EB95E499718B54AF208FACAD /* NodeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2CD88C1DDA7D37E8E9B508D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Release;
+		};
+		7F765F222A28D16D7E4E5393 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Debug;
+		};
+		810F88B2670C14529902A43A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/filament-framework/include",
+					"$(SRCROOT)/filament-framework/include/filament",
+				);
+				INFOPLIST_FILE = GrasshopperSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/filament-framework/lib/arm64",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lfilament",
+					"-lbackend",
+					"-lutils",
+					"-lfilabridge",
+					"-lfilaflat",
+					"-lgeometry",
+					"-lshaders",
+					"-lsmol-v",
+					"-libl",
+					"-lfilament-iblprefilter",
+					"-lzstd",
+					"-lmikktspace",
+					"-lbluegl",
+					"-lbluevk",
+					"-lcivetweb",
+					"-lbasis_transcoder",
+					"-ldracodec",
+					"-lstb",
+					"-lmeshoptimizer",
+					"-labseil",
+					"-lperfetto",
+					"-luberarchive",
+					"-luberzlib",
+					"-limage",
+					"-limageio-lite",
+					"-libl-lite",
+					"-framework OpenGL",
+					"-lc++",
+					"-framework Metal",
+					"-framework MetalKit",
+					"-framework QuartzCore",
+					"-framework Cocoa",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.parametric.GrasshopperSwift;
+				PRODUCT_NAME = GrasshopperSwift;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "GrasshopperSwift/GrasshopperSwift-Bridging-Header.h";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Release;
+		};
+		8E65B55425D9861BDFBB4A0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/filament-framework/include",
+					"$(SRCROOT)/filament-framework/include/filament",
+				);
+				INFOPLIST_FILE = GrasshopperSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/filament-framework/lib/arm64",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lfilament",
+					"-lbackend",
+					"-lutils",
+					"-lfilabridge",
+					"-lfilaflat",
+					"-lgeometry",
+					"-lshaders",
+					"-lsmol-v",
+					"-libl",
+					"-lfilament-iblprefilter",
+					"-lzstd",
+					"-lmikktspace",
+					"-lbluegl",
+					"-lbluevk",
+					"-lcivetweb",
+					"-lbasis_transcoder",
+					"-ldracodec",
+					"-lstb",
+					"-lmeshoptimizer",
+					"-labseil",
+					"-lperfetto",
+					"-luberarchive",
+					"-luberzlib",
+					"-limage",
+					"-limageio-lite",
+					"-libl-lite",
+					"-framework OpenGL",
+					"-lc++",
+					"-framework Metal",
+					"-framework MetalKit",
+					"-framework QuartzCore",
+					"-framework Cocoa",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.parametric.GrasshopperSwift;
+				PRODUCT_NAME = GrasshopperSwift;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "GrasshopperSwift/GrasshopperSwift-Bridging-Header.h";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E61FF6CEC49C81185279E31 /* Build configuration list for PBXProject "GrasshopperSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F765F222A28D16D7E4E5393 /* Debug */,
+				2CD88C1DDA7D37E8E9B508D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EDFD1899A9368C1A378D6CB1 /* Build configuration list for PBXNativeTarget "GrasshopperSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E65B55425D9861BDFBB4A0D /* Debug */,
+				810F88B2670C14529902A43A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 013FE01B4DB09906ECDE64AD /* Project object */;
+}
