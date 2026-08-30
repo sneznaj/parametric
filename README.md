@@ -2,6 +2,15 @@
 
 SwiftUI macOS prototype for a Grasshopper-style parametric modeling tool.
 
+## Features
+
+- **Node-based visual programming** — build parametric models by wiring together nodes on a graph canvas (`GraphCanvas`, `NodeView`, `NodeLibraryPanel`), with live evaluation via `NodeEvaluator`.
+- **Geometry kernels** — CSG boolean operations, curve construction, and mesh generation (`CSGKernel`, `CurveKernel`, `MeshKernel`), plus math expression nodes for driving parameters.
+- **Real-time PBR viewport** — Filament-backed rendering (`FilamentRenderView`) with physically based studio materials and image-based lighting.
+- **Path-traced rendering** — a custom Metal path tracer (`PathTracerRenderer`, `PathTracerShaders.metal`) for higher-fidelity offline-style renders, with optional Intel Open Image Denoise (OIDN) cleanup pass.
+- **Wide export support** — write geometry out to OBJ, STL, STEP, IGES, FBX, glTF, USD, PLY, 3MF, Collada, and SVG.
+- **Workspace management** — save and reload node graphs as projects (`WorkspaceManager`).
+
 ## Layout
 
 - `GrasshopperSwift/` contains the Xcode project, XcodeGen spec, and app source.
