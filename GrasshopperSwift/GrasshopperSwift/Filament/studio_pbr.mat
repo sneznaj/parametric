@@ -1,5 +1,27 @@
 // Filament PBR material for studio-style geometry preview.
 // Maps to the Material3D struct parameters in the Swift model layer.
+//
+// Beyond the flat PBR factors, this material also derives procedural
+// micro-surface detail (a tangent-space bump + roughness jitter) from the
+// object's own local-space position, so a "Brushed Stainless" or "ABS
+// Plastic" material reads as a real, imperfect surface instead of a
+// perfectly flat CG blob — with no additional UVs or textures required.
+// The look (streaky / peened / grooved / grainy / dimpled) is picked per-
+// shape via `roughnessPattern`, matching the RoughnessPattern enum in
+// Geometry.swift.
+//
+// Coordinates are sampled from `localPosition` (VertexAttribute::CUSTOM0,
+// filled in by FilamentBridge's buildRenderable()) rather than world
+// position: it's the vertex position relative to the entity's own
+// bounding-box center, computed once at mesh-build time. World position
+// would make the noise field itself act like a fixed backdrop, so a shape
+// dragged/animated through it would look like the pattern is sliding
+// across the surface instead of being carried by the object.
+//
+// The three axis-aligned projections used for the pseudo-triplanar mapping
+// are blended continuously by normal weight (instead of a hard nearest-axis
+// switch), so there's no seam where the dominant axis flips — e.g. around
+// a sphere or cylinder's equator.
 
 material {
     name : studio_pbr,
@@ -31,10 +53,38 @@ material {
         {
             type : float,
             name : anisotropy
+        },
+        {
+            type : float3,
+            name : sheenColorFactor
+        },
+        {
+            type : float,
+            name : sheenRoughnessFactor
+        },
+        {
+            type : float,
+            name : normalDetail
+        },
+        {
+            type : float,
+            name : roughnessVariation
+        },
+        {
+            type : float,
+            name : textureScale
+        },
+        {
+            type : float,
+            name : roughnessPattern
         }
     ],
     requires : [
-        uv0
+        uv0,
+        custom0
+    ],
+    variables : [
+        localPos
     ],
     shadingModel : lit,
     blending : opaque,
@@ -43,14 +93,172 @@ material {
 
 vertex {
     void materialVertex(inout MaterialVertexInputs material) {
-        // Standard vertex shader — no customizations needed.
+        // Hand the raw (untransformed-by-view) local-space position through
+        // to the fragment stage as an interpolated varying.
+        material.localPos = vec4(mesh_custom0.xyz, 1.0);
     }
 }
 
 fragment {
+
+    // -- Value noise (hash-based, no textures) -----------------------------
+
+    float studioHash(vec2 p) {
+        p = fract(p * vec2(123.34, 456.21));
+        p += dot(p, p + 45.32);
+        return fract(p.x * p.y);
+    }
+
+    float studioNoise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        float a = studioHash(i);
+        float b = studioHash(i + vec2(1.0, 0.0));
+        float c = studioHash(i + vec2(0.0, 1.0));
+        float d = studioHash(i + vec2(1.0, 1.0));
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+    }
+
+    // 3-octave fractal noise, centered around 0.
+    float studioFbm(vec2 p) {
+        float sum = 0.0;
+        sum += 0.500 * (studioNoise(p) - 0.5);
+        sum += 0.250 * (studioNoise(p * 2.03) - 0.5);
+        sum += 0.125 * (studioNoise(p * 4.11) - 0.5);
+        return sum;
+    }
+
+    // -- Cellular / Worley noise --------------------------------------------
+    // Distance from `p` to the nearest of a jittered grid of feature points.
+    // Unlike smoothed value-noise fbm (which always reads as soft "clouds"),
+    // this gives crisp, individually-distinguishable grains/dimples — what
+    // bead-blasting and hammering actually look like up close.
+    float studioWorley(vec2 p) {
+        vec2 ip = floor(p);
+        vec2 fp = fract(p);
+        float minDist = 8.0;
+        for (int y = -1; y <= 1; y++) {
+            for (int x = -1; x <= 1; x++) {
+                vec2 cell = vec2(float(x), float(y));
+                vec2 jitter = vec2(
+                    studioHash(ip + cell),
+                    studioHash(ip + cell + vec2(17.0, 31.0))
+                );
+                float d = length(cell + jitter - fp);
+                minDist = min(minDist, d);
+            }
+        }
+        return minDist;
+    }
+
+    // Signed procedural height field, shaped per RoughnessPattern ordinal:
+    // 0 smooth, 1 orange-peel, 2 brushed, 3 machined, 4 stippled, 5 hammered.
+    //
+    // `axis` is the streak/groove-progression coordinate for the two
+    // *directional* patterns (brushed, machined). It must be the same
+    // world-space component for all three triplanar projections (see
+    // studioBlendedHeight) — using each projection's own in-plane x (as
+    // this used to) gives the streaks a different orientation per
+    // projection (world Y in one, world X in the other two), so wherever
+    // the blend weight shifts between projections the groove direction
+    // flips, producing a visible seam even though the height *values*
+    // blend continuously. Sharing one axis keeps the direction consistent
+    // everywhere; only the streaks' apparent strength varies with viewing
+    // angle, which is seamless.
+    float studioPatternHeight(vec2 p, float axis, int pattern) {
+        if (pattern == 0) {
+            return 0.0;
+        } else if (pattern == 1) {
+            // Orange peel: broad, soft, low-frequency undulation.
+            return studioFbm(p * 1.4);
+        } else if (pattern == 2) {
+            // Brushed: coarse anisotropic streaks running along one axis,
+            // plus a finer, higher-frequency scratch layer for realism.
+            float coarse = studioNoise(vec2(axis * 42.0, (p.x + p.y) * 0.65)) - 0.5;
+            float fine = studioNoise(vec2(axis * 140.0 + 91.0, (p.x + p.y) * 0.9)) - 0.5;
+            return coarse * 0.75 + fine * 0.25;
+        } else if (pattern == 3) {
+            // Machined: regular grooves (lathe/mill marks) with a crisp
+            // triangle-wave profile (real tool marks have sharp ridges, not
+            // sine's rounded-off shoulders), plus a touch of noise so it
+            // doesn't look perfectly synthetic.
+            float t = fract(axis * 35.0);
+            float groove = 1.0 - 4.0 * abs(t - 0.5);
+            return groove * 0.7 + studioFbm(p * 6.0) * 0.3;
+        } else if (pattern == 4) {
+            // Stippled / bead-blasted: fine, high-frequency, individually
+            // distinguishable grains via cellular noise.
+            float w = studioWorley(p * 3.0);
+            float grain = 1.0 - smoothstep(0.0, 1.15, w);
+            return (grain - 0.32) * 1.7;
+        } else {
+            // Hammered: sparse, larger, rounded dish shapes with a defined
+            // rim between adjacent strikes — also cellular, at a coarser
+            // scale and with more contrast than the stippled pattern.
+            float w = studioWorley(p * 1.05);
+            float dish = 1.0 - smoothstep(0.0, 1.4, w);
+            return (pow(dish, 1.4) - 0.3) * 1.9;
+        }
+    }
+
+    // How strongly each pattern should express itself even at a fixed
+    // `normalDetail` dial — smooth surfaces stay smooth, hammered/orange
+    // peel read more strongly than fine machining marks.
+    float studioPatternWeight(int pattern) {
+        if (pattern == 0) return 0.0;
+        if (pattern == 1) return 1.1;
+        if (pattern == 2) return 0.55;
+        if (pattern == 3) return 0.5;
+        if (pattern == 4) return 0.7;
+        return 1.3; // hammered
+    }
+
+    // Triplanar-blended height at a local-space point: samples all three
+    // axis-aligned projections and combines them with the caller's
+    // normal-derived blend weights. Because `bw` varies continuously across
+    // the surface (see `material()` below), there is no seam — unlike
+    // switching to a single "dominant axis" projection, which produces a
+    // hard discontinuity exactly where two axes tie.
+    //
+    // All three samples share `p.x` as their directional-pattern axis (see
+    // studioPatternHeight) so brushed/machined grooves keep one consistent
+    // world-space orientation everywhere, instead of flipping direction
+    // wherever the blend weight shifts between projections.
+    float studioBlendedHeight(highp vec3 p, vec3 bw, int pattern) {
+        float hx = studioPatternHeight(p.yz, p.x, pattern);
+        float hy = studioPatternHeight(p.xz, p.x, pattern);
+        float hz = studioPatternHeight(p.xy, p.x, pattern);
+        return hx * bw.x + hy * bw.y + hz * bw.z;
+    }
+
+    // Always-on, very fine imperfection — independent of `roughnessPattern`
+    // and not scaled by `normalDetail`/`roughnessVariation`. No real surface,
+    // however polished, is a mathematically perfect mirror; without this, a
+    // "smooth"/polished material (chrome, anodized, glass-like plastics)
+    // gets literally zero surface detail and reflects the environment as an
+    // exact, pixel-for-pixel copy of the backdrop, which reads as "the
+    // object isn't there" rather than "the object is shiny".
+    float studioBlendedMicro(highp vec3 p, vec3 bw) {
+        float hx = studioNoise(p.yz) - 0.5;
+        float hy = studioNoise(p.xz) - 0.5;
+        float hz = studioNoise(p.xy) - 0.5;
+        return hx * bw.x + hy * bw.y + hz * bw.z;
+    }
+
     void material(inout MaterialInputs material) {
         prepareMaterial(material);
+
         // Apply the parameterized PBR values to the standard lit material.
+        // On a metal (metallic factor near 1), baseColor *is* F0 — the
+        // material's spectral reflectance. Filament already does the right
+        // physics here: reflected = incidentLight * F0, i.e. the light gets
+        // filtered through the material's own reflectance, not replaced by
+        // it. There is no shader trick that makes a metal show "its own
+        // colour" independent of that multiply — the fix is for F0 (the
+        // baseColorFactor the Swift side sends over) to actually hold each
+        // metal's real reflectance tint instead of a near-neutral guess.
+        // See the material-preset table in NodeEvaluator.swift.
         material.baseColor = materialParams.baseColorFactor;
         material.metallic  = materialParams.metallicFactor;
         material.roughness = materialParams.roughnessFactor;
@@ -58,5 +266,102 @@ fragment {
         material.clearCoat = materialParams.clearCoatFactor;
         material.clearCoatRoughness = materialParams.clearCoatRoughness;
         material.anisotropy = materialParams.anisotropy;
+
+        // Sheen (cloth/velvet/brushed-fabric fuzz layer) — a KHR_materials_sheen-
+        // style lobe stacked on top of the standard metallic-roughness BRDF
+        // rather than a dedicated, mutually-exclusive shading model. This
+        // lets a single material carry sheen *and* clear coat *and*
+        // anisotropy at once (e.g. a coated fabric), and keeps the "no sheen"
+        // case (sheenColorFactor black, the default) an exact no-op — Filament
+        // only adds the sheen lobe's energy on top, it doesn't replace
+        // anything the metallic-roughness path already computed.
+        material.sheenColor = materialParams.sheenColorFactor;
+        material.sheenRoughness = materialParams.sheenRoughnessFactor;
+
+        // -- Procedural micro-surface detail --------------------------------
+        // Triplanar-projected from local (object-relative) position, so it
+        // works uniformly across every primitive (including generic meshes
+        // with no real UV unwrap) without visible texture stretching, stays
+        // attached to the object as it moves, and blends seamlessly across
+        // curved surfaces instead of snapping between projections.
+        //
+        // Unlike the old version, this always runs — even for
+        // roughnessPattern "smooth" / normalDetail 0 — because a perfectly
+        // flat, perfectly smooth surface reflects the environment as an
+        // exact copy of the backdrop with no break in it at all, which the
+        // eye reads as "there's nothing there" rather than "that's a shiny
+        // material". See studioBlendedMicro above.
+        int pattern = int(materialParams.roughnessPattern + 0.5);
+        highp vec3 lp = variable_localPos.xyz;
+        vec3 n = normalize(getWorldGeometricNormalVector());
+
+        // `lp` is normalized by FilamentBridge (buildRenderable()) to roughly
+        // [-1, 1] against each entity's own bounding-box half-extent, so this
+        // frequency reads as a consistent number of pattern repeats
+        // regardless of the object's absolute size in world units.
+        float freq = 3.5 * max(materialParams.textureScale, 0.05);
+        highp vec3 coord = lp * freq;
+
+        // Normal-weighted triplanar blend factors — continuous, so no
+        // seam appears where the dominant axis changes.
+        vec3 aw = pow(abs(n), vec3(4.0));
+        vec3 bw = aw / max(aw.x + aw.y + aw.z, 1e-5);
+
+        float patternWeight = studioPatternWeight(pattern);
+        float patternAmount = clamp(materialParams.normalDetail * patternWeight, 0.0, 2.0);
+        const float kMicroAmount = 0.05;
+        const float kMicroFreq = 4.4;
+        highp vec3 microCoord = coord * kMicroFreq;
+
+        float hC = studioBlendedHeight(coord, bw, pattern) * patternAmount
+                 + studioBlendedMicro(microCoord, bw) * kMicroAmount;
+
+        // Perturb the normal via a screen-space surface gradient (Schüler's
+        // "bump mapping unparametrized surfaces" method) instead of a fixed-
+        // step object-space finite difference. The patterns' finest features
+        // range from ~1x to ~140x the base frequency (see
+        // studioPatternHeight's coarse/fine layers), so a single hand-picked
+        // step could never resolve all of them at once — too coarse a step
+        // aliases the fine brushed/machined/stippled layers into speckled
+        // noise, too fine a step wastes precision on the broad orange-peel/
+        // hammered layers. dFdx/dFdy instead track however fast `hC` actually
+        // changes per pixel, so this self-adapts to every
+        // pattern/frequency/camera-distance combination with no tuning.
+        highp vec3 worldPos = getWorldPosition();
+        highp vec3 dPdx = dFdx(worldPos);
+        highp vec3 dPdy = dFdy(worldPos);
+        float dHdx = dFdx(hC);
+        float dHdy = dFdy(hC);
+
+        vec3 r1 = cross(dPdy, n);
+        vec3 r2 = cross(n, dPdx);
+        float det = dot(dPdx, r1);
+        vec3 surfGrad = sign(det) * (dHdx * r1 + dHdy * r2) / max(abs(det), 1e-8);
+        vec3 perturbedWorldNormal = normalize(n - surfGrad);
+
+        highp mat3 tbn = getWorldTangentFrame();
+        material.normal = normalize(transpose(tbn) * perturbedWorldNormal);
+
+        // Sample the *same* blended height fields (phase-shifted) for
+        // roughness variation, so the micro-gloss variation reads as part of
+        // the same surface detail instead of an unrelated soft "cloud"
+        // layered independently on top of it. This means scaling by the same
+        // patternAmount (normalDetail * patternWeight) that tames the bump
+        // above — without it, a material dialed to a near-invisible bump
+        // (e.g. anodized aluminum's normalDetail 0.10) still got the *full*,
+        // unweighted pattern height driving its roughness, scaled only by
+        // the unrelated roughnessVariation dial. That produced a roughness
+        // ripple with nothing to do with how strongly the finish was actually
+        // dialed in — reading as arbitrary blotchy/cratered noise rather than
+        // a real material's finish, which is always faint here since real
+        // machined/anodized/brushed metal barely varies in gloss at all.
+        float patternStrength = clamp(patternAmount, 0.0, 1.0);
+        float roughPattern = studioBlendedHeight(coord * 1.7 + vec3(11.3), bw, pattern) * patternStrength;
+        float roughMicro = studioBlendedMicro(microCoord * 1.7 + vec3(5.2), bw);
+        material.roughness = clamp(
+            material.roughness
+                + roughPattern * materialParams.roughnessVariation * 2.0
+                + roughMicro * 0.025,
+            0.045, 1.0);
     }
 }

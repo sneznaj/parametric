@@ -7,47 +7,184 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02DBC51FB62CB6358A547E93 /* ExportMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963C6A426AB36682747C5B4 /* ExportMesh.swift */; };
+		061A68FA6E2867F97BA08F16 /* PathTracerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377FB2E1CD27F2B3B9139CFD /* PathTracerScene.swift */; };
 		0984E0A4D01433C2EB43D327 /* FilamentBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 19618F2FDFC117513E44138D /* FilamentBridge.mm */; };
+		1528494BBCB9F273A31C39A4 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89551E12C48981EF94E936B /* TabBar.swift */; };
+		17359B6E4C9E5D6BEF1C07E3 /* OIDNBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF240A2D9AD539F6882D14F5 /* OIDNBridge.mm */; };
+		21320D1FFCFDB9635B9B99AA /* libtbb.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2325E7F32EB37A024199C250 /* libtbb.12.dylib */; };
+		265D43AEE57DC138BEC5FC79 /* IGESExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7B2C052CB19D6EFBF1FDD3 /* IGESExporter.swift */; };
+		2B55A4865F785D52941F00EA /* GraphicsQualitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2AEBCE17FB0DA0BD8B8996 /* GraphicsQualitySettingsView.swift */; };
+		3176616CA4B423806B753B88 /* USDExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A065C77959AD115A7B7AA0 /* USDExporter.swift */; };
 		32CD12238550ED2CB2775D61 /* FilamentRenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F5AAE835EC5966FC5BA97 /* FilamentRenderView.swift */; };
 		3446D9E75DA0C96805F114AD /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F75D6DC3A0D64A98323CBEB /* ConnectionsView.swift */; };
+		35A462D5CECA8F5D15A237E9 /* libOpenImageDenoise.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED6FA006708EBEEDA1B57F0F /* libOpenImageDenoise.dylib */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3714FE81746732F4D874948E /* NodeLibraryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1781C6F453582B44D6407136 /* NodeLibraryPanel.swift */; };
+		3B6CD24F6A914B9E11687940 /* libOpenImageDenoise_core.2.5.1.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE1BF7A857520EBF0F48951 /* libOpenImageDenoise_core.2.5.1.dylib */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3C9B3924B1642A24267912BB /* PathTracerRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FC60EDA2FEEE1F4B74322B /* PathTracerRenderer.swift */; };
+		3E3849F6DB122FFC4F230723 /* studio_subsurface.mat in Resources */ = {isa = PBXBuildFile; fileRef = 938827F9C9A0EBA8DBB2458A /* studio_subsurface.mat */; };
+		40107594EB8112E2F6129A50 /* ZipWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8467BA964C766F2F332DB5F /* ZipWriter.swift */; };
+		40BD8FABD4D5F9C3BAF66A76 /* libOpenImageDenoise_core.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE1BF7A857520EBF0F48951 /* libOpenImageDenoise_core.2.5.1.dylib */; };
+		42FC747695A98338199F2546 /* PLYExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E7F0F2636942EE566F5218 /* PLYExporter.swift */; };
+		4D58100292B17C64AFFCF8F5 /* GraphicsQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3D2381C6455FFE560C42 /* GraphicsQuality.swift */; };
+		58798CD3086EEC70CF3076B0 /* CurveKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B114628F72FC81083B1A5CB2 /* CurveKernel.swift */; };
+		5DBE70E9AD4820C1485C0E5D /* libtbb.12.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2325E7F32EB37A024199C250 /* libtbb.12.dylib */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5EED64047090636F0DB5DD84 /* UltraRealisticRenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D037B63D0BC540065AED29BF /* UltraRealisticRenderView.swift */; };
+		67444A2110A52D24A2EAE382 /* libOpenImageDenoise.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6FA006708EBEEDA1B57F0F /* libOpenImageDenoise.dylib */; };
+		68F62D7F34D8CFE5893D7F5D /* PortColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A115808339B4B8B859202D /* PortColorStore.swift */; };
+		6F169948F84D96C2D68CA92F /* Export3DUTTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ED75809ED03F0CF6D5571B /* Export3DUTTypes.swift */; };
+		74FF6A07F231E3DEB886A877 /* default_skybox.ktx in Resources */ = {isa = PBXBuildFile; fileRef = B6C56970F8461FAAD47BEE40 /* default_skybox.ktx */; };
+		7D7AD0050BBA77D3D474654D /* ExportUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F52679E0097FD7CC51505E /* ExportUtil.swift */; };
+		7D7EAA8CBDF14042A424A4DA /* OBJExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4840D8ED586107C61A18AF3 /* OBJExporter.swift */; };
 		8087D57352D92B33D8E19444 /* studio_pbr.filamat in Resources */ = {isa = PBXBuildFile; fileRef = 6F28129B765A9AECDBF8189D /* studio_pbr.filamat */; };
+		836BC7E5375E7E308A71A515 /* libOpenImageDenoise_device_cpu.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD3E2666B0287F18F217BAA /* libOpenImageDenoise_device_cpu.2.5.1.dylib */; };
 		85F36D9D3AD249AD8824635C /* GeometryPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329F83B1DF16E102FF49639 /* GeometryPreviewView.swift */; };
+		8A66D955BE4731355F75EC6F /* libOpenImageDenoise_device_metal.2.5.1.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA2128D28A8952DFD9B459CF /* libOpenImageDenoise_device_metal.2.5.1.dylib */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C2FC38289F9F6710FF416FF /* NodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E6D3C9923E12756397D1D1 /* NodeFactory.swift */; };
+		95044B967FF3FDBEA97FF330 /* MeshKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A482467471EAA7713A39 /* MeshKernel.swift */; };
 		9559DB441D7870B092DE7A68 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28893433F0019BCBCEAF12D7 /* ContentView.swift */; };
+		984AE20DBE65AB0EFC7F1CF7 /* ColladaExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89D6AFBD317D49F4F0D7923 /* ColladaExporter.swift */; };
+		A21DBE7170345E3B25AFBD55 /* gen_filamat_header.py in Resources */ = {isa = PBXBuildFile; fileRef = E82A9B4D74B4DC78941E8ED2 /* gen_filamat_header.py */; };
 		A25C85CE5D46A6E1F9EB25EC /* studio_pbr.mat in Resources */ = {isa = PBXBuildFile; fileRef = DFC37E34284EA3E504BD3FB5 /* studio_pbr.mat */; };
+		A3270340BE9FEAAD8100C29A /* IBL in Resources */ = {isa = PBXBuildFile; fileRef = 4F196FF7CF2EE19B54899AC6 /* IBL */; };
+		B0D881060D67DDCB08F81422 /* STLExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6237D06050870034AC350CFB /* STLExporter.swift */; };
 		B6F3DB685FCC43F31DF36D09 /* GraphCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A65E7674962017CF6B4FC5 /* GraphCanvas.swift */; };
+		BCC07F86C0498F194C4DB283 /* SVGExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970AC9806F4B71FDAAE27A50 /* SVGExporter.swift */; };
+		BCD0002F7A6A311082105D9E /* GLTFExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE282A81C4510DB89FC9D740 /* GLTFExporter.swift */; };
+		C1378084515CF7400EE23138 /* ThreeMFExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6504D4334FC523E156EF46 /* ThreeMFExporter.swift */; };
+		C52BEF8513BED2A4B2659586 /* PathTracerShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = AD45224857654E2CA0CE8F22 /* PathTracerShaders.metal */; };
+		C9F0C6552B88A8B239AAB57A /* STEPExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386098FC20BBCFB0FDBFAC1 /* STEPExporter.swift */; };
+		CA03036163682AE38D71410A /* CSGKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCEF7EAAC8DE1F139734468 /* CSGKernel.swift */; };
+		CAF51D4DBDF868B6B3808BA0 /* WorkspaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAE9D02AC51D155B3617CBB /* WorkspaceManager.swift */; };
 		D18D678DB59393BC1FCA289F /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156E5A4F135DAEC2FB705817 /* Geometry.swift */; };
+		D3CAF7CCDB3A68460D5954CF /* FBXExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F24B603B77518493C408891 /* FBXExporter.swift */; };
+		D6D9A18BEAC5FBEEB6DAF6BF /* libOpenImageDenoise_device_metal.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2128D28A8952DFD9B459CF /* libOpenImageDenoise_device_metal.2.5.1.dylib */; };
+		D89E2884C8EFE64FBBAD6E58 /* OIDNDenoiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A031A8BD92B0CC004A5222D /* OIDNDenoiser.swift */; };
+		DC614F246FA462F3CF237AB8 /* default_ibl.ktx in Resources */ = {isa = PBXBuildFile; fileRef = 55A6392EF681A864E7CCD858 /* default_ibl.ktx */; };
+		E558DE0367CBDF76CE9CCAB5 /* BRepBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C4B7659D9D7CFDF744711C /* BRepBuilder.swift */; };
 		E5E959E8EDE2C69182E6B5E5 /* NodeEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE82D5683A41845018D0FE /* NodeEvaluator.swift */; };
 		EA9AC1C979AA21F627A95FF2 /* GrasshopperSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620A50FB57B45296D489B9AE /* GrasshopperSwiftApp.swift */; };
 		EB95E499718B54AF208FACAD /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7839C29916F38F0E537A1D47 /* NodeView.swift */; };
+		F40E88BEE725D195685D1206 /* libOpenImageDenoise_device_cpu.2.5.1.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD3E2666B0287F18F217BAA /* libOpenImageDenoise_device_cpu.2.5.1.dylib */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F60423BDC996FF0D918F55A2 /* MathExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974216E8AFFD3A41EFDBB413 /* MathExpression.swift */; };
 		FB4BE207B8C5DAC0E0884354 /* NodeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C017416CFD20953D00F863 /* NodeGraph.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F9C4D04C1BD45149276E2B53 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				35A462D5CECA8F5D15A237E9 /* libOpenImageDenoise.dylib in Embed Frameworks */,
+				3B6CD24F6A914B9E11687940 /* libOpenImageDenoise_core.2.5.1.dylib in Embed Frameworks */,
+				F40E88BEE725D195685D1206 /* libOpenImageDenoise_device_cpu.2.5.1.dylib in Embed Frameworks */,
+				8A66D955BE4731355F75EC6F /* libOpenImageDenoise_device_metal.2.5.1.dylib in Embed Frameworks */,
+				5DBE70E9AD4820C1485C0E5D /* libtbb.12.dylib in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		02C3A482467471EAA7713A39 /* MeshKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshKernel.swift; sourceTree = "<group>"; };
+		07A065C77959AD115A7B7AA0 /* USDExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USDExporter.swift; sourceTree = "<group>"; };
+		0F310ECE2E6DA1956FC1A60F /* PathTracerShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PathTracerShaderTypes.h; sourceTree = "<group>"; };
 		156E5A4F135DAEC2FB705817 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		1781C6F453582B44D6407136 /* NodeLibraryPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeLibraryPanel.swift; sourceTree = "<group>"; };
 		19618F2FDFC117513E44138D /* FilamentBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FilamentBridge.mm; sourceTree = "<group>"; };
 		19E6D3C9923E12756397D1D1 /* NodeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeFactory.swift; sourceTree = "<group>"; };
 		21CBDF549367DA43BAD70179 /* FilamentBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilamentBridge.h; sourceTree = "<group>"; };
+		2325E7F32EB37A024199C250 /* libtbb.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtbb.12.dylib; path = "oidn-framework/lib/arm64/libtbb.12.dylib"; sourceTree = "<group>"; };
+		23E7F0F2636942EE566F5218 /* PLYExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLYExporter.swift; sourceTree = "<group>"; };
 		26A65E7674962017CF6B4FC5 /* GraphCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCanvas.swift; sourceTree = "<group>"; };
 		28893433F0019BCBCEAF12D7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2AB3022AB45BDC026DBA9E1C /* studio_subsurface_filamat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = studio_subsurface_filamat.h; sourceTree = "<group>"; };
 		2B8F5AAE835EC5966FC5BA97 /* FilamentRenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilamentRenderView.swift; sourceTree = "<group>"; };
 		2F75D6DC3A0D64A98323CBEB /* ConnectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsView.swift; sourceTree = "<group>"; };
+		35EF3D2381C6455FFE560C42 /* GraphicsQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsQuality.swift; sourceTree = "<group>"; };
+		377FB2E1CD27F2B3B9139CFD /* PathTracerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTracerScene.swift; sourceTree = "<group>"; };
 		37E3F80344EFF118FFB538D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3CE1BF7A857520EBF0F48951 /* libOpenImageDenoise_core.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libOpenImageDenoise_core.2.5.1.dylib; path = "oidn-framework/lib/arm64/libOpenImageDenoise_core.2.5.1.dylib"; sourceTree = "<group>"; };
+		43FC60EDA2FEEE1F4B74322B /* PathTracerRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTracerRenderer.swift; sourceTree = "<group>"; };
 		45C017416CFD20953D00F863 /* NodeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeGraph.swift; sourceTree = "<group>"; };
+		4F196FF7CF2EE19B54899AC6 /* IBL */ = {isa = PBXFileReference; lastKnownFileType = folder; name = IBL; path = GrasshopperSwift/Resources/IBL; sourceTree = SOURCE_ROOT; };
+		55A6392EF681A864E7CCD858 /* default_ibl.ktx */ = {isa = PBXFileReference; path = default_ibl.ktx; sourceTree = "<group>"; };
+		5F24B603B77518493C408891 /* FBXExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBXExporter.swift; sourceTree = "<group>"; };
 		620A50FB57B45296D489B9AE /* GrasshopperSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrasshopperSwiftApp.swift; sourceTree = "<group>"; };
+		6237D06050870034AC350CFB /* STLExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STLExporter.swift; sourceTree = "<group>"; };
 		643424DD9357FC376669EE71 /* GrasshopperSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrasshopperSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67C4B7659D9D7CFDF744711C /* BRepBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRepBuilder.swift; sourceTree = "<group>"; };
 		6F28129B765A9AECDBF8189D /* studio_pbr.filamat */ = {isa = PBXFileReference; path = studio_pbr.filamat; sourceTree = "<group>"; };
+		70A115808339B4B8B859202D /* PortColorStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortColorStore.swift; sourceTree = "<group>"; };
+		7386098FC20BBCFB0FDBFAC1 /* STEPExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STEPExporter.swift; sourceTree = "<group>"; };
 		73EF54D1C326AB4E3866DDAA /* GrasshopperSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GrasshopperSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		7839C29916F38F0E537A1D47 /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
+		7A031A8BD92B0CC004A5222D /* OIDNDenoiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDNDenoiser.swift; sourceTree = "<group>"; };
+		7B7B2C052CB19D6EFBF1FDD3 /* IGESExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGESExporter.swift; sourceTree = "<group>"; };
+		7CD3E2666B0287F18F217BAA /* libOpenImageDenoise_device_cpu.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libOpenImageDenoise_device_cpu.2.5.1.dylib; path = "oidn-framework/lib/arm64/libOpenImageDenoise_device_cpu.2.5.1.dylib"; sourceTree = "<group>"; };
+		938827F9C9A0EBA8DBB2458A /* studio_subsurface.mat */ = {isa = PBXFileReference; path = studio_subsurface.mat; sourceTree = "<group>"; };
+		970AC9806F4B71FDAAE27A50 /* SVGExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGExporter.swift; sourceTree = "<group>"; };
+		974216E8AFFD3A41EFDBB413 /* MathExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathExpression.swift; sourceTree = "<group>"; };
 		9ECE82D5683A41845018D0FE /* NodeEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeEvaluator.swift; sourceTree = "<group>"; };
+		AD45224857654E2CA0CE8F22 /* PathTracerShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PathTracerShaders.metal; sourceTree = "<group>"; };
+		B114628F72FC81083B1A5CB2 /* CurveKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveKernel.swift; sourceTree = "<group>"; };
+		B6C56970F8461FAAD47BEE40 /* default_skybox.ktx */ = {isa = PBXFileReference; path = default_skybox.ktx; sourceTree = "<group>"; };
+		C1F52679E0097FD7CC51505E /* ExportUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportUtil.swift; sourceTree = "<group>"; };
 		C329F83B1DF16E102FF49639 /* GeometryPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryPreviewView.swift; sourceTree = "<group>"; };
+		CDBDAF38EFBE2390D2D075EE /* OIDNBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OIDNBridge.h; sourceTree = "<group>"; };
+		CE282A81C4510DB89FC9D740 /* GLTFExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLTFExporter.swift; sourceTree = "<group>"; };
+		D037B63D0BC540065AED29BF /* UltraRealisticRenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltraRealisticRenderView.swift; sourceTree = "<group>"; };
+		D89D6AFBD317D49F4F0D7923 /* ColladaExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColladaExporter.swift; sourceTree = "<group>"; };
+		DF2AEBCE17FB0DA0BD8B8996 /* GraphicsQualitySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsQualitySettingsView.swift; sourceTree = "<group>"; };
 		DFC37E34284EA3E504BD3FB5 /* studio_pbr.mat */ = {isa = PBXFileReference; path = studio_pbr.mat; sourceTree = "<group>"; };
+		E4840D8ED586107C61A18AF3 /* OBJExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBJExporter.swift; sourceTree = "<group>"; };
+		E82A9B4D74B4DC78941E8ED2 /* gen_filamat_header.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = gen_filamat_header.py; sourceTree = "<group>"; };
+		ED6FA006708EBEEDA1B57F0F /* libOpenImageDenoise.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libOpenImageDenoise.dylib; path = "oidn-framework/lib/arm64/libOpenImageDenoise.dylib"; sourceTree = "<group>"; };
 		EF0FB8C6665E0C36B48A88BE /* studio_pbr_filamat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = studio_pbr_filamat.h; sourceTree = "<group>"; };
+		EF240A2D9AD539F6882D14F5 /* OIDNBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OIDNBridge.mm; sourceTree = "<group>"; };
+		F5ED75809ED03F0CF6D5571B /* Export3DUTTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Export3DUTTypes.swift; sourceTree = "<group>"; };
+		F8467BA964C766F2F332DB5F /* ZipWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipWriter.swift; sourceTree = "<group>"; };
+		F89551E12C48981EF94E936B /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		F963C6A426AB36682747C5B4 /* ExportMesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportMesh.swift; sourceTree = "<group>"; };
+		FA2128D28A8952DFD9B459CF /* libOpenImageDenoise_device_metal.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libOpenImageDenoise_device_metal.2.5.1.dylib; path = "oidn-framework/lib/arm64/libOpenImageDenoise_device_metal.2.5.1.dylib"; sourceTree = "<group>"; };
+		FA6504D4334FC523E156EF46 /* ThreeMFExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeMFExporter.swift; sourceTree = "<group>"; };
+		FAAE9D02AC51D155B3617CBB /* WorkspaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceManager.swift; sourceTree = "<group>"; };
+		FCCEF7EAAC8DE1F139734468 /* CSGKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSGKernel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		A758B922265B15F4829495C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67444A2110A52D24A2EAE382 /* libOpenImageDenoise.dylib in Frameworks */,
+				40BD8FABD4D5F9C3BAF66A76 /* libOpenImageDenoise_core.2.5.1.dylib in Frameworks */,
+				836BC7E5375E7E308A71A515 /* libOpenImageDenoise_device_cpu.2.5.1.dylib in Frameworks */,
+				D6D9A18BEAC5FBEEB6DAF6BF /* libOpenImageDenoise_device_metal.2.5.1.dylib in Frameworks */,
+				21320D1FFCFDB9635B9B99AA /* libtbb.12.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
+		154DB0D1AB30BFB3F4A29198 /* PathTracer */ = {
+			isa = PBXGroup;
+			children = (
+				CDBDAF38EFBE2390D2D075EE /* OIDNBridge.h */,
+				EF240A2D9AD539F6882D14F5 /* OIDNBridge.mm */,
+				7A031A8BD92B0CC004A5222D /* OIDNDenoiser.swift */,
+				43FC60EDA2FEEE1F4B74322B /* PathTracerRenderer.swift */,
+				377FB2E1CD27F2B3B9139CFD /* PathTracerScene.swift */,
+				AD45224857654E2CA0CE8F22 /* PathTracerShaders.metal */,
+				0F310ECE2E6DA1956FC1A60F /* PathTracerShaderTypes.h */,
+			);
+			path = PathTracer;
+			sourceTree = "<group>";
+		};
 		1A267492346C1F980F9716FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -56,8 +193,11 @@
 				2B8F5AAE835EC5966FC5BA97 /* FilamentRenderView.swift */,
 				C329F83B1DF16E102FF49639 /* GeometryPreviewView.swift */,
 				26A65E7674962017CF6B4FC5 /* GraphCanvas.swift */,
+				DF2AEBCE17FB0DA0BD8B8996 /* GraphicsQualitySettingsView.swift */,
 				1781C6F453582B44D6407136 /* NodeLibraryPanel.swift */,
 				7839C29916F38F0E537A1D47 /* NodeView.swift */,
+				F89551E12C48981EF94E936B /* TabBar.swift */,
+				D037B63D0BC540065AED29BF /* UltraRealisticRenderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -74,9 +214,35 @@
 			isa = PBXGroup;
 			children = (
 				156E5A4F135DAEC2FB705817 /* Geometry.swift */,
+				35EF3D2381C6455FFE560C42 /* GraphicsQuality.swift */,
 				45C017416CFD20953D00F863 /* NodeGraph.swift */,
+				70A115808339B4B8B859202D /* PortColorStore.swift */,
+				FAAE9D02AC51D155B3617CBB /* WorkspaceManager.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		5F6747A3601D9E2A0C081E4F /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				67C4B7659D9D7CFDF744711C /* BRepBuilder.swift */,
+				D89D6AFBD317D49F4F0D7923 /* ColladaExporter.swift */,
+				F5ED75809ED03F0CF6D5571B /* Export3DUTTypes.swift */,
+				F963C6A426AB36682747C5B4 /* ExportMesh.swift */,
+				C1F52679E0097FD7CC51505E /* ExportUtil.swift */,
+				5F24B603B77518493C408891 /* FBXExporter.swift */,
+				CE282A81C4510DB89FC9D740 /* GLTFExporter.swift */,
+				7B7B2C052CB19D6EFBF1FDD3 /* IGESExporter.swift */,
+				E4840D8ED586107C61A18AF3 /* OBJExporter.swift */,
+				23E7F0F2636942EE566F5218 /* PLYExporter.swift */,
+				7386098FC20BBCFB0FDBFAC1 /* STEPExporter.swift */,
+				6237D06050870034AC350CFB /* STLExporter.swift */,
+				970AC9806F4B71FDAAE27A50 /* SVGExporter.swift */,
+				FA6504D4334FC523E156EF46 /* ThreeMFExporter.swift */,
+				07A065C77959AD115A7B7AA0 /* USDExporter.swift */,
+				F8467BA964C766F2F332DB5F /* ZipWriter.swift */,
+			);
+			path = Export;
 			sourceTree = "<group>";
 		};
 		77AE2F45463F2925220860D7 /* Filament */ = {
@@ -84,17 +250,34 @@
 			children = (
 				21CBDF549367DA43BAD70179 /* FilamentBridge.h */,
 				19618F2FDFC117513E44138D /* FilamentBridge.mm */,
+				E82A9B4D74B4DC78941E8ED2 /* gen_filamat_header.py */,
 				EF0FB8C6665E0C36B48A88BE /* studio_pbr_filamat.h */,
 				6F28129B765A9AECDBF8189D /* studio_pbr.filamat */,
 				DFC37E34284EA3E504BD3FB5 /* studio_pbr.mat */,
+				2AB3022AB45BDC026DBA9E1C /* studio_subsurface_filamat.h */,
+				938827F9C9A0EBA8DBB2458A /* studio_subsurface.mat */,
 			);
 			path = Filament;
+			sourceTree = "<group>";
+		};
+		78E3200D151029C1ADF30D2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CE1BF7A857520EBF0F48951 /* libOpenImageDenoise_core.2.5.1.dylib */,
+				7CD3E2666B0287F18F217BAA /* libOpenImageDenoise_device_cpu.2.5.1.dylib */,
+				FA2128D28A8952DFD9B459CF /* libOpenImageDenoise_device_metal.2.5.1.dylib */,
+				ED6FA006708EBEEDA1B57F0F /* libOpenImageDenoise.dylib */,
+				2325E7F32EB37A024199C250 /* libtbb.12.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8411D7D7B904321341ED1A78 = {
 			isa = PBXGroup;
 			children = (
+				4F196FF7CF2EE19B54899AC6 /* IBL */,
 				8C1204C579E3A1EE2DD4AFB1 /* GrasshopperSwift */,
+				78E3200D151029C1ADF30D2A /* Frameworks */,
 				4052A9916B483AC3FC35ED0C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,9 +288,12 @@
 				73EF54D1C326AB4E3866DDAA /* GrasshopperSwift-Bridging-Header.h */,
 				620A50FB57B45296D489B9AE /* GrasshopperSwiftApp.swift */,
 				37E3F80344EFF118FFB538D9 /* Info.plist */,
+				5F6747A3601D9E2A0C081E4F /* Export */,
 				77AE2F45463F2925220860D7 /* Filament */,
 				491F900E7146EA9474398FDC /* Models */,
 				AEB58214CB69672F661E07B2 /* Nodes */,
+				154DB0D1AB30BFB3F4A29198 /* PathTracer */,
+				E45712A855019D5B71E861E2 /* Resources */,
 				1A267492346C1F980F9716FB /* Views */,
 			);
 			path = GrasshopperSwift;
@@ -116,10 +302,31 @@
 		AEB58214CB69672F661E07B2 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				FCCEF7EAAC8DE1F139734468 /* CSGKernel.swift */,
+				B114628F72FC81083B1A5CB2 /* CurveKernel.swift */,
+				974216E8AFFD3A41EFDBB413 /* MathExpression.swift */,
+				02C3A482467471EAA7713A39 /* MeshKernel.swift */,
 				9ECE82D5683A41845018D0FE /* NodeEvaluator.swift */,
 				19E6D3C9923E12756397D1D1 /* NodeFactory.swift */,
 			);
 			path = Nodes;
+			sourceTree = "<group>";
+		};
+		E45712A855019D5B71E861E2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E6F64058A3E1296C0A49902B /* IBL */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E6F64058A3E1296C0A49902B /* IBL */ = {
+			isa = PBXGroup;
+			children = (
+				55A6392EF681A864E7CCD858 /* default_ibl.ktx */,
+				B6C56970F8461FAAD47BEE40 /* default_skybox.ktx */,
+			);
+			path = IBL;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +338,8 @@
 			buildPhases = (
 				AEE752F1ED41DD55419FCB9D /* Sources */,
 				A3514DAF9EEC3D52E80981B1 /* Resources */,
+				A758B922265B15F4829495C9 /* Frameworks */,
+				F9C4D04C1BD45149276E2B53 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -178,8 +387,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3270340BE9FEAAD8100C29A /* IBL in Resources */,
+				DC614F246FA462F3CF237AB8 /* default_ibl.ktx in Resources */,
+				74FF6A07F231E3DEB886A877 /* default_skybox.ktx in Resources */,
+				A21DBE7170345E3B25AFBD55 /* gen_filamat_header.py in Resources */,
 				8087D57352D92B33D8E19444 /* studio_pbr.filamat in Resources */,
 				A25C85CE5D46A6E1F9EB25EC /* studio_pbr.mat in Resources */,
+				3E3849F6DB122FFC4F230723 /* studio_subsurface.mat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,19 +404,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E558DE0367CBDF76CE9CCAB5 /* BRepBuilder.swift in Sources */,
+				CA03036163682AE38D71410A /* CSGKernel.swift in Sources */,
+				984AE20DBE65AB0EFC7F1CF7 /* ColladaExporter.swift in Sources */,
 				3446D9E75DA0C96805F114AD /* ConnectionsView.swift in Sources */,
 				9559DB441D7870B092DE7A68 /* ContentView.swift in Sources */,
+				58798CD3086EEC70CF3076B0 /* CurveKernel.swift in Sources */,
+				6F169948F84D96C2D68CA92F /* Export3DUTTypes.swift in Sources */,
+				02DBC51FB62CB6358A547E93 /* ExportMesh.swift in Sources */,
+				7D7AD0050BBA77D3D474654D /* ExportUtil.swift in Sources */,
+				D3CAF7CCDB3A68460D5954CF /* FBXExporter.swift in Sources */,
 				0984E0A4D01433C2EB43D327 /* FilamentBridge.mm in Sources */,
 				32CD12238550ED2CB2775D61 /* FilamentRenderView.swift in Sources */,
+				BCD0002F7A6A311082105D9E /* GLTFExporter.swift in Sources */,
 				D18D678DB59393BC1FCA289F /* Geometry.swift in Sources */,
 				85F36D9D3AD249AD8824635C /* GeometryPreviewView.swift in Sources */,
 				B6F3DB685FCC43F31DF36D09 /* GraphCanvas.swift in Sources */,
+				4D58100292B17C64AFFCF8F5 /* GraphicsQuality.swift in Sources */,
+				2B55A4865F785D52941F00EA /* GraphicsQualitySettingsView.swift in Sources */,
 				EA9AC1C979AA21F627A95FF2 /* GrasshopperSwiftApp.swift in Sources */,
+				265D43AEE57DC138BEC5FC79 /* IGESExporter.swift in Sources */,
+				F60423BDC996FF0D918F55A2 /* MathExpression.swift in Sources */,
+				95044B967FF3FDBEA97FF330 /* MeshKernel.swift in Sources */,
 				E5E959E8EDE2C69182E6B5E5 /* NodeEvaluator.swift in Sources */,
 				8C2FC38289F9F6710FF416FF /* NodeFactory.swift in Sources */,
 				FB4BE207B8C5DAC0E0884354 /* NodeGraph.swift in Sources */,
 				3714FE81746732F4D874948E /* NodeLibraryPanel.swift in Sources */,
 				EB95E499718B54AF208FACAD /* NodeView.swift in Sources */,
+				7D7EAA8CBDF14042A424A4DA /* OBJExporter.swift in Sources */,
+				17359B6E4C9E5D6BEF1C07E3 /* OIDNBridge.mm in Sources */,
+				D89E2884C8EFE64FBBAD6E58 /* OIDNDenoiser.swift in Sources */,
+				42FC747695A98338199F2546 /* PLYExporter.swift in Sources */,
+				3C9B3924B1642A24267912BB /* PathTracerRenderer.swift in Sources */,
+				061A68FA6E2867F97BA08F16 /* PathTracerScene.swift in Sources */,
+				C52BEF8513BED2A4B2659586 /* PathTracerShaders.metal in Sources */,
+				68F62D7F34D8CFE5893D7F5D /* PortColorStore.swift in Sources */,
+				C9F0C6552B88A8B239AAB57A /* STEPExporter.swift in Sources */,
+				B0D881060D67DDCB08F81422 /* STLExporter.swift in Sources */,
+				BCC07F86C0498F194C4DB283 /* SVGExporter.swift in Sources */,
+				1528494BBCB9F273A31C39A4 /* TabBar.swift in Sources */,
+				C1378084515CF7400EE23138 /* ThreeMFExporter.swift in Sources */,
+				3176616CA4B423806B753B88 /* USDExporter.swift in Sources */,
+				5EED64047090636F0DB5DD84 /* UltraRealisticRenderView.swift in Sources */,
+				CAF51D4DBDF868B6B3808BA0 /* WorkspaceManager.swift in Sources */,
+				40107594EB8112E2F6129A50 /* ZipWriter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,9 +583,14 @@
 				CODE_SIGNING_REQUIRED = NO;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"oidn-framework/lib/arm64\"",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/filament-framework/include",
 					"$(SRCROOT)/filament-framework/include/filament",
+					"$(SRCROOT)/oidn-framework/include",
 				);
 				INFOPLIST_FILE = GrasshopperSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -349,6 +599,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/filament-framework/lib/arm64",
+					"$(SRCROOT)/oidn-framework/lib/arm64",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -362,6 +613,7 @@
 					"-lsmol-v",
 					"-libl",
 					"-lfilament-iblprefilter",
+					"-lktxreader",
 					"-lzstd",
 					"-lmikktspace",
 					"-lbluegl",
@@ -403,9 +655,14 @@
 				CODE_SIGNING_REQUIRED = NO;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"oidn-framework/lib/arm64\"",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/filament-framework/include",
 					"$(SRCROOT)/filament-framework/include/filament",
+					"$(SRCROOT)/oidn-framework/include",
 				);
 				INFOPLIST_FILE = GrasshopperSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -414,6 +671,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/filament-framework/lib/arm64",
+					"$(SRCROOT)/oidn-framework/lib/arm64",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -427,6 +685,7 @@
 					"-lsmol-v",
 					"-libl",
 					"-lfilament-iblprefilter",
+					"-lktxreader",
 					"-lzstd",
 					"-lmikktspace",
 					"-lbluegl",

@@ -1,3 +1,17 @@
+# project.yml — xcodegen spec for GrasshopperSwift
+#
+# Filament IBL assets
+# --------------------
+# The 3D viewport loads `default_ibl.ktx` (prefiltered reflections/irradiance)
+# and `default_skybox.ktx` from `Resources/IBL/` in the app bundle, generated
+# with `filament-framework/bin/cmgen --deploy=default --format=ktx` from a
+# synthetic soft-key studio-sky image — no external HDRI download needed.
+# To swap in a different environment, replace those two files (any equirect
+# or cubemap image cmgen accepts as input works) and re-run cmgen.
+#
+# Without these assets, the app builds and runs but falls back to a single
+# soft direct fill light (no environment reflections or diffuse IBL fill).
+
 name: GrasshopperSwift
 options:
   bundleIdPrefix: com.parametric
@@ -20,6 +34,10 @@ targets:
     platform: macOS
     sources:
       - GrasshopperSwift
+      - path: GrasshopperSwift/Resources/IBL
+        type: folder
+        buildPhase: resources
+        optional: true
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.parametric.GrasshopperSwift
       PRODUCT_NAME: GrasshopperSwift
@@ -36,10 +54,12 @@ targets:
       HEADER_SEARCH_PATHS:
         - $(SRCROOT)/filament-framework/include
         - $(SRCROOT)/filament-framework/include/filament
+        - $(SRCROOT)/oidn-framework/include
 
       # Filament static library search paths
       LIBRARY_SEARCH_PATHS:
         - $(SRCROOT)/filament-framework/lib/arm64
+        - $(SRCROOT)/oidn-framework/lib/arm64
 
       # C++ settings for Filament
       CLANG_CXX_LANGUAGE_STANDARD: c++17
@@ -59,6 +79,7 @@ targets:
         - -lsmol-v
         - -libl
         - -lfilament-iblprefilter
+        - -lktxreader
         - -lzstd
         - -lmikktspace
         - -lbluegl
@@ -81,5 +102,24 @@ targets:
         - -framework MetalKit
         - -framework QuartzCore
         - -framework Cocoa
+
+    # OIDN's dylibs (unlike Filament's static .a libs) need to be embedded
+    # into the app bundle to be found by @rpath at launch, not just linked.
+    dependencies:
+      - framework: oidn-framework/lib/arm64/libOpenImageDenoise.dylib
+        embed: true
+        codeSign: false
+      - framework: oidn-framework/lib/arm64/libOpenImageDenoise_core.2.5.1.dylib
+        embed: true
+        codeSign: false
+      - framework: oidn-framework/lib/arm64/libOpenImageDenoise_device_cpu.2.5.1.dylib
+        embed: true
+        codeSign: false
+      - framework: oidn-framework/lib/arm64/libOpenImageDenoise_device_metal.2.5.1.dylib
+        embed: true
+        codeSign: false
+      - framework: oidn-framework/lib/arm64/libtbb.12.dylib
+        embed: true
+        codeSign: false
     scheme:
       testTargets: []

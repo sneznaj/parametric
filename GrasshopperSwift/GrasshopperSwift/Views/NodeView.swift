@@ -4,12 +4,17 @@ import SwiftUI
 struct NodeView: View {
     @ObservedObject var node: Node
     @ObservedObject var graph: NodeGraph
+    @ObservedObject private var colorStore = PortColorStore.shared
     let onPortTap: (UUID, UUID, Bool) -> Void   // nodeID, portID, isInput
     let onTap: () -> Void
     let onDelete: () -> Void
     let liveOffset: CGSize
     let onDragChanged: (CGSize) -> Void
     let onDragEnded: () -> Void
+
+    private var isPressHighlighted: Bool {
+        graph.pressHighlightedNodeIDs.contains(node.id)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -19,9 +24,18 @@ struct NodeView: View {
         .frame(width: Node.width)
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         .background(nodeBackground)
+        .background(
+            NodeRightPressTracker(
+                onPressBegan: { graph.pressedNodeID = node.id },
+                onPressEnded: {
+                    if graph.pressedNodeID == node.id {
+                        graph.pressedNodeID = nil
+                    }
+                }
+            )
+        )
         .overlay(nodeBorder)
-        .shadow(color: node.isSelected ? .accentColor.opacity(0.6) : .black.opacity(0.25),
-                radius: node.isSelected ? 8 : 4, x: 0, y: 2)
+        .shadow(color: shadowColor, radius: shadowRadius, x: 0, y: 2)
         .offset(x: liveOffset.width, y: liveOffset.height)
         .onHover { isHovered in
             if isHovered {
@@ -30,6 +44,14 @@ struct NodeView: View {
                 graph.hoveredNodeID = nil
             }
         }
+    }
+
+    private var shadowColor: Color {
+        node.isSelected ? .accentColor.opacity(0.6) : .black.opacity(0.25)
+    }
+
+    private var shadowRadius: CGFloat {
+        node.isSelected ? 8 : 4
     }
 
     // MARK: Header
@@ -116,13 +138,16 @@ struct NodeView: View {
 
             // Dot
             Circle()
-                .fill(port.type.color)
+                .fill(colorStore.color(for: port.type))
                 .frame(width: Node.portRadius * 2, height: Node.portRadius * 2)
                 .overlay(
                     Circle()
                         .stroke(Color.white.opacity(0.6), lineWidth: isConnected ? 0 : 1.5)
                 )
-                .onTapGesture { onPortTap(node.id, port.id, isInput) }
+                .onTapGesture {
+                    FileHandle.standardError.write("DEBUG: port tap fired node=\(node.id) isInput=\(isInput)\n".data(using: .utf8)!)
+                    onPortTap(node.id, port.id, isInput)
+                }
 
             // Label
             Text(port.name)
@@ -137,7 +162,20 @@ struct NodeView: View {
                     .foregroundStyle(.white)
                     .padding(.horizontal, 4)
                     .padding(.vertical, 1)
-                    .background(Capsule().fill(port.type.color.opacity(0.8)))
+                    .background(Capsule().fill(colorStore.color(for: port.type).opacity(0.8)))
+                    .lineLimit(1)
+            }
+
+            // Dim default-value badge for unconnected inputs — otherwise a
+            // port like Material's "Finish" gives no hint that it already
+            // has a usable default and doesn't need anything wired into it.
+            if isInput, !isConnected, let val = port.value {
+                Text(val.displayString)
+                    .font(.system(size: 9, weight: .medium).monospacedDigit())
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 1)
+                    .background(Capsule().fill(Color.white.opacity(0.06)))
                     .lineLimit(1)
             }
 
@@ -159,7 +197,9 @@ struct NodeView: View {
             BooleanToggleInline(node: node, graph: graph)
         case .textInput:
             TextInputInline(node: node, graph: graph)
-        case .colorPicker:
+        case .mathExpression:
+            MathExpressionInline(node: node, graph: graph)
+        case .colorPicker, .constructColorPicker:
             ColorPickerInline(node: node, graph: graph)
         default:
             EmptyView()
@@ -175,7 +215,17 @@ struct NodeView: View {
 
     private var nodeBorder: some View {
         RoundedRectangle(cornerRadius: 8, style: .continuous)
-            .stroke(node.isSelected ? Color.accentColor : Color.primary.opacity(0.15), lineWidth: node.isSelected ? 2 : 1)
+            .stroke(borderColor, lineWidth: borderWidth)
+    }
+
+    private var borderColor: Color {
+        if node.isSelected { return .accentColor }
+        if isPressHighlighted { return .white.opacity(0.9) }
+        return .primary.opacity(0.15)
+    }
+
+    private var borderWidth: CGFloat {
+        (node.isSelected || isPressHighlighted) ? 5.5 : 1
     }
 }
 
@@ -231,6 +281,85 @@ private struct NodeHeaderPanCapture: NSViewRepresentable {
 private final class PanCaptureView: NSView {
     override func hitTest(_ point: NSPoint) -> NSView? {
         self
+    }
+}
+
+// MARK: - Right-press highlight tracker
+
+/// Watches for the right mouse button going down inside this node's bounds and
+/// coming back up anywhere, so the node can highlight its connected neighbors
+/// and wires for as long as the button is held. Uses local event monitors
+/// (rather than a hit-testing NSView) so it never steals clicks from the
+/// header's pan gesture, port taps, or inline controls layered on top of it.
+private struct NodeRightPressTracker: NSViewRepresentable {
+    let onPressBegan: () -> Void
+    let onPressEnded: () -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(onPressBegan: onPressBegan, onPressEnded: onPressEnded)
+    }
+
+    func makeNSView(context: Context) -> TrackingView {
+        let view = TrackingView()
+        context.coordinator.attach(to: view)
+        return view
+    }
+
+    func updateNSView(_ nsView: TrackingView, context: Context) {
+        context.coordinator.onPressBegan = onPressBegan
+        context.coordinator.onPressEnded = onPressEnded
+    }
+
+    static func dismantleNSView(_ nsView: TrackingView, coordinator: Coordinator) {
+        coordinator.detach()
+    }
+
+    final class Coordinator {
+        var onPressBegan: () -> Void
+        var onPressEnded: () -> Void
+        private weak var view: NSView?
+        private var downMonitor: Any?
+        private var upMonitor: Any?
+
+        init(onPressBegan: @escaping () -> Void, onPressEnded: @escaping () -> Void) {
+            self.onPressBegan = onPressBegan
+            self.onPressEnded = onPressEnded
+        }
+
+        func attach(to view: NSView) {
+            self.view = view
+            startMonitoringIfNeeded()
+        }
+
+        func detach() {
+            if let downMonitor {
+                NSEvent.removeMonitor(downMonitor)
+                self.downMonitor = nil
+            }
+            if let upMonitor {
+                NSEvent.removeMonitor(upMonitor)
+                self.upMonitor = nil
+            }
+            view = nil
+        }
+
+        private func startMonitoringIfNeeded() {
+            guard downMonitor == nil else { return }
+
+            downMonitor = NSEvent.addLocalMonitorForEvents(matching: .rightMouseDown) { [weak self] event in
+                guard let self, let view = self.view, view.window != nil else { return event }
+                let frameInWindow = view.convert(view.bounds, to: nil)
+                if frameInWindow.contains(event.locationInWindow) {
+                    self.onPressBegan()
+                }
+                return event
+            }
+
+            upMonitor = NSEvent.addLocalMonitorForEvents(matching: .rightMouseUp) { [weak self] event in
+                self?.onPressEnded()
+                return event
+            }
+        }
     }
 }
 
@@ -361,6 +490,28 @@ struct TextInputInline: View {
             .onAppear {
                 if case .text(let v) = node.outputs[safe: 0]??.value { text = v }
                 else { node.outputs[0].value = .text(text) }
+            }
+    }
+}
+
+struct MathExpressionInline: View {
+    @ObservedObject var node: Node
+    @ObservedObject var graph: NodeGraph
+    @State private var text: String = ""
+
+    var body: some View {
+        TextField("2x + pi*y", text: $text)
+            .textFieldStyle(.roundedBorder)
+            .font(.system(size: 11, design: .monospaced))
+            .padding(.horizontal, 8)
+            .padding(.bottom, 6)
+            .onChange(of: text) { _, v in
+                node.expression = v
+                graph.syncExpressionPorts(for: node)
+                graph.evaluate()
+            }
+            .onAppear {
+                text = node.expression
             }
     }
 }

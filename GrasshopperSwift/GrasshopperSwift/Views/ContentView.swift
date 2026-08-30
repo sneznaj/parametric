@@ -1,98 +1,133 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var graph: NodeGraph
-    @AppStorage("showConnectorHoverHighlight") private var showConnectorHoverHighlight = false
-    @StateObject private var canvasViewport = CanvasViewport()
-    @State private var showLibrary = true
-    @State private var showInspector = true
+    @EnvironmentObject var workspace: WorkspaceManager
+    @Environment(\.graphFileActions) private var fileActions
+    @AppStorage("showConnectorHoverHighlight") private var showConnectorHoverHighlight = true
+    @AppStorage(kViewModeKey) private var storedViewMode: String = ViewMode.perspective.rawValue
+    @State private var columnVisibility: NavigationSplitViewVisibility = .all
     @Environment(\.openWindow) var openWindow
 
+    // Per-tab viewports keyed by graph identity
+    @State private var viewports: [UUID: CanvasViewport] = [:]
+
+    // Close-tab alert state
+    @State private var showCloseTabAlert = false
+    @State private var tabToCloseIndex: Int?
+
+    @State private var deleteKeyMonitor: Any?
+
+    private var graph: NodeGraph { workspace.activeGraph }
+
+    private var activeViewport: CanvasViewport {
+        let id = graph.id
+        if let existing = viewports[id] { return existing }
+        let vp = CanvasViewport()
+        viewports[id] = vp
+        return vp
+    }
+
     var body: some View {
-        NavigationSplitView(columnVisibility: .constant(.all)) {
-            NodeLibraryPanel(graph: graph, viewport: canvasViewport)
-                .navigationSplitViewColumnWidth(200)
-        } detail: {
-            HStack(spacing: 0) {
-                GraphCanvas(graph: graph, viewport: canvasViewport)
+        VStack(spacing: 0) {
+            ProjectTabBar(
+                onNewTab: { workspace.newTab() },
+                onCloseTab: { index in requestCloseTab(at: index) }
+            )
+
+            NavigationSplitView(columnVisibility: $columnVisibility) {
+                NodeLibraryPanel(graph: graph, viewport: activeViewport, is2DMode: is2DMode)
+                    .navigationSplitViewColumnWidth(200)
+            } detail: {
+                GraphCanvas(graph: graph, viewport: activeViewport)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                if showInspector {
-                    Divider()
-                    InspectorPanel(graph: graph)
-                        .frame(width: 220)
-                }
             }
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigation) {
-                Button {
-                    withAnimation { showLibrary.toggle() }
-                } label: {
-                    Label("Library", systemImage: "sidebar.left")
-                }
-                .help("Toggle node library")
-            }
-
-            ToolbarItemGroup(placement: .primaryAction) {
-                Button {
-                    openWindow(id: "geometry-preview")
-                } label: {
-                    Label("Preview", systemImage: "square.3.layers.3d")
-                }
-                .help("Open geometry preview window")
-
-                Divider()
-
-                Button {
-                    graph.evaluate()
-                } label: {
-                    Label("Evaluate", systemImage: "play.fill")
-                }
-                .keyboardShortcut("r", modifiers: .command)
-                .help("Re-evaluate graph (⌘R)")
-
-                Toggle(isOn: $showConnectorHoverHighlight) {
-                    Label("Wire Hover", systemImage: "dot.scope")
-                }
-                .toggleStyle(.button)
-                .help("Show connector hover highlight")
-
-                Button(role: .destructive) {
-                    deleteSelectedNode()
-                } label: {
-                    Label("Delete", systemImage: "trash")
-                }
-                .disabled(selectedNode == nil)
-                .help("Delete selected node")
-
-                Button {
-                    clearGraph()
-                } label: {
-                    Label("Clear", systemImage: "trash")
-                }
-                .help("Clear all nodes")
-
-                Button {
-                    withAnimation { showInspector.toggle() }
-                } label: {
-                    Label("Inspector", systemImage: "sidebar.right")
-                }
-                .help("Toggle inspector")
-            }
-        }
-        .navigationTitle("Grasshopper Swift")
-        .onAppear {
-            loadSampleGraph()
-            NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
-                // Delete (backspace) = 51, Forward Delete = 117
-                if event.keyCode == 51 || event.keyCode == 117 {
-                    if hoveredConnection != nil || hoveredNode != nil || selectedNode != nil {
-                        deleteActiveItem()
-                        return nil
+            .toolbar {
+                ToolbarItemGroup(placement: .primaryAction) {
+                    Button {
+                        fileActions.new()
+                    } label: {
+                        Label("New", systemImage: "doc.badge.plus")
                     }
+                    .help("New graph (⌘N)")
+
+                    Button {
+                        fileActions.open()
+                    } label: {
+                        Label("Open", systemImage: "folder")
+                    }
+                    .help("Open graph (⌘O)")
+
+                    Button {
+                        fileActions.save()
+                    } label: {
+                        Label("Save", systemImage: "square.and.arrow.down")
+                    }
+                    .help("Save graph (⌘S)")
+
+                    Divider()
+
+                    Button {
+                        openWindow(id: "geometry-preview")
+                    } label: {
+                        Label("Preview", systemImage: "square.3.layers.3d")
+                    }
+                    .help("Open geometry preview window")
+
+                    if canSwitch2D3D {
+                        Button {
+                            toggle2DMode()
+                        } label: {
+                            Label(is2DMode ? "2D Mode" : "3D Mode", systemImage: is2DMode ? "square.fill" : "cube.fill")
+                        }
+                        .help(is2DMode ? "Switch to 3D perspective (⌘5)" : "Switch to 2D mode (⌘1)")
+                    }
+
+                    Divider()
+
+                    Toggle(isOn: $showConnectorHoverHighlight) {
+                        Label("Wire Hover", systemImage: "dot.scope")
+                    }
+                    .toggleStyle(.button)
+                    .help("Show connector hover highlight")
+
+                    Button(role: .destructive) {
+                        deleteSelectedNode()
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    .disabled(selectedNode == nil)
+                    .help("Delete selected node")
+
+                    Button {
+                        clearGraph()
+                    } label: {
+                        Label("Clear", systemImage: "clear")
+                    }
+                    .help("Clear all nodes")
                 }
-                return event
+            }
+            .navigationTitle(graph.displayTitle)
+        }
+        .alert("Unsaved Changes", isPresented: $showCloseTabAlert) {
+            Button("Save") { saveAndCloseTab() }
+            Button("Discard Changes", role: .destructive) { discardAndCloseTab() }
+            Button("Cancel", role: .cancel) { tabToCloseIndex = nil }
+        } message: {
+            Text("The project has unsaved changes. Do you want to save before closing?")
+        }
+        .onAppear {
+            loadSampleGraphIfNeeded()
+            updateDocumentEdited()
+            installDeleteKeyMonitorIfNeeded()
+        }
+        .onDisappear {
+            removeDeleteKeyMonitor()
+        }
+        .onChange(of: graph.hasUnsavedChanges) { _, _ in updateDocumentEdited() }
+        .onChange(of: graph.currentFileURL) { _, _ in updateDocumentEdited() }
+        .onReceive(NotificationCenter.default.publisher(for: .closeTabRequested)) { notification in
+            if let index = notification.userInfo?["index"] as? Int {
+                requestCloseTab(at: index)
             }
         }
     }
@@ -100,6 +135,21 @@ struct ContentView: View {
     private func clearGraph() {
         graph.nodes.removeAll()
         graph.connections.removeAll()
+    }
+
+    private var is2DMode: Bool {
+        storedViewMode == ViewMode.twoD.rawValue
+    }
+
+    /// 2D and 3D nodes can't be mixed in the same project, so the pipeline can only be
+    /// switched while the active graph is empty.
+    private var canSwitch2D3D: Bool {
+        graph.nodes.isEmpty
+    }
+
+    private func toggle2DMode() {
+        guard canSwitch2D3D else { return }
+        storedViewMode = is2DMode ? ViewMode.perspective.rawValue : ViewMode.twoD.rawValue
     }
 
     private var selectedNode: Node? {
@@ -135,6 +185,107 @@ struct ContentView: View {
         deleteSelectedNode()
     }
 
+    /// Installs the global Delete/Forward-Delete monitor at most once per
+    /// `ContentView` lifecycle — without this guard, every `onAppear` (tab
+    /// switches, window refocus) stacked another monitor on top of the last,
+    /// each one independently deleting the hovered/selected item on the same
+    /// keypress.
+    private func installDeleteKeyMonitorIfNeeded() {
+        guard deleteKeyMonitor == nil else { return }
+        deleteKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+            // Delete (backspace) = 51, Forward Delete = 117
+            if event.keyCode == 51 || event.keyCode == 117 {
+                // AppKit's default text-editing behavior hides the system
+                // pointer on keystrokes routed to a focused NSText field
+                // (setHiddenUntilMouseMoves). Backspace should never leave
+                // the pointer hidden over the canvas, so cancel that here
+                // regardless of which branch below handles the key.
+                NSCursor.setHiddenUntilMouseMoves(false)
+
+                // Let an in-progress text edit (Math Expression, slider range
+                // fields, etc.) handle its own backspace instead of hijacking
+                // the keystroke to delete whatever the mouse happens to be
+                // resting on.
+                if NSApp.keyWindow?.firstResponder is NSText {
+                    return event
+                }
+                if hoveredConnection != nil || hoveredNode != nil || selectedNode != nil {
+                    deleteActiveItem()
+                    return nil
+                }
+            }
+            return event
+        }
+    }
+
+    private func removeDeleteKeyMonitor() {
+        if let deleteKeyMonitor {
+            NSEvent.removeMonitor(deleteKeyMonitor)
+        }
+        deleteKeyMonitor = nil
+    }
+
+    private func loadSampleGraphIfNeeded() {
+        guard graph.nodes.isEmpty else { return }
+        let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
+        guard !hasLaunchedBefore else { return }
+        UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+        loadSampleGraph()
+    }
+
+    private func updateDocumentEdited() {
+        NSApplication.shared.keyWindow?.isDocumentEdited = graph.hasUnsavedChanges
+    }
+
+    // MARK: - Tab Close
+
+    private func requestCloseTab(at index: Int) {
+        let g = workspace.graphs[index]
+        if g.hasUnsavedChanges {
+            tabToCloseIndex = index
+            showCloseTabAlert = true
+        } else {
+            viewports.removeValue(forKey: g.id)
+            workspace.closeTab(at: index)
+        }
+    }
+
+    private func saveAndCloseTab() {
+        guard let index = tabToCloseIndex else { return }
+        let g = workspace.graphs[index]
+        if let url = g.currentFileURL {
+            do {
+                try g.save(to: url)
+                viewports.removeValue(forKey: g.id)
+                workspace.closeTab(at: index)
+            } catch {
+                NSAlert(error: error).runModal()
+            }
+        } else {
+            let panel = NSSavePanel()
+            panel.allowedContentTypes = [.grasshopperGraph]
+            panel.nameFieldStringValue = "Untitled.ghs"
+            panel.canCreateDirectories = true
+            panel.title = "Save Graph"
+            guard panel.runModal() == .OK, let url = panel.url else { return }
+            do {
+                try g.save(to: url)
+                viewports.removeValue(forKey: g.id)
+                workspace.closeTab(at: index)
+            } catch {
+                NSAlert(error: error).runModal()
+            }
+        }
+        tabToCloseIndex = nil
+    }
+
+    private func discardAndCloseTab() {
+        guard let index = tabToCloseIndex else { return }
+        viewports.removeValue(forKey: workspace.graphs[index].id)
+        workspace.closeTab(at: index)
+        tabToCloseIndex = nil
+    }
+
     private func loadSampleGraph() {
         // ── Math subgraph ──────────────────────────────────
         let numberInput = NodeFactory.make(.numberInput, at: CGPoint(x: 40, y: 20))
@@ -152,8 +303,7 @@ struct ContentView: View {
         radiusSlider.outputs[0].value = .number(6)
 
         let circleNode = NodeFactory.make(.geoCircle, at: CGPoint(x: 260, y: 330))
-        let colorNode = NodeFactory.make(.colorPicker, at: CGPoint(x: 40, y: 430))
-        colorNode.outputs[0].value = .color(.mint)
+        let materialNode = NodeFactory.make(.materialAnodizedAluminum, at: CGPoint(x: 40, y: 430))
         let geoOut = NodeFactory.make(.output, at: CGPoint(x: 500, y: 400))
 
         // Sides slider → Polygon
@@ -168,7 +318,7 @@ struct ContentView: View {
 
         graph.nodes = [numberInput, sliderA, sliderB, multiply, out,
                        radiusSlider, circleNode,
-                       colorNode, geoOut,
+                       materialNode, geoOut,
                        sidesSlider, polyNode,
                        gridW, gridNode]
 
@@ -185,8 +335,10 @@ struct ContentView: View {
                                        toNodeID: circleNode.id,     toPortID: circleNode.inputs[1].id))
         graph.addConnection(Connection(fromNodeID: circleNode.id, fromPortID: circleNode.outputs[0].id,
                                        toNodeID: geoOut.id,        toPortID: geoOut.inputs[0].id))
-        graph.addConnection(Connection(fromNodeID: colorNode.id,  fromPortID: colorNode.outputs[0].id,
-                                       toNodeID: geoOut.id,       toPortID: geoOut.inputs[1].id))
+        if let matPort = geoOut.inputs.first(where: { $0.type == .material }) {
+            graph.addConnection(Connection(fromNodeID: materialNode.id, fromPortID: materialNode.outputs[0].id,
+                                           toNodeID: geoOut.id,          toPortID: matPort.id))
+        }
 
         // Polygon: radius slider → radius, sides slider → sides
         graph.addConnection(Connection(fromNodeID: radiusSlider.id, fromPortID: radiusSlider.outputs[0].id,
@@ -201,141 +353,5 @@ struct ContentView: View {
                                        toNodeID: gridNode.id, toPortID: gridNode.inputs[1].id))
 
         graph.evaluate()
-    }
-}
-
-// MARK: - Inspector Panel
-
-struct InspectorPanel: View {
-    @ObservedObject var graph: NodeGraph
-
-    var selectedNode: Node? {
-        graph.nodes.first { $0.isSelected }
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("Inspector")
-                .font(.headline)
-                .padding()
-
-            Divider()
-
-            if let node = selectedNode {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 12) {
-                        // Node info
-                        GroupBox("Node") {
-                            VStack(alignment: .leading, spacing: 6) {
-                                LabeledContent("Type", value: node.kind.defaultLabel)
-                                LabeledContent("Category", value: node.kind.category.rawValue)
-                                LabeledContent("ID", value: node.id.uuidString.prefix(8) + "…")
-                            }
-                            .font(.system(size: 12))
-                        }
-
-                        // Inputs
-                        if !node.inputs.isEmpty {
-                            GroupBox("Inputs") {
-                                VStack(alignment: .leading, spacing: 6) {
-                                    ForEach(node.inputs) { port in
-                                        PortRow(port: port)
-                                    }
-                                }
-                                .font(.system(size: 12))
-                            }
-                        }
-
-                        // Outputs
-                        if !node.outputs.isEmpty {
-                            GroupBox("Outputs") {
-                                VStack(alignment: .leading, spacing: 6) {
-                                    ForEach(node.outputs) { port in
-                                        PortRow(port: port)
-                                    }
-                                }
-                                .font(.system(size: 12))
-                            }
-                        }
-
-                        // Connections
-                        let nodeConns = graph.connections.filter {
-                            $0.fromNodeID == node.id || $0.toNodeID == node.id
-                        }
-                        if !nodeConns.isEmpty {
-                            GroupBox("Connections") {
-                                VStack(alignment: .leading, spacing: 6) {
-                                    ForEach(nodeConns) { conn in
-                                        ConnectionRow(conn: conn, graph: graph, currentNodeID: node.id)
-                                    }
-                                }
-                                .font(.system(size: 12))
-                            }
-                        }
-                    }
-                    .padding()
-                }
-            } else {
-                VStack {
-                    Spacer()
-                    Image(systemName: "cursorarrow.click")
-                        .font(.largeTitle)
-                        .foregroundStyle(.tertiary)
-                    Text("Select a node to inspect")
-                        .font(.callout)
-                        .foregroundStyle(.tertiary)
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-            }
-        }
-        .background(.regularMaterial)
-    }
-}
-
-struct PortRow: View {
-    let port: Port
-    var body: some View {
-        HStack {
-            Circle()
-                .fill(port.type.color)
-                .frame(width: 8, height: 8)
-            Text(port.name)
-                .foregroundStyle(.secondary)
-            Spacer()
-            Text(port.value?.displayString ?? "—")
-                .foregroundStyle(.primary)
-                .monospacedDigit()
-        }
-    }
-}
-
-struct ConnectionRow: View {
-    let conn: Connection
-    let graph: NodeGraph
-    let currentNodeID: UUID
-
-    var body: some View {
-        let isOut = conn.fromNodeID == currentNodeID
-        HStack(spacing: 4) {
-            Image(systemName: isOut ? "arrow.right" : "arrow.left")
-                .foregroundStyle(isOut ? .green : .blue)
-                .font(.system(size: 10))
-            let otherID = isOut ? conn.toNodeID : conn.fromNodeID
-            if let other = graph.node(id: otherID) {
-                Text(other.title)
-                    .foregroundStyle(.primary)
-            }
-            Spacer()
-            Button(role: .destructive) {
-                graph.removeConnection(conn.id)
-            } label: {
-                Image(systemName: "minus.circle")
-                    .foregroundStyle(.red)
-            }
-            .buttonStyle(.plain)
-        }
     }
 }

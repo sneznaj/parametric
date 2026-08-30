@@ -1,0 +1,240 @@
+// Filament subsurface-scattering material for translucent geometry preview
+// (wax, marble, alabaster, jade, skin-like plastics). Maps to the same
+// Material3D struct as studio_pbr.mat, but through the `subsurface` shading
+// model instead of `lit` — a dedicated BRDF+BTDF blend that fakes light
+// diffusing through the object's volume and exiting elsewhere (approximated
+// via `thickness` + `subsurfacePower` + `subsurfaceColor`, not real photon
+// transport). `lit`'s clearCoat/anisotropy/sheen properties don't exist on
+// this shading model, so this stays a separate material file rather than a
+// branch of studio_pbr.mat.
+//
+// The procedural triplanar bump/roughness-detail block below is copied
+// verbatim from studio_pbr.mat (Filament's material grammar has no #include
+// across .mat files) — see that file for the extended rationale comments.
+
+material {
+    name : studio_subsurface,
+    parameters : [
+        {
+            type : float4,
+            name : baseColorFactor
+        },
+        {
+            type : float,
+            name : metallicFactor
+        },
+        {
+            type : float,
+            name : roughnessFactor
+        },
+        {
+            type : float,
+            name : reflectance
+        },
+        {
+            type : float,
+            name : subsurfacePower
+        },
+        {
+            type : float3,
+            name : subsurfaceColorFactor
+        },
+        {
+            type : float,
+            name : thicknessFactor
+        },
+        {
+            type : float,
+            name : normalDetail
+        },
+        {
+            type : float,
+            name : roughnessVariation
+        },
+        {
+            type : float,
+            name : textureScale
+        },
+        {
+            type : float,
+            name : roughnessPattern
+        }
+    ],
+    requires : [
+        uv0,
+        custom0
+    ],
+    variables : [
+        localPos
+    ],
+    shadingModel : subsurface,
+    blending : opaque,
+    culling : back
+}
+
+vertex {
+    void materialVertex(inout MaterialVertexInputs material) {
+        material.localPos = vec4(mesh_custom0.xyz, 1.0);
+    }
+}
+
+fragment {
+
+    // -- Value noise (hash-based, no textures) -----------------------------
+
+    float studioHash(vec2 p) {
+        p = fract(p * vec2(123.34, 456.21));
+        p += dot(p, p + 45.32);
+        return fract(p.x * p.y);
+    }
+
+    float studioNoise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        float a = studioHash(i);
+        float b = studioHash(i + vec2(1.0, 0.0));
+        float c = studioHash(i + vec2(0.0, 1.0));
+        float d = studioHash(i + vec2(1.0, 1.0));
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+    }
+
+    // 3-octave fractal noise, centered around 0.
+    float studioFbm(vec2 p) {
+        float sum = 0.0;
+        sum += 0.500 * (studioNoise(p) - 0.5);
+        sum += 0.250 * (studioNoise(p * 2.03) - 0.5);
+        sum += 0.125 * (studioNoise(p * 4.11) - 0.5);
+        return sum;
+    }
+
+    // -- Cellular / Worley noise --------------------------------------------
+    float studioWorley(vec2 p) {
+        vec2 ip = floor(p);
+        vec2 fp = fract(p);
+        float minDist = 8.0;
+        for (int y = -1; y <= 1; y++) {
+            for (int x = -1; x <= 1; x++) {
+                vec2 cell = vec2(float(x), float(y));
+                vec2 jitter = vec2(
+                    studioHash(ip + cell),
+                    studioHash(ip + cell + vec2(17.0, 31.0))
+                );
+                float d = length(cell + jitter - fp);
+                minDist = min(minDist, d);
+            }
+        }
+        return minDist;
+    }
+
+    // Signed procedural height field, shaped per RoughnessPattern ordinal —
+    // see studio_pbr.mat for the full per-case rationale.
+    float studioPatternHeight(vec2 p, float axis, int pattern) {
+        if (pattern == 0) {
+            return 0.0;
+        } else if (pattern == 1) {
+            return studioFbm(p * 1.4);
+        } else if (pattern == 2) {
+            float coarse = studioNoise(vec2(axis * 42.0, (p.x + p.y) * 0.65)) - 0.5;
+            float fine = studioNoise(vec2(axis * 140.0 + 91.0, (p.x + p.y) * 0.9)) - 0.5;
+            return coarse * 0.75 + fine * 0.25;
+        } else if (pattern == 3) {
+            float t = fract(axis * 35.0);
+            float groove = 1.0 - 4.0 * abs(t - 0.5);
+            return groove * 0.7 + studioFbm(p * 6.0) * 0.3;
+        } else if (pattern == 4) {
+            float w = studioWorley(p * 3.0);
+            float grain = 1.0 - smoothstep(0.0, 1.15, w);
+            return (grain - 0.32) * 1.7;
+        } else {
+            float w = studioWorley(p * 1.05);
+            float dish = 1.0 - smoothstep(0.0, 1.4, w);
+            return (pow(dish, 1.4) - 0.3) * 1.9;
+        }
+    }
+
+    float studioPatternWeight(int pattern) {
+        if (pattern == 0) return 0.0;
+        if (pattern == 1) return 1.1;
+        if (pattern == 2) return 0.55;
+        if (pattern == 3) return 0.5;
+        if (pattern == 4) return 0.7;
+        return 1.3;
+    }
+
+    float studioBlendedHeight(highp vec3 p, vec3 bw, int pattern) {
+        float hx = studioPatternHeight(p.yz, p.x, pattern);
+        float hy = studioPatternHeight(p.xz, p.x, pattern);
+        float hz = studioPatternHeight(p.xy, p.x, pattern);
+        return hx * bw.x + hy * bw.y + hz * bw.z;
+    }
+
+    float studioBlendedMicro(highp vec3 p, vec3 bw) {
+        float hx = studioNoise(p.yz) - 0.5;
+        float hy = studioNoise(p.xz) - 0.5;
+        float hz = studioNoise(p.xy) - 0.5;
+        return hx * bw.x + hy * bw.y + hz * bw.z;
+    }
+
+    void material(inout MaterialInputs material) {
+        prepareMaterial(material);
+
+        material.baseColor = materialParams.baseColorFactor;
+        material.metallic = materialParams.metallicFactor;
+        material.roughness = materialParams.roughnessFactor;
+        material.reflectance = materialParams.reflectance;
+
+        // Subsurface approximation: `subsurfacePower` shapes how tightly the
+        // transmitted-light term hugs the light direction (higher = a
+        // narrower, more direct "glow" through thin sections, like wax or a
+        // leaf); `subsurfaceColor` tints that transmitted light (what color
+        // comes through, as opposed to baseColor which is what bounces off);
+        // `thickness` scales how much of it reaches the far side at all.
+        material.subsurfacePower = materialParams.subsurfacePower;
+        material.subsurfaceColor = materialParams.subsurfaceColorFactor;
+        material.thickness = materialParams.thicknessFactor;
+
+        int pattern = int(materialParams.roughnessPattern + 0.5);
+        highp vec3 lp = variable_localPos.xyz;
+        vec3 n = normalize(getWorldGeometricNormalVector());
+
+        float freq = 3.5 * max(materialParams.textureScale, 0.05);
+        highp vec3 coord = lp * freq;
+
+        vec3 aw = pow(abs(n), vec3(4.0));
+        vec3 bw = aw / max(aw.x + aw.y + aw.z, 1e-5);
+
+        float patternWeight = studioPatternWeight(pattern);
+        float patternAmount = clamp(materialParams.normalDetail * patternWeight, 0.0, 2.0);
+        const float kMicroAmount = 0.05;
+        const float kMicroFreq = 4.4;
+        highp vec3 microCoord = coord * kMicroFreq;
+
+        float hC = studioBlendedHeight(coord, bw, pattern) * patternAmount
+                 + studioBlendedMicro(microCoord, bw) * kMicroAmount;
+
+        highp vec3 worldPos = getWorldPosition();
+        highp vec3 dPdx = dFdx(worldPos);
+        highp vec3 dPdy = dFdy(worldPos);
+        float dHdx = dFdx(hC);
+        float dHdy = dFdy(hC);
+
+        vec3 r1 = cross(dPdy, n);
+        vec3 r2 = cross(n, dPdx);
+        float det = dot(dPdx, r1);
+        vec3 surfGrad = sign(det) * (dHdx * r1 + dHdy * r2) / max(abs(det), 1e-8);
+        vec3 perturbedWorldNormal = normalize(n - surfGrad);
+
+        highp mat3 tbn = getWorldTangentFrame();
+        material.normal = normalize(transpose(tbn) * perturbedWorldNormal);
+
+        float patternStrength = clamp(patternAmount, 0.0, 1.0);
+        float roughPattern = studioBlendedHeight(coord * 1.7 + vec3(11.3), bw, pattern) * patternStrength;
+        float roughMicro = studioBlendedMicro(microCoord * 1.7 + vec3(5.2), bw);
+        material.roughness = clamp(
+            material.roughness
+                + roughPattern * materialParams.roughnessVariation * 2.0
+                + roughMicro * 0.025,
+            0.045, 1.0);
+    }
+}

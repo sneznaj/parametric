@@ -1,7 +1,9 @@
 import SwiftUI
+import AppKit
 
 struct ConnectionsView: View {
     @ObservedObject var graph: NodeGraph
+    @ObservedObject private var colorStore = PortColorStore.shared
     var liveNodeOffsets: [UUID: CGSize] = [:]
     var canvasOrigin: CGPoint = .zero
     var hoveredConnectionID: UUID? = nil
@@ -20,16 +22,17 @@ struct ConnectionsView: View {
                     let toIdx    = toNode.inputs.firstIndex(where: { $0.id == conn.toPortID })
                 else { continue }
 
-                let fromPt = outputPosition(for: fromNode, index: fromIdx)
-                let toPt   = inputPosition(for: toNode, index: toIdx)
-                let portType = fromNode.outputs[fromIdx].type
-                let isHovered = showsHoverHighlight && conn.id == hoveredConnectionID
+                let fromPt   = outputPosition(for: fromNode, index: fromIdx)
+                let toPt     = inputPosition(for: toNode, index: toIdx)
+                let wireColor = colorStore.color(for: fromNode.outputs[fromIdx].type)
+                let isHovered = (showsHoverHighlight && conn.id == hoveredConnectionID)
+                    || graph.pressHighlightedConnectionIDs.contains(conn.id)
 
                 drawWire(
                     ctx: ctx,
                     from: fromPt,
                     to: toPt,
-                    color: portType.color,
+                    color: wireColor,
                     opacity: isHovered ? 1.0 : 0.9,
                     lineWidth: isHovered ? 5.5 : 2.5
                 )
@@ -41,7 +44,7 @@ struct ConnectionsView: View {
                     ctx: ctx,
                     from: wire.startPoint,
                     to: wire.endPoint,
-                    color: wire.portType.color,
+                    color: colorStore.color(for: wire.portType),
                     opacity: 0.7,
                     lineWidth: 2.5,
                     dashed: true
